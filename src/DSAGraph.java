@@ -1,7 +1,8 @@
 /* DSA Graph by Moritz Bergemann
  * Model class for graph data structure consisting of set of vertices linked
- *  together by edges
+ *  together by (directional) edges
  * Created Date: 3/09/2019
+ * Updated Date: 3/10/2019
  */
 import java.util.*;
 
@@ -31,7 +32,8 @@ public class DSAGraph
         {
             label = inLabel;
             value = inValue;
-            adjacencyList = new DSALinkedList();
+            adjacencyList = new DSALinkedList(); /*List of vertices that this
+                connected to this graph (where this graph is source)*/
             visited = false;
         }
 
@@ -84,71 +86,38 @@ public class DSAGraph
     }
 
     /* Returns number of vertices currently in graph
-     * NOTE: DSALinkedList should probably have a getCount method that you can
-     *  then just call here
      */
     public int getVertexCount()
     {
-        int vertexCount = 0;
-        Iterator vertexListIterator = vertexList.iterator();
-
-        while(vertexListIterator.hasNext())
-        {
-            vertexListIterator.next();
-            vertexCount++;
-        }
-
-        return vertexCount;
+        return vertexList.getCount();
     }
 
     /* Returns number of edges currently in graph
      */
     public int getEdgeCount()
     {
-        int adjacentVertexCount = 0; /*Total number of adjacent vertices 
-            referenced in every vertex's adjacency list (should be exactly 
-            double the number of edges as 1 edge = 2 entries in respective 
-            vertex's adjacency lists)*/
-        int edgeCount;
+        int edgeCount = 0; /*Total number of edges in graph (equivalent to total
+            number of items in each vertex's adjacency list*/
         Iterator vertexListIterator = vertexList.iterator();
-        Iterator adjacencyListIterator; /*Iterator for eatch vertex's adjacency
-            list*/
         DSAGraphVertex currentVertex, currentAdjacentVertex;
 
         //Iterating through each vertex in list of vertices
         while (vertexListIterator.hasNext())
         {
             currentVertex = (DSAGraphVertex)vertexListIterator.next();
-            
-            //Iterating through adjacency list of current vertex
-            adjacencyListIterator = currentVertex.adjacencyList.iterator();
-            while (adjacencyListIterator.hasNext())
-            {
-                adjacencyListIterator.next();
-                
-                /*Increasing adjacentVertexCount for each vertex in adjacency
-                    list*/
-                adjacentVertexCount++;
-            }
-        }
-        
-        if (adjacentVertexCount % 2 == 1) /*If adjacent vertex count is odd &
-            not 0 (SHOULD NEVER BE THE CASE)*/
-        {
-            throw new IllegalArgumentException("You messed up: " +
-                "adjacentVertexCount is odd");
-        }
-        
-        //Getting number of edges as number of adjacent vertices listed / 2
-        edgeCount = adjacentVertexCount / 2;
 
+            //Increasing edgeCount by number of vertices in adjacency list
+            edgeCount += currentVertex.adjacencyList.getCount();
+        }
+
+        //Getting number of edges as number of adjacent vertices listed / 2
         return edgeCount;
     }
 
     /* Returns true if 2 vertices with imported labels are adjacent & false if
      *  not, throws exception if one/both of vertices are not in graph
      */
-    public boolean isAdjacent(String inLabel1, String inLabel2) 
+    public boolean isAdjacent(String inLabel1, String inLabel2)
     {
         boolean areAdjacent = false;
         DSAGraphVertex vertex1, vertex2, currentAdjacentVertex;
@@ -156,15 +125,15 @@ public class DSAGraph
         /*Getting 2 vertices using their labels (throws IllegalArgumentException
             if either doesn't exist*/
         vertex1 = getVertex(inLabel1);
-        vertex2 = getVertex(inLabel2);
-        
+         vertex2 = getVertex(inLabel2);
+
         //Creating iterator for vertex 1's adjacency list (2 would also work)
-        Iterator vertex1AdjacencyListIterator = 
+        Iterator vertex1AdjacencyListIterator =
             vertex1.adjacencyList.iterator();
-        
+
         while (vertex1AdjacencyListIterator.hasNext())
         {
-            currentAdjacentVertex = 
+            currentAdjacentVertex =
                 (DSAGraphVertex)vertex1AdjacencyListIterator.next();
             if (currentAdjacentVertex == vertex2) /*If vertex 1's adjacency
                 list contains link to vertex 2*/
@@ -174,6 +143,37 @@ public class DSAGraph
         }
         return areAdjacent;
     }
+
+    //Removed Method as Probably Not Required
+//    /* Returns true if 2 vertices with imported labels are adjacent & false if
+//     *  not, throws exception if one/both of vertices are not in graph
+//     */
+//    public boolean isAdjacent(String inLabel1, String inLabel2)
+//    {
+//        boolean areAdjacent = false;
+//        DSAGraphVertex vertex1, vertex2, currentAdjacentVertex;
+//
+//        /*Getting 2 vertices using their labels (throws IllegalArgumentException
+//            if either doesn't exist*/
+//        vertex1 = getVertex(inLabel1);
+//        vertex2 = getVertex(inLabel2);
+//
+//        //Creating iterator for vertex 1's adjacency list (2 would also work)
+//        Iterator vertex1AdjacencyListIterator =
+//            vertex1.adjacencyList.iterator();
+//
+//        while (vertex1AdjacencyListIterator.hasNext())
+//        {
+//            currentAdjacentVertex =
+//                (DSAGraphVertex)vertex1AdjacencyListIterator.next();
+//            if (currentAdjacentVertex == vertex2) /*If vertex 1's adjacency
+//                list contains link to vertex 2*/
+//            {
+//                areAdjacent = true;
+//            }
+//        }
+//        return areAdjacent;
+//    }
     
     /* Prints the graph's vertices to the console in adjacency list form
      */
@@ -399,7 +399,7 @@ public class DSAGraph
             while (adjListIterator.hasNext())
             {
                 currentAdjVertex = (DSAGraphVertex)adjListIterator.next();
-                if (currentAdjVertex.visited == false)
+                if (!currentAdjVertex.visited)
                 {
                     vertexQueue.enqueue(currentAdjVertex);
                     
@@ -417,10 +417,10 @@ public class DSAGraph
 
         //Returning value of found vertex
         return traversalList;
-        
     }
+
     //PRIVATE ACCESSORS
-    /* Returns a vertex in the graph (so that it may be modified within this 
+    /* Returns a vertex in the graph (so that it may be modified within this
      *  class) by searching through the list of all vertices, throws exception
      *  if vertex not present in list
      */
@@ -465,7 +465,7 @@ public class DSAGraph
             newVertex = new DSAGraphVertex(inLabel, inValue);
             vertexList.insertLast(newVertex);
 
-            //Sorting list of vertices to be in ACII order
+            //Sorting list of vertices to be in ASCII order
             vertexList.sortSortable();
         }
         else
@@ -475,11 +475,11 @@ public class DSAGraph
         }
     }
     
-    /* Adds edge connecting given vertices together into graph (by adding to
-     *  their respective adjacency lists) if vertices with both labels exist
+    /* Adds directional edge connecting vertex with first label (source) to
+     *  one with second label (sink) if vertices with both labels exist
      *  in graph, throws exception otherwise
      */
-    public void addEdge(String inLabel1, String inLabel2) 
+    public void addEdge(String inLabel1, String inLabel2)
     {
         DSAGraphVertex vertex1, vertex2;
         
@@ -489,10 +489,9 @@ public class DSAGraph
         vertex1 = getVertex(inLabel1);
         vertex2 = getVertex(inLabel2);
         
-        //Adding link to the other vertex to the adjacency list of both vertices
+        //Adding link to other vertex to the first's adjacency list
         vertex1.adjacencyList.insertLast(vertex2);
-        vertex2.adjacencyList.insertLast(vertex1);
-    
+
         //Sorting both vertice's adjacency lists to be in ASCII order
         vertex1.adjacencyList.sortSortable();
         vertex2.adjacencyList.sortSortable();

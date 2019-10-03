@@ -8,8 +8,9 @@ import java.io.Serializable;
 public class DSALinkedList implements Iterable, Serializable
 {
     //CLASS FIELDS
-    public DSAListNode head; //First node in linked list
-    public DSAListNode tail; //Last node in linked list
+    private DSAListNode head; //First node in linked list
+    private DSAListNode tail; //Last node in linked list
+    private int count; //Stores number of elements in linked list
 
     //INNER CLASSES
     /* Class DSAListNode
@@ -115,6 +116,7 @@ public class DSALinkedList implements Iterable, Serializable
             //Setting head/tail reference to new node
             head = newNode;
             tail = newNode;
+            count = 0;
         }
         else
         {
@@ -126,6 +128,8 @@ public class DSALinkedList implements Iterable, Serializable
             //Setting head reference to new node
             head = newNode;
         }
+
+        count++;
     }
     
     /* Insert node as last in list
@@ -151,6 +155,8 @@ public class DSALinkedList implements Iterable, Serializable
             //Setting tail reference to new node
             tail = newNode;
         }
+
+        count++;
     }
     
     /* Remove first node in list & return its value
@@ -182,7 +188,8 @@ public class DSALinkedList implements Iterable, Serializable
                 head.prev = null;
             }
         }
-        
+
+        count--;
         return nodeValue;
     }
 
@@ -215,7 +222,8 @@ public class DSALinkedList implements Iterable, Serializable
                 tail.next = null;
             }
         }
-        
+
+        count--;
         return nodeValue;
     }
 
@@ -316,6 +324,13 @@ public class DSALinkedList implements Iterable, Serializable
     {
         //Creating & returning iterator for this linked list
         return new DSALinkedListIterator(this);
+    }
+
+    /*Returns number of items currently in list
+     */
+    public int getCount()
+    {
+        return count;
     }
 
     /* Returns whether list is currently empty

@@ -115,21 +115,21 @@ public class DSAGraphTestHarness
         out.println("Getting edge count of graph 1 (should be 0): " + graph1.getEdgeCount());
         out.println("Getting edge count of graph 2 (should be 8): " + graph2.getEdgeCount());
         out.println("Getting edge count of graph 3 (should be 0): " + graph3.getEdgeCount());
-        //isAdjacent
-        out.println("Checking whether nodes 'A' & 'B' in graph 1 adjacent (shoulnd't be): " + graph1.isAdjacent("A", "B"));
-        out.println("Checking whether nodes 'A' & 'B' in graph 2 adjacent (should be): " + graph2.isAdjacent("A", "B"));
-        out.println("Checking whether nodes 'A' & 'J' in graph 2 adjacent (shoulnd't be): " + graph2.isAdjacent("A", "J"));
-        out.println("Checking whether nodes 'A' & 'X' in graph 2 adjacent ('X' not in graph, should throw exception): ");
-        try
-        {
-            out.println(graph2.isAdjacent("A", "X"));
-            out.println("Succeeded (shouldn't have)");
-        }
-        catch (IllegalArgumentException i)
-        {
-            out.println("Exception Caught: " + i.getMessage());
-        }
-        out.println();
+        //isAdjacent (removed)
+//        out.println("Checking whether nodes 'A' & 'B' in graph 1 adjacent (shoulnd't be): " + graph1.isAdjacent("A", "B"));
+//        out.println("Checking whether nodes 'A' & 'B' in graph 2 adjacent (should be): " + graph2.isAdjacent("A", "B"));
+//        out.println("Checking whether nodes 'A' & 'J' in graph 2 adjacent (shoulnd't be): " + graph2.isAdjacent("A", "J"));
+//        out.println("Checking whether nodes 'A' & 'X' in graph 2 adjacent ('X' not in graph, should throw exception): ");
+//        try
+//        {
+//            out.println(graph2.isAdjacent("A", "X"));
+//            out.println("Succeeded (shouldn't have)");
+//        }
+//        catch (IllegalArgumentException i)
+//        {
+//            out.println("Exception Caught: " + i.getMessage());
+//        }
+//        out.println();
         out.println("Checking whether nodes 'A' & 'B' in graph 3 adjacent (graph is empty, should throw exception): "); 
         try
         {
