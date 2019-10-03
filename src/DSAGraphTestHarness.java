@@ -1,0 +1,202 @@
+/* DSA Graph Test Harness by Moritz Bergemann
+ * Testharness for DSAGraph model class
+ * Created DateL 4/09/2019
+ */
+
+import static java.lang.System.out;
+import java.util.*;
+public class DSAGraphTestHarness
+{
+    public static void main (String[] args)
+    {
+        String[] labelArray = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+
+        //Constructor
+        out.println("Creating 3 graphs for testing...");
+        DSAGraph graph1 = new DSAGraph();
+        DSAGraph graph2 = new DSAGraph();
+        DSAGraph graph3 = new DSAGraph();
+        out.println();
+
+        //Adding vertices
+        out.println("Adding Set of vertices to graph 1 (labels A, B, C, D, E, F, G, H, I, J), values 'value [label]");
+        for (int ii = 0; ii < labelArray.length; ii++)
+        {
+            System.out.println("Adding vertex: label '" + labelArray[ii] + "' value 'value " + labelArray[ii] + "'");
+            graph1.addVertex(labelArray[ii], "value " + labelArray[ii]);
+        }
+        
+        out.println("Adding same set of vertices to graph 2 (labels A, B, C, D, E, F, G, H, I, J), values 'value [label]");
+        out.println();
+
+        out.println("Attempting to add vertex with label 'A' (already in graph) to graph 1:");
+        try
+        {
+            graph1.addVertex("A", "doesn't matter");
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+        out.println();
+
+        for (int ii = 0; ii < labelArray.length; ii++)
+        {
+            System.out.println("Adding vertex: label '" + labelArray[ii] + "' value 'value " + labelArray[ii] + "'");
+            graph2.addVertex(labelArray[ii], "value " + labelArray[ii]);
+        }
+        out.println();
+
+        //Adding edges
+        out.println("Adding set of edges to graph 2");
+        out.println("Adding edge {A, B}");
+        graph2.addEdge("A", "B");
+        out.println("Adding edge {A, C}");
+        graph2.addEdge("A", "C");
+        out.println("Adding edge {D, G}");
+        graph2.addEdge("D", "G");
+        out.println("Adding edge {E, A}");
+        graph2.addEdge("E", "A");
+        out.println("Adding edge {H, J}");
+        graph2.addEdge("H", "J");
+        out.println("Adding edge {G, I}");
+        graph2.addEdge("G", "I");
+        out.println("Adding edge {A, B} (again)");
+        graph2.addEdge("A", "B");
+        out.println("Adding edge {I, J}");
+        graph2.addEdge("I", "J");
+        out.println();
+
+        out.println("Attempting to add edge {A, X} to graph (label X doesn't exist)");
+        try
+        {
+            graph2.addEdge("A", "X");
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+        out.println();
+        
+        //Displaying graph
+        out.println("Displaying graph 1 (No edges):");
+        graph1.displayAsList();
+        out.println();
+
+        out.println("Displaying graph 2: ");
+        graph2.displayAsList();
+        out.println();
+
+        out.println("Displaying graph 3 (empty): ");
+        graph3.displayAsList();
+        out.println();
+        
+        out.println("Displaying graph 1 as matrix: ");
+        graph1.displayAsMatrix();
+        out.println();
+
+        out.println("Displaying graph 2 as matrix: ");
+        graph2.displayAsMatrix();
+        out.println();
+    
+        //Other Accessors
+        //hasVertex
+        out.println("Checking whether graph 2 has vertex with label 'D' (should have): " + graph2.hasVertex("D"));
+        out.println("Checking whether graph 1 has vertex with label 'A' (should have): " + graph1.hasVertex("A"));
+        out.println("Checking whether graph 1 has vertex with label 'test' (shouldn't have): " + graph1.hasVertex("X"));
+        out.println("Checking whether graph 3 has vertex with label 'A' (graph empty): " + graph3.hasVertex("A"));
+        //getVertexCount
+        out.println("Getting vertex count of graph 1 (should be 10): " + graph1.getVertexCount());
+        out.println("Getting vertex count of graph 2 (should be 10): " + graph2.getVertexCount());
+        out.println("Getting vertex count of graph 3 (should be 0): " + graph3.getVertexCount());
+        //getEdgeCount
+        out.println("Getting edge count of graph 1 (should be 0): " + graph1.getEdgeCount());
+        out.println("Getting edge count of graph 2 (should be 8): " + graph2.getEdgeCount());
+        out.println("Getting edge count of graph 3 (should be 0): " + graph3.getEdgeCount());
+        //isAdjacent
+        out.println("Checking whether nodes 'A' & 'B' in graph 1 adjacent (shoulnd't be): " + graph1.isAdjacent("A", "B"));
+        out.println("Checking whether nodes 'A' & 'B' in graph 2 adjacent (should be): " + graph2.isAdjacent("A", "B"));
+        out.println("Checking whether nodes 'A' & 'J' in graph 2 adjacent (shoulnd't be): " + graph2.isAdjacent("A", "J"));
+        out.println("Checking whether nodes 'A' & 'X' in graph 2 adjacent ('X' not in graph, should throw exception): ");
+        try
+        {
+            out.println(graph2.isAdjacent("A", "X"));
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+        out.println();
+        out.println("Checking whether nodes 'A' & 'B' in graph 3 adjacent (graph is empty, should throw exception): "); 
+        try
+        {
+            out.println(graph3.isAdjacent("A", "B"));
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+        out.println();
+    
+        //Search methods
+        DSAGraph pracGraph1 = new DSAGraph();
+        DSAGraph pracGraph2 = new DSAGraph();
+        Iterator traversalIterator;
+
+        out.println("Creating graphs from DSA practical 5...");
+        pracGraph1 = FileIO.readGraph("prac5graph1.al");
+        pracGraph2 = FileIO.readGraph("prac5graph2.al");
+        out.println();
+
+        out.println("Graph 1:");
+        pracGraph1.displayAsList();
+        out.println();
+        out.println("Graph 1 depth first result: ");
+        traversalIterator = pracGraph1.depthFirstSearch().iterator();
+        while (traversalIterator.hasNext())
+        {
+            out.print(traversalIterator.next() + " ");
+        }
+        out.println();
+        out.println("Graph 1 breadth first result: ");
+        traversalIterator = pracGraph1.breadthFirstSearch().iterator();
+        while (traversalIterator.hasNext())
+        {
+            out.print(traversalIterator.next() + " ");
+        }
+        out.println();
+        out.println();
+
+        out.println("Graph 2:");
+        pracGraph2.displayAsList();
+        out.println();
+        out.println("Graph 2 depth first result: ");
+        traversalIterator = pracGraph2.depthFirstSearch().iterator();
+        while (traversalIterator.hasNext())
+        {
+            out.print(traversalIterator.next() + " ");
+        }
+        out.println();
+        out.println("Graph 2 breadth first result: ");
+        traversalIterator = pracGraph2.breadthFirstSearch().iterator();
+        while (traversalIterator.hasNext())
+        {
+            out.print(traversalIterator.next() + " ");
+        }
+        out.println();
+    }
+}
+/*
+        try
+        {
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+*/
