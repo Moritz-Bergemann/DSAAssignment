@@ -144,6 +144,9 @@ public class DSAGraph
         return areAdjacent;
     }
 
+    //TODO String[] getAdjacent(String inLabel)
+
+
     //Removed Method as Probably Not Required
 //    /* Returns true if 2 vertices with imported labels are adjacent & false if
 //     *  not, throws exception if one/both of vertices are not in graph
@@ -174,7 +177,7 @@ public class DSAGraph
 //        }
 //        return areAdjacent;
 //    }
-    
+
     /* Prints the graph's vertices to the console in adjacency list form
      */
     public void displayAsList()
@@ -298,7 +301,7 @@ public class DSAGraph
     }
 
     /* Performs depth-first traversal of graph & returns vertex result as 
-     *  string, throws exception graph is empty
+     *  linked list of label strings, throws exception if graph is empty
      */
     public DSALinkedList depthFirstSearch()
     {
@@ -361,12 +364,12 @@ public class DSAGraph
             }
         }
 
-        //Returning traversal string
+        //Returning traversal list
         return traversalList;
     }
 
-    /* Performs breadth-first search for value of vertex with imported label 
-     *  in graph, throws exception if not found
+    /* Performs breadth-first traversal of graph & returns vertex result as
+     *  linked list of label strings, throws exception if graph is empty
      */
     public DSALinkedList breadthFirstSearch()
     {
