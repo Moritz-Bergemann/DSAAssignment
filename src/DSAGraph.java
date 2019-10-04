@@ -9,8 +9,34 @@ import java.util.*;
 public class DSAGraph
 {
     //CLASS FIELDS
-    DSALinkedList vertexList; //List of vertices in graph (unordered?)
-    
+    DSALinkedList vertexList; //List of vertices in graph (ordered)
+
+    /* Removes the edge connecting the 2 imported labels (directionally) if it
+     *  exists, throws exception if edge or vertices don't exist
+     */
+    public void removeEdge(String inLabel1, String inLabel2)
+    {
+        DSAGraphVertex vertex1, curAdjVertex;
+        Iterator adjListIterator;
+
+        if (hasEdge(inLabel1, inLabel2)) /*If graph has the edge to be removed
+            (will throw exception if either of vertices do not exist)*/
+        {
+            vertex1 = getVertex(inLabel1);
+            adjListIterator = vertex1.adjacencyList.iterator();
+
+            while (adjListIterator.hasNext())
+            {
+                curAdjVertex = (DSAGraphVertex)adjListIterator.next();
+                //TODO
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException("Edge does not exist");
+        }
+    }
+
     //INNER CLASSES
     /* Model class for vertices within linked list
      * Implements sortable so that it can be sorted by its label fields
@@ -76,6 +102,33 @@ public class DSAGraph
         }
         
         return vertexPresent;
+    }
+
+    /* Returns whether the graph possess a directional edge going from label1
+     *  to label2. Throws exception if one of the imported labels does not
+     *  exist.
+     */
+    public boolean hasEdge(String inLabel1, String inLabel2)
+    {
+        boolean edgePresent = false;
+        DSAGraphVertex vertex1, curAdjVertex;
+        Iterator adjListIterator;
+        vertex1 = getVertex(inLabel1);
+        adjListIterator = vertex1.adjacencyList.iterator();
+
+        while (adjListIterator.hasNext()) /*For each vertex in the first
+            imported label's adjacency list*/
+        {
+            curAdjVertex = (DSAGraphVertex)adjListIterator.next();
+            if (curAdjVertex.label.equals(inLabel2)) /*If the current vertex
+                in the adjacency list has the same label as the one being
+                searched for*/
+            {
+                edgePresent = true;
+            }
+        }
+
+        return edgePresent;
     }
 
     /* Returns whether graph is currently empty

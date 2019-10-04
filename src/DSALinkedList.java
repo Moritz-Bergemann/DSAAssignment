@@ -227,6 +227,60 @@ public class DSALinkedList implements Iterable, Serializable
         return nodeValue;
     }
 
+    /* Removes node at imported position in linked list (starting at 0) &
+     *  returns its value. Throws exception if position is larger than linked
+     *  list size
+     * MOSTLY TESTED
+     */
+    public Object removeAt(int position)
+    {
+        DSAListNode curNode;
+        Object nodeValue;
+
+        if (position < count && position >= 0) /*If position is within range of
+            list*/
+        {
+            if (position == 0) //If removing first element
+            {
+                nodeValue = removeFirst();
+            }
+            else if (position == count - 1) //If removing last element
+            {
+                nodeValue = removeLast();
+            }
+            else
+            {
+                curNode = head;
+
+                //Getting to node to remove
+                for (int ii = 0; ii < position; ii++)
+                {
+                    curNode = curNode.next;
+                }
+
+                //Getting node's value to return
+                nodeValue = curNode.value;
+
+                /*Unlinking node (can be done in uniform way as known not to be
+                    first or last*/
+                curNode.prev.next = curNode.next;
+                curNode.next.prev = curNode.prev;
+
+                /*Decreasing count (ONLY for this remove as other removes
+                    decrease the count themselves*/
+                count--;
+            }
+
+        }
+        else
+        {
+            throw new IllegalArgumentException("Imported position out of list" +
+                    "range");
+        }
+
+        return nodeValue;
+    }
+
     /* Sorts nodes in link list based on string comparison of node values,
      *  algorithm used is effectively bubble sort
      *  (ONLY WORKS IF ALL NODE VALUES ARE STRINGS)
