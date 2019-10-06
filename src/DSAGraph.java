@@ -18,6 +18,8 @@ public class DSAGraph
     {
         DSAGraphVertex vertex1, curAdjVertex;
         Iterator adjListIterator;
+        int adjListPosition;
+        boolean removed;
 
         if (hasEdge(inLabel1, inLabel2)) /*If graph has the edge to be removed
             (will throw exception if either of vertices do not exist)*/
@@ -25,15 +27,29 @@ public class DSAGraph
             vertex1 = getVertex(inLabel1);
             adjListIterator = vertex1.adjacencyList.iterator();
 
-            while (adjListIterator.hasNext())
+            //Searching for & removing connected node in adjacency list
+            adjListPosition = 0;
+            removed = false;
+            while (adjListIterator.hasNext() && !removed)
             {
                 curAdjVertex = (DSAGraphVertex)adjListIterator.next();
-                //TODO
+
+                if (curAdjVertex.label.equals(inLabel2)) /*If current adjacency
+                    list node has label of edge to be removed*/
+                {
+                    vertex1.adjacencyList.removeAt(adjListPosition);
+
+                    /*Setting cancelling iteration to avoid removing multiple
+                        instances of the same edge (if they were to exist)*/
+                    removed = true;
+                }
+                adjListPosition++;
             }
         }
         else
         {
-            throw new IllegalArgumentException("Edge does not exist");
+            throw new IllegalArgumentException("Edge {" + inLabel1 + ", " +
+                    inLabel2 + "} does not exist");
         }
     }
 
@@ -113,7 +129,12 @@ public class DSAGraph
         boolean edgePresent = false;
         DSAGraphVertex vertex1, curAdjVertex;
         Iterator adjListIterator;
+
+        /*Getting vertices in graph from imported labels (will throw exception
+            if either does not exist)*/
         vertex1 = getVertex(inLabel1);
+        getVertex(inLabel2);
+
         adjListIterator = vertex1.adjacencyList.iterator();
 
         while (adjListIterator.hasNext()) /*For each vertex in the first

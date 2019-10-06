@@ -1,5 +1,5 @@
 /* DSA Graph Test Harness by Moritz Bergemann
- * Testharness for DSAGraph model class
+ * Test Harness for DSAGraph model class
  * Created DateL 4/09/2019
  */
 
@@ -67,7 +67,6 @@ public class DSAGraphTestHarness
         out.println("Adding edge {I, J}");
         graph2.addEdge("I", "J");
         out.println();
-
         out.println("Attempting to add edge {A, X} to graph (label X doesn't exist)");
         try
         {
@@ -79,7 +78,35 @@ public class DSAGraphTestHarness
             out.println("Exception Caught: " + i.getMessage());
         }
         out.println();
-        
+
+        //Removing edges
+        out.println("Removing edges from graph 2");
+        out.println("Removing edge {D, G}");
+        graph2.removeEdge("D", "G");
+        out.println("Removing edge {A, B} (only one instance should be removed)");
+        graph2.removeEdge("A", "B");
+        out.println("Attempting to remove edge {A, J} (doesn't exist)");
+        try
+        {
+            graph2.removeEdge("A", "J");
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+        out.println("Attempting to remove edge {A, X} (vertex X doesn't exist)");
+        try
+        {
+            graph2.removeEdge("A", "X");
+            out.println("Succeeded (shouldn't have)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception Caught: " + i.getMessage());
+        }
+        out.println();
+
         //Displaying graph
         out.println("Displaying graph 1 (No edges):");
         graph1.displayAsList();
