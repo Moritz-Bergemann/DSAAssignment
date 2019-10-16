@@ -1,18 +1,18 @@
+import java.util.Iterator;
+
 /* Network by Moritz Bergemann
  * Uses contains methods for simulation of social network using a graph object,
  *  where each vertex is an account & each (directional) edge is directed
  *  towards a follower (sink).
  * Created Date: 3/10/2019
  */
-public class Network
+public class Network extends DSAGraph
 {
     //CLASS FIELDS
-    private DSAGraph network; //Graph representing network
     private DSALinkedList posts; //List of all posts made in this network
     private int curTime;
 
     //PRIVATE INNER CLASSES
-
     /* Stores user information (excluding the user name as this will be the
      *  node label in the graph) of a user in the network
      */
@@ -21,8 +21,8 @@ public class Network
         //CLASS FIELDS
         private int followers;
         private int following;
-        private int createdTime; /*Timestep at which user was added to network (0 if
-            initial*/
+        private int createdTime; /*Timestep at which user was added to network
+            (0 if initial*/
 
         /* Alternate Constructor (takes in created time)
          */
@@ -50,7 +50,7 @@ public class Network
      */
     public Network()
     {
-        network = new DSAGraph();
+        super(); //Constructing DSAGraph Superclass
         posts = new DSALinkedList();
         curTime = 0;
     }
@@ -62,10 +62,10 @@ public class Network
     {
         UserInfo newUserInfo;
 
-        if (!network.hasVertex(inName)) //If user not already in network
+        if (!super.hasVertex(inName)) //If user not already in network
         {
             newUserInfo = new UserInfo(curTime);
-            network.addVertex(inName, newUserInfo);
+            super.addVertex(inName, newUserInfo);
         }
         else
         {
@@ -80,16 +80,16 @@ public class Network
      */
     public void addFollower(String inName1, String inName2)
     {
-        if (!network.hasVertex(inName1)) //If first user doesn't exist
+        if (!super.hasVertex(inName1)) //If first user doesn't exist
         {
             throw new IllegalArgumentException("User '" + inName1 + "' not in" +
                     "graph");
         }
-        else if (!network.hasVertex(inName2)) //If 2nd user doesn't exist
+        else if (!super.hasVertex(inName2)) //If 2nd user doesn't exist
         {
             throw new IllegalArgumentException("User '" + inName2 + "' not in" +
                     "graph");
-        } else if (network.hasEdge(inName1, inName2)) /*If relationship already
+        } else if (super.hasEdge(inName1, inName2)) /*If relationship already
             exists*/
         {
             throw new IllegalArgumentException("Relationship already exists");
@@ -102,7 +102,7 @@ public class Network
         {
             /*Adding relationship between users (directional so that points from
                 followed to follower (since this is how posts spread)*/
-            network.addEdge(inName2, inName1);
+            super.addEdge(inName2, inName1);
         }
     }
 
@@ -114,10 +114,10 @@ public class Network
     {
         try
         {
-            if (network.hasEdge(inName2, inName1)) /*If network has a follower-
+            if (super.hasEdge(inName2, inName1)) /*If network has a follower-
                 followed relationship between user1 & user2*/
             {
-                network.removeEdge(inName2, inName1);
+                super.removeEdge(inName2, inName1);
             }
         }
         catch (IllegalArgumentException i) /*If one of the imported vertices
@@ -127,5 +127,8 @@ public class Network
         }
     }
 
-    
+    public void timeStep()
+    {
+        Iterator postIterator = posts.iterator();
+    }
 }
