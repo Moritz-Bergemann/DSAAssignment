@@ -7,9 +7,9 @@
 public class Network
 {
     //CLASS FIELDS
-    DSAGraph network; //Graph representing network
-    DSALinkedList posts; //List of all posts made in this network
-    int curTime;
+    private DSAGraph network; //Graph representing network
+    private DSALinkedList posts; //List of all posts made in this network
+    private int curTime;
 
     //PRIVATE INNER CLASSES
 
@@ -126,4 +126,6 @@ public class Network
             throw new IllegalArgumentException("One of users does not exist");
         }
     }
+
+    
 }
