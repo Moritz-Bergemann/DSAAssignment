@@ -7,49 +7,36 @@
  */
 import java.security.cert.CertificateEncodingException;
 import java.util.*;
-public class SocialSim
-{
+
+public class SocialSim {
     boolean runMenu;
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         //Taking actions based on command line parameters
         if (args.length == 0) /*If no arguments given (means should just
-            display usage information)*/
-        {
+            display usage information)*/ {
             usageInfo();
-        }
-        else if (args[0].equals("-s")) /*If Simulation Mode flag given*/
-        {
+        } else if (args[0].equals("-s")) /*If Simulation Mode flag given*/ {
             if (args.length == 5) /*If correct number of other parameters
                 provided for simulation mode NOTE: Should this even be 8? Don't
-                you need more information (i.e. timesteps)*/
-            {
+                you need more information (i.e. timesteps)*/ {
                 simulation(args[1], args[2], Double.parseDouble(args[3]),
                         Double.parseDouble(args[4]));
-            }
-            else
-            {
+            } else {
                 System.out.println("Invalid number of command line arguments" +
                         "given for simulation mode! Run without command line" +
                         "parameters for usage information.");
             }
-        }
-        else if (args[0].equals("-i")) /*If Interactive Mode flag given*/
-        {
+        } else if (args[0].equals("-i")) /*If Interactive Mode flag given*/ {
             if (args.length == 1) /*If no additional command line parameters
-                given (as interactive mode doesn't take any*/
-            {
+                given (as interactive mode doesn't take any*/ {
                 interactiveMenu();
-            }
-            else
-            {
+            } else {
                 System.out.println("Invalid number of command line arguments" +
                         "given for interactive mode! Run without command line" +
                         "parameters for usage information.");
             }
-        }
-        else
-        {
+        } else {
             System.out.println("Invalid command line arguments given! Run " +
                     "without command line parameters for usage information.");
         }
@@ -57,8 +44,7 @@ public class SocialSim
 
     /* Displays program usage information.
      */
-    public static void usageInfo()
-    {
+    public static void usageInfo() {
         System.out.println("SocialSim by Moritz Bergemann (2019)");
         System.out.println("Program for simulating a social network of " +
                 "people, including followers and the creating, sharing & " +
@@ -87,15 +73,14 @@ public class SocialSim
     /*Runs (and repeats) the menu for the program's interactive mode, and calls
      * the required functions to perform the selected tasks.
      */
-    public static void interactiveMenu()
-    {
+    public static void interactiveMenu() {
         Scanner sc = new Scanner(System.in);
         String netFile, eventFile, postUser;
         String optionText = "\t1. Load network" + "\n" +
                 "\t2. Set probabilities" + "\n" +
                 "\t3. User operations (find/insert/delete users)" + "\n" +
                 "\t4. Relationship operations (find/insert/remove follower/" +
-                    "followed relationships)" + "\n" +
+                "followed relationships)" + "\n" +
                 "\t5. Create post" + "\n" +
                 "\t6. Display network" + "\n" +
                 "\t7. Statistics" + "\n" +
@@ -108,16 +93,14 @@ public class SocialSim
         //Running menu
         int menuChoice;
         boolean end = false;
-        do
-        {
+        do {
             System.out.println("MAIN MENU:");
             System.out.println("Please choose one of the following options:");
             System.out.println(optionText);
             menuChoice = inputInt("Choice", 1, 9);
 
             switch (menuChoice) /*NOTE: Maybe move a lot of this into
-                NetworkManager if you can extensively modify the graph*/
-            {
+                NetworkManager if you can extensively modify the graph*/ {
                 case 1:
                     System.out.print("Input name of network file to read: ");
                     netFile = sc.nextLine();
@@ -167,8 +150,7 @@ public class SocialSim
      *  NOTE: How many timesteps???
      */
     public static void simulation(String netFile, String eventFile,
-                                  double likeProb, double followProb)
-    {
+                                  double likeProb, double followProb) {
         //Creating network for use in simulation
         Network network = new Network();
         //TODO
@@ -177,8 +159,7 @@ public class SocialSim
     /* Displays the statistics menu to the user & returns the information
      *  requested.
      */
-    public static void statisticsMenu(Network network)
-    {
+    public static void statisticsMenu(Network network) {
         int menuChoice;
         String recordUser;
         Scanner sc = new Scanner(System.in);
@@ -186,8 +167,7 @@ public class SocialSim
                 "\t2. Show users in order of popularity\n" +
                 "\t3. Show a user record"); //TODO any more?
         menuChoice = inputInt("Choice", 1, 3);
-        switch (menuChoice)
-        {
+        switch (menuChoice) {
             case 1:
                 //TODO
                 break;
@@ -205,17 +185,14 @@ public class SocialSim
     /* Processes and validates user input of an integer using the imported
      *  prompt between the imported minimum and maximum
      */
-    public static int inputInt(String initalPrompt, int min, int max)
-    {
+    public static int inputInt(String initalPrompt, int min, int max) {
         Scanner sc = new Scanner(System.in);
         int input = 0;
         String prompt = initalPrompt;
 
         //Repeating input prompt until user input is within range
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.print(prompt);
                 input = sc.nextInt();
 
@@ -224,12 +201,10 @@ public class SocialSim
                     again)*/
                 prompt = "Invalid Input! Please input an integer between " +
                         min + " & " + max + " (inclusive)";
-            }
-            catch (NumberFormatException n)
-            {
+            } catch (NumberFormatException n) {
                 //Modifying prompt to include message for invalid integer input
                 prompt = "Invalid Input! Please input an integer (whole number)"
-                    + "\n" + initalPrompt;
+                        + "\n" + initalPrompt;
 
                 //Putting user input outside valid range so loop continues
                 input = min - 1;
@@ -243,17 +218,14 @@ public class SocialSim
      *  prompt between the imported minimum and maximum
      */
     public static double inputDouble(String initalPrompt, double min,
-                                     double max)
-    {
+                                     double max) {
         Scanner sc = new Scanner(System.in);
         double input = 0.0;
         String prompt = initalPrompt;
 
         //Repeating input prompt until user input is within range
-        do
-        {
-            try
-            {
+        do {
+            try {
                 System.out.print(prompt);
                 input = sc.nextDouble();
 
@@ -262,9 +234,7 @@ public class SocialSim
                     again)*/
                 prompt = "Invalid Input! Please input a decimal number " +
                         "between " + min + " & " + max + " (inclusive)";
-            }
-            catch (NumberFormatException n)
-            {
+            } catch (NumberFormatException n) {
                 /*Modifying prompt to include message for invalid data type
                     input*/
                 prompt = "Invalid Input! Please input a decimal number"
@@ -276,5 +246,10 @@ public class SocialSim
         } while (input < min || input > max);
 
         return input;
+    }
+
+    public void yeet()
+    {
+
     }
 }

@@ -43,6 +43,23 @@ public class Network extends DSAGraph
         private String op; //Label of original poster
         private int likes; //Number of likes post has received
         private String content; /*Actual content of post*/
+        private int createdTime;
+
+        /* Alternate Constructor
+         */
+        private Post(String inOP, String inContent, int inCreatedTime)
+        {
+            if (inContent != "") //If content of post is not empty
+            {
+                op = inOP;
+                content = inContent;
+                createdTime = inCreatedTime;
+            }
+            else
+            {
+                throw new IllegalArgumentException("Post content cannot be negative");
+            }
+        }
     }
 
     //CONSTRUCTORS
@@ -124,6 +141,19 @@ public class Network extends DSAGraph
             does not exist*/
         {
             throw new IllegalArgumentException("One of users does not exist");
+        }
+    }
+
+    public void makePost(String user, String content)
+    {
+        Post inPost;
+        if super.hasVertex(user);
+        {
+
+        }
+        else
+        {
+            throw new IllegalArgumentException("User is not in network");
         }
     }
 
