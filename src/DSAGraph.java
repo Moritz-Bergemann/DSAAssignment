@@ -9,14 +9,14 @@ import java.util.*;
 public class DSAGraph
 {
     //CLASS FIELDS
-    DSALinkedList vertexList; //List of vertices in graph (ordered)
+    protected DSALinkedList vertexList; //List of vertices in graph (ordered)
 
     //INNER CLASSES
     /* Model class for vertices within linked list
      * Implements sortable so that it can be sorted by its label fields
      *  in the DSALinkedList class
      */
-    private class DSAGraphVertex implements Sortable
+    protected class DSAGraphVertex implements Sortable
     {
         //CLASS FIELDS
         String label;
@@ -459,7 +459,7 @@ public class DSAGraph
      *  class) by searching through the list of all vertices, throws exception
      *  if vertex not present in list
      */
-    private DSAGraphVertex getVertex(String inLabel)
+    protected DSAGraphVertex getVertex(String inLabel)
     {
         DSAGraphVertex vertexToGet = null; //Vertex to return (null by default)
         DSAGraphVertex currentVertex;
@@ -486,7 +486,7 @@ public class DSAGraph
         return vertexToGet;
     }
 
-    //MUTATORS
+    //PUBLIC MUTATORS
     /* Adds vertex with given label & value to graph if label does not already
      *  exist in graph, throws exception otherwise*/
     public void addVertex(String inLabel, Object inValue) 

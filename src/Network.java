@@ -11,6 +11,8 @@ public class Network extends DSAGraph
     //CLASS FIELDS
     private DSALinkedList posts; //List of all posts made in this network
     private int curTime;
+    private double likeChance; //Chance of liking a post
+    private double followChance;
 
     //PRIVATE INNER CLASSES
     /* Stores user information (excluding the user name as this will be the
@@ -41,11 +43,14 @@ public class Network extends DSAGraph
     {
         //CLASS FIELDS
         private String op; //Label of original poster
-        private int likes; //Number of likes post has received
         private String content; /*Actual content of post*/
-        private int createdTime;
+        private int likes; //Number of likes post has received
+        private int createdTime; //Timestep post was created
+        private boolean complete; //Whether post can be shared any further
         DSALinkedList usersLiked; //Users who have liked this post
-        DSALinkedList usersToLike; //Users who will have a chance to like the next post in the next timestep
+        DSALinkedList usersShared; //Users who have had this post shared to them
+        DSALinkedList usersToLike; /*Users who will have a chance to like/share
+            the next post in the next timestep*/
 
         /* Alternate Constructor
          */
@@ -148,16 +153,28 @@ public class Network extends DSAGraph
         }
     }
 
-    public void makePost(String user, String content)
+    /* Creates a post with given content*/
+    public void makePost(String userName, String content)
     {
-        Post inPost;
-        if (super.hasVertex(user))
+        Post newPost;
+        if (super.hasVertex(userName))
         {
             try
             {
-                inPost = new Post(user, content, curTime);
-            } catch (IllegalArgumentException i) {
-                throw new IllegalArgumentException("Could not create post: " + i.getMessage());
+                newPost = new Post(userName, content, curTime);
+
+                //Add post to list of posts
+                posts.insertLast(newPost);
+
+                /*Do initial share of post to all of OP's
+                    followers*/
+                sharePost(newPost, super.getVertex(userName));
+            }
+            catch (IllegalArgumentException i) /*If post
+            constructor threw exception*/
+            {
+                throw new IllegalArgumentException("Could not create post: " +
+                        i.getMessage());
             }
         }
         else
@@ -166,8 +183,137 @@ public class Network extends DSAGraph
         }
     }
 
+    /* Shares the imported post to all the followers of the imported user
+     *  (given they have not already had the post shared with them). Adds
+     *  all users the post has been shared with to the imported linked list.
+     */
+    private void sharePost(Post inPost, String inUser,
+                           DSALinkedList justSharedUsers)
+    {
+        Iterator followerIter;
+        DSAGraphVertex curFollower;
+
+        if (super.hasVertex(inUser))
+        {
+            followerIter = super.getVertex(inUser).adjacencyList.iterator();
+
+            while (followerIter.hasNext())
+            {
+                curFollower = (DSAGraphVertex)followerIter.next();
+
+                if (!seenPost(inPost, inUser)) /*If user has not already seen
+                    the imported post*/
+                {
+                    /*Adding user to list of users post has been shared with
+                        in this timestep*/
+                    justSharedUsers.insertLast(inUser);
+
+                    /*Adding user to post's list of users it has been shared
+                        with*/
+                    inPost.usersShared.insertLast(inUser);
+                }
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException("User does not exist");
+        }
+    }
+
+    /* Increases the imported user's likes by 1 and adds the user's name to the
+     *  list of users who have liked the post.
+     */
+    private void likePost(Post inPost, String inUser)
+    {
+        if (super.hasVertex(inUser))
+        {
+            //Increase post's number of likes
+            inPost.likes++;
+
+            //Add user who liked post to list of users who have liked it
+            inPost.usersLiked.insertLast(inUser);
+        }
+        else
+        {
+            throw new IllegalArgumentException("Input user does not exist");
+        }
+    }
+
     public void timeStep()
     {
-        Iterator postIterator = posts.iterator();
+        Iterator postIter, toLikeIter;
+        Post curPost;
+        String curUser;
+        DSALinkedList sharedUsers; /*Linked list of users who post was shared to
+            in this timestep*/
+
+        postIter = posts.iterator();
+        while (postIter.hasNext()) //For each post in network
+        {
+            curPost = (Post)postIter.next();
+
+            toLikeIter = curPost.usersToLike.iterator();
+
+            if (!curPost.complete)
+            {
+                while (toLikeIter.hasNext())
+                {
+                    sharedUsers = new DSALinkedList();
+                    curUser = (String)toLikeIter.next();
+
+                    if (chance(likeChance)) /*If the chance to like the post is
+                        met*/
+                    {
+                        //Make the current user like the post
+                        likePost(curPost, curUser);
+
+                        if (chance(shareChance))
+                        //TODO INCOMPLETE
+                    }
+                    //Share post to all users following the current user
+                    sharePost(curPost, curUser, sharedUsers);
+                }
+            }
+        }
+    }
+
+    /* Returns true if the imported user has already been shared the imported
+     *  post and false if not. Throws exception if user does not exist.
+     */
+    private boolean seenPost(Post inPost, String inUser)
+    {
+        Iterator sharedUserIter;
+        String curUser;
+        boolean seen = false; /*Stores whether imported user has seen imported
+            post*/
+
+        if (super.hasVertex(inUser))
+        {
+            sharedUserIter = inPost.usersShared.iterator();
+
+            while (sharedUserIter.hasNext() && !seen) /*For each user post has
+                been shared to & while it has not been determined imported user
+                has seen post*/
+            {
+                curUser = (String) sharedUserIter.next();
+
+                if (curUser.equals(inUser)) //If user being searched for found
+                {
+                    seen = true;
+                }
+            }
+        }
+        return seen;
+    }
+
+    /*Returns a boolean that has the imported chance (between 0.0 & 1.0) of
+     *  being true.
+     */
+    private boolean chance(double inChance)
+    {
+        //Sanity check
+        assert (inChance >= 0.0) && (inChance <= 1.0) : "Chance not >0 & <1";
+
+        return (inChance >= Math.random());
     }
 }
