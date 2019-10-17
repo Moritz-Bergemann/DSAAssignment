@@ -1,0 +1,6 @@
+Each post should have a queue/list of users who have just had the post shared to them in the most recent timestep.
+    The timestep method should then iterate through the list of users for each post and give all receivers the chance
+    to like the post/follow the OP.
+    All new users who have the post shared to them (must ensure that followers do not already have the post shared to
+    then) should either be added to the back of the user queue or be added to a new queue that then replaces the old one
+    for the next timestep.
