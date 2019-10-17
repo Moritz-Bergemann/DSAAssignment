@@ -44,6 +44,8 @@ public class Network extends DSAGraph
         private int likes; //Number of likes post has received
         private String content; /*Actual content of post*/
         private int createdTime;
+        DSALinkedList usersLiked; //Users who have liked this post
+        DSALinkedList usersToLike; //Users who will have a chance to like the next post in the next timestep
 
         /* Alternate Constructor
          */
@@ -53,7 +55,9 @@ public class Network extends DSAGraph
             {
                 op = inOP;
                 content = inContent;
+                likes = 0; //Likes starts initially at 0
                 createdTime = inCreatedTime;
+
             }
             else
             {
@@ -147,9 +151,14 @@ public class Network extends DSAGraph
     public void makePost(String user, String content)
     {
         Post inPost;
-        if super.hasVertex(user);
+        if (super.hasVertex(user))
         {
-
+            try
+            {
+                inPost = new Post(user, content, curTime);
+            } catch (IllegalArgumentException i) {
+                throw new IllegalArgumentException("Could not create post: " + i.getMessage());
+            }
         }
         else
         {

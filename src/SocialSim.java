@@ -248,8 +248,5 @@ public class SocialSim {
         return input;
     }
 
-    public void yeet()
-    {
 
-    }
 }

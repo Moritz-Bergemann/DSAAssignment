@@ -11,48 +11,6 @@ public class DSAGraph
     //CLASS FIELDS
     DSALinkedList vertexList; //List of vertices in graph (ordered)
 
-    /* Removes the edge connecting the 2 imported labels (directionally) if it
-     *  exists, throws exception if edge or vertices don't exist
-     */
-    public void removeEdge(String inLabel1, String inLabel2)
-    {
-        DSAGraphVertex vertex1, curAdjVertex;
-        Iterator adjListIterator;
-        int adjListPosition;
-        boolean removed;
-
-        if (hasEdge(inLabel1, inLabel2)) /*If graph has the edge to be removed
-            (will throw exception if either of vertices do not exist)*/
-        {
-            vertex1 = getVertex(inLabel1);
-            adjListIterator = vertex1.adjacencyList.iterator();
-
-            //Searching for & removing connected node in adjacency list
-            adjListPosition = 0;
-            removed = false;
-            while (adjListIterator.hasNext() && !removed)
-            {
-                curAdjVertex = (DSAGraphVertex)adjListIterator.next();
-
-                if (curAdjVertex.label.equals(inLabel2)) /*If current adjacency
-                    list node has label of edge to be removed*/
-                {
-                    vertex1.adjacencyList.removeAt(adjListPosition);
-
-                    /*Setting cancelling iteration to avoid removing multiple
-                        instances of the same edge (if they were to exist)*/
-                    removed = true;
-                }
-                adjListPosition++;
-            }
-        }
-        else
-        {
-            throw new IllegalArgumentException("Edge {" + inLabel1 + ", " +
-                    inLabel2 + "} does not exist");
-        }
-    }
-
     //INNER CLASSES
     /* Model class for vertices within linked list
      * Implements sortable so that it can be sorted by its label fields
@@ -572,6 +530,48 @@ public class DSAGraph
         //Sorting both vertice's adjacency lists to be in ASCII order
         vertex1.adjacencyList.sortSortable();
         vertex2.adjacencyList.sortSortable();
+    }
+
+    /* Removes the edge connecting the 2 imported labels (directionally) if it
+     *  exists, throws exception if edge or vertices don't exist
+     */
+    public void removeEdge(String inLabel1, String inLabel2)
+    {
+        DSAGraphVertex vertex1, curAdjVertex;
+        Iterator adjListIterator;
+        int adjListPosition;
+        boolean removed;
+
+        if (hasEdge(inLabel1, inLabel2)) /*If graph has the edge to be removed
+            (will throw exception if either of vertices do not exist)*/
+        {
+            vertex1 = getVertex(inLabel1);
+            adjListIterator = vertex1.adjacencyList.iterator();
+
+            //Searching for & removing connected node in adjacency list
+            adjListPosition = 0;
+            removed = false;
+            while (adjListIterator.hasNext() && !removed)
+            {
+                curAdjVertex = (DSAGraphVertex)adjListIterator.next();
+
+                if (curAdjVertex.label.equals(inLabel2)) /*If current adjacency
+                    list node has label of edge to be removed*/
+                {
+                    vertex1.adjacencyList.removeAt(adjListPosition);
+
+                    /*Setting cancelling iteration to avoid removing multiple
+                        instances of the same edge (if they were to exist)*/
+                    removed = true;
+                }
+                adjListPosition++;
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException("Edge {" + inLabel1 + ", " +
+                    inLabel2 + "} does not exist");
+        }
     }
 
     /* Sets all vertices in graph to unvisited
