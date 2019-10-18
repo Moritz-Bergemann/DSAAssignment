@@ -104,23 +104,23 @@ public class Network extends DSAGraph
      *  in the form inUser1 follows inUser2. Throws exception if either of
      *  the users do not exist or if the relationship already exists.
      */
-    public void addFollower(String inName1, String inName2)
+    public void addFollower(String inUser1, String inUser2)
     {
-        if (!super.hasVertex(inName1)) //If first user doesn't exist
+        if (!super.hasVertex(inUser1)) //If first user doesn't exist
         {
-            throw new IllegalArgumentException("User '" + inName1 + "' not in" +
-                    "graph");
+            throw new IllegalArgumentException("User '" + inUser1 + "' not in" +
+                    "network");
         }
-        else if (!super.hasVertex(inName2)) //If 2nd user doesn't exist
+        else if (!super.hasVertex(inUser2)) //If 2nd user doesn't exist
         {
-            throw new IllegalArgumentException("User '" + inName2 + "' not in" +
-                    "graph");
-        } else if (super.hasEdge(inName1, inName2)) /*If relationship already
+            throw new IllegalArgumentException("User '" + inUser2 + "' not in" +
+                    "network");
+        } else if (super.hasEdge(inUser1, inUser2)) /*If relationship already
             exists*/
         {
             throw new IllegalArgumentException("Relationship already exists");
         }
-        else if (inName1.equals(inName2)) //If 2 imported names are the same
+        else if (inUser1.equals(inUser2)) //If 2 imported names are the same
         {
             throw new IllegalArgumentException("User cannot follow themselves");
         }
@@ -128,8 +128,33 @@ public class Network extends DSAGraph
         {
             /*Adding relationship between users (directional so that points from
                 followed to follower (since this is how posts spread)*/
-            super.addEdge(inName2, inName1);
+            super.addEdge(inUser2, inUser1);
         }
+    }
+
+    /* Returns whether the network contains the follower-followed relationship
+     *  between the imported users in the form inUser1 follows inUser2
+     */
+    public boolean hasFollower(String inUser1, String inUser2)
+    {
+        boolean followerPresent = false;
+
+        if (super.hasVertex(inUser1))
+        {
+            if (super.hasVertex(inUser2))
+            {
+                followerPresent = super.hasEdge(inUser2, inUser1); /*Reverse as
+                    follower-followed represented by followed having edge
+                    directed towards follower*/
+            }
+            else
+            {
+                throw new IllegalArgumentException("User" + inUser2 + "not in" +
+                        "network");
+            }
+        }
+
+        return followerPresent;
     }
 
     /*Removes a follower-followed relationship between the imported two users
@@ -153,7 +178,9 @@ public class Network extends DSAGraph
         }
     }
 
-    /* Creates a post with given content*/
+    /* Creates a post with given content, posted by the imported user and shares
+     *  it with the OPs followers
+    */
     public void makePost(String userName, String content)
     {
         Post newPost;
@@ -168,7 +195,7 @@ public class Network extends DSAGraph
 
                 /*Do initial share of post to all of OP's
                     followers*/
-                sharePost(newPost, super.getVertex(userName));
+                sharePost(newPost, userName, newPost.usersToLike); //NOTE does this make sense?
             }
             catch (IllegalArgumentException i) /*If post
             constructor threw exception*/
@@ -244,8 +271,8 @@ public class Network extends DSAGraph
         Iterator postIter, toLikeIter;
         Post curPost;
         String curUser;
-        DSALinkedList sharedUsers; /*Linked list of users who post was shared to
-            in this timestep*/
+        DSALinkedList justSharedUsers; /*Linked list of users who post was
+            shared to in this timestep*/
 
         postIter = posts.iterator();
         while (postIter.hasNext()) //For each post in network
@@ -256,9 +283,12 @@ public class Network extends DSAGraph
 
             if (!curPost.complete)
             {
+                /*Creating linked list of users who have had this post shared
+                    with them on this timestep*/
+                justSharedUsers = new DSALinkedList();
+
                 while (toLikeIter.hasNext())
                 {
-                    sharedUsers = new DSALinkedList();
                     curUser = (String)toLikeIter.next();
 
                     if (chance(likeChance)) /*If the chance to like the post is
@@ -267,11 +297,39 @@ public class Network extends DSAGraph
                         //Make the current user like the post
                         likePost(curPost, curUser);
 
-                        if (chance(shareChance))
-                        //TODO INCOMPLETE
+                        /*Make the current user share the post (& add all users
+                            who received it to list of just shared users)*/
+                        sharePost(curPost, curUser, justSharedUsers);
+
+                        if (chance(followChance)) /*If chance of following OP
+                            also met (only occurs if post was also liked)*/
+                        {
+                            if (!hasFollower(curUser, curPost.op)) /*If user
+                                is not already following OP*/
+                            {
+                                /*Making current user follow post's original
+                                    poster*/
+                                addFollower(curUser, curPost.op);
+                            }
+                        }
                     }
-                    //Share post to all users following the current user
-                    sharePost(curPost, curUser, sharedUsers);
+                }
+                if (!justSharedUsers.isEmpty()) /*If at least 1 user had the
+                    post shared to them this timestep (who will have a chance
+                    of liking/sharing it in the next timestep)*/
+                {
+                    /*Discarding users to like (as has been used) & setting it
+                        to all users who have a chance to like the post in the
+                        next timestep*/
+                    curPost.usersToLike = justSharedUsers;
+                }
+                else
+                {
+                    /*Marking post as complete (as there is are no users that
+                        may share it in the next timestep and therefore no
+                        chance of it being shared again)*/
+                    curPost.complete = true;
+                    curPost.usersToLike = null;
                 }
             }
         }
