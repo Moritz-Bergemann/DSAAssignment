@@ -30,7 +30,7 @@ public class Network extends DSAGraph
          */
         private UserInfo(int inCreatedTime)
         {
-            assert createdTime >= 0 : "User created time below 0";
+            assert createdTime >= 0 : "User's created time below 0";
             followers = 0;
             following = 0;
             createdTime = inCreatedTime;
@@ -56,7 +56,7 @@ public class Network extends DSAGraph
          */
         private Post(String inOP, String inContent, int inCreatedTime)
         {
-            if (inContent != "") //If content of post is not empty
+            if (!inContent.equals("")) //If content of post is not empty
             {
                 op = inOP;
                 content = inContent;
@@ -233,11 +233,11 @@ public class Network extends DSAGraph
                 {
                     /*Adding user to list of users post has been shared with
                         in this timestep*/
-                    justSharedUsers.insertLast(inUser);
+                    justSharedUsers.insertLast(curFollower);
 
                     /*Adding user to post's list of users it has been shared
                         with*/
-                    inPost.usersShared.insertLast(inUser);
+                    inPost.usersShared.insertLast(curFollower);
                 }
             }
         }
@@ -273,6 +273,9 @@ public class Network extends DSAGraph
         String curUser;
         DSALinkedList justSharedUsers; /*Linked list of users who post was
             shared to in this timestep*/
+
+        //Increasing timestep count
+        curTime++;
 
         postIter = posts.iterator();
         while (postIter.hasNext()) //For each post in network
