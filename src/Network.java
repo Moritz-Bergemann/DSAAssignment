@@ -109,13 +109,13 @@ public class Network extends DSAGraph
         if (!super.hasVertex(inUser1)) //If first user doesn't exist
         {
             throw new IllegalArgumentException("User '" + inUser1 + "' not in" +
-                    "network");
+                    " network");
         }
         else if (!super.hasVertex(inUser2)) //If 2nd user doesn't exist
         {
             throw new IllegalArgumentException("User '" + inUser2 + "' not in" +
-                    "network");
-        } else if (super.hasEdge(inUser1, inUser2)) /*If relationship already
+                    " network");
+        } else if (super.hasEdge(inUser2, inUser1)) /*If relationship already
             exists*/
         {
             throw new IllegalArgumentException("Relationship already exists");
@@ -129,6 +129,12 @@ public class Network extends DSAGraph
             /*Adding relationship between users (directional so that points from
                 followed to follower (since this is how posts spread)*/
             super.addEdge(inUser2, inUser1);
+
+            //Increasing following user's 'following' count by 1
+            ((UserInfo)super.getVertex(inUser1).value).following++;
+
+            //Increasing followed user's 'follower' count by 1
+            ((UserInfo)super.getVertex(inUser2).value).followers++;
         }
     }
 
@@ -150,7 +156,7 @@ public class Network extends DSAGraph
             else
             {
                 throw new IllegalArgumentException("User" + inUser2 + "not in" +
-                        "network");
+                        " network");
             }
         }
 
@@ -161,14 +167,20 @@ public class Network extends DSAGraph
      *  (in form User1 follows User2). Throws exception if either of the users
      *  or the relationship doesn't exist.
      */
-    public void removeFollower(String inName1, String inName2)
+    public void removeFollower(String inUser1, String inUser2)
     {
         try
         {
-            if (super.hasEdge(inName2, inName1)) /*If network has a follower-
+            if (super.hasEdge(inUser2, inUser1)) /*If network has a follower-
                 followed relationship between user1 & user2*/
             {
-                super.removeEdge(inName2, inName1);
+                super.removeEdge(inUser2, inUser1);
+
+                //Decreasing following user's 'following' count by 1
+                ((UserInfo)super.getVertex(inUser1).value).following--;
+
+                //Decreasing followed user's 'follower' count by 1
+                ((UserInfo)super.getVertex(inUser2).value).followers--;
             }
         }
         catch (IllegalArgumentException i) /*If one of the imported vertices
