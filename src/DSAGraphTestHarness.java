@@ -142,7 +142,19 @@ public class DSAGraphTestHarness
         out.println("Getting edge count of graph 1 (should be 0): " + graph1.getEdgeCount());
         out.println("Getting edge count of graph 2 (should be 8): " + graph2.getEdgeCount());
         out.println("Getting edge count of graph 3 (should be 0): " + graph3.getEdgeCount());
-        //isAdjacent (removed)
+
+        //removeVertex
+        out.println("Removing edges from graph 2 (should remove also remove all references in adjacency lists)");
+        out.println("Removing 'A'");
+        graph2.removeVertex("A");
+        out.println("Removing 'J'");
+        graph2.removeVertex("J");
+
+        out.println("Redisplaying graph 2:");
+        graph2.displayAsList();
+        out.println();
+
+        //isAdjacent (removed for directional graph as not required for network)
 //        out.println("Checking whether nodes 'A' & 'B' in graph 1 adjacent (shoulnd't be): " + graph1.isAdjacent("A", "B"));
 //        out.println("Checking whether nodes 'A' & 'B' in graph 2 adjacent (should be): " + graph2.isAdjacent("A", "B"));
 //        out.println("Checking whether nodes 'A' & 'J' in graph 2 adjacent (shoulnd't be): " + graph2.isAdjacent("A", "J"));

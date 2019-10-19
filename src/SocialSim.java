@@ -5,38 +5,52 @@
  * NOTE: How does the '-s' version of the program running determine for how many
  *  timesteps the program should be run?
  */
+
 import java.security.cert.CertificateEncodingException;
 import java.util.*;
 
-public class SocialSim {
-    boolean runMenu;
-
-    public static void main(String[] args) {
+public class SocialSim
+{
+    public static void main(String[] args)
+    {
         //Taking actions based on command line parameters
         if (args.length == 0) /*If no arguments given (means should just
-            display usage information)*/ {
+            display usage information)*/
+        {
             usageInfo();
-        } else if (args[0].equals("-s")) /*If Simulation Mode flag given*/ {
+        }
+        else if (args[0].equals("-s")) /*If Simulation Mode flag given*/
+        {
             if (args.length == 5) /*If correct number of other parameters
                 provided for simulation mode NOTE: Should this even be 8? Don't
-                you need more information (i.e. timesteps)*/ {
+                you need more information (i.e. timesteps)*/
+            {
                 simulation(args[1], args[2], Double.parseDouble(args[3]),
                         Double.parseDouble(args[4]));
-            } else {
+            }
+            else
+            {
                 System.out.println("Invalid number of command line arguments" +
                         "given for simulation mode! Run without command line" +
                         "parameters for usage information.");
             }
-        } else if (args[0].equals("-i")) /*If Interactive Mode flag given*/ {
+        }
+        else if (args[0].equals("-i")) /*If Interactive Mode flag given*/
+        {
             if (args.length == 1) /*If no additional command line parameters
-                given (as interactive mode doesn't take any*/ {
-                interactiveMenu();
-            } else {
+                given (as interactive mode doesn't take any*/
+            {
+                interactive();
+            }
+            else
+            {
                 System.out.println("Invalid number of command line arguments" +
                         "given for interactive mode! Run without command line" +
                         "parameters for usage information.");
             }
-        } else {
+        }
+        else
+        {
             System.out.println("Invalid command line arguments given! Run " +
                     "without command line parameters for usage information.");
         }
@@ -44,7 +58,8 @@ public class SocialSim {
 
     /* Displays program usage information.
      */
-    public static void usageInfo() {
+    public static void usageInfo()
+    {
         System.out.println("SocialSim by Moritz Bergemann (2019)");
         System.out.println("Program for simulating a social network of " +
                 "people, including followers and the creating, sharing & " +
@@ -73,9 +88,9 @@ public class SocialSim {
     /*Runs (and repeats) the menu for the program's interactive mode, and calls
      * the required functions to perform the selected tasks.
      */
-    public static void interactiveMenu() {
+    public static void interactive()
+    {
         Scanner sc = new Scanner(System.in);
-        String netFile, eventFile, postUser;
         String optionText = "\t1. Load network" + "\n" +
                 "\t2. Set probabilities" + "\n" +
                 "\t3. User operations (find/insert/delete users)" + "\n" +
@@ -93,51 +108,73 @@ public class SocialSim {
         //Running menu
         int menuChoice;
         boolean end = false;
-        do {
+        do
+        {
             System.out.println("MAIN MENU:");
             System.out.println("Please choose one of the following options:");
             System.out.println(optionText);
             menuChoice = inputInt("Choice", 1, 9);
 
             switch (menuChoice) /*NOTE: Maybe move a lot of this into
-                NetworkManager if you can extensively modify the graph*/ {
-                case 1:
+                NetworkManager if you can extensively modify the graph*/
+            {
+                case 1: //Load network
                     System.out.print("Input name of network file to read: ");
-                    netFile = sc.nextLine();
-                    //TODO read network file & use to create network
+                    String netFileName = sc.nextLine();
+                    try
+                    {
+                        //Reading file at filename input by user
+                        DSALinkedList netInfo =
+                                FileManager.readFile(netFileName);
 
-                    System.out.print("Input name of events file to read: ");
-                    eventFile = sc.nextLine();
-                    //TODO read event file
+                        /*Attempting to create new network from contents of
+                            network file & setting used network to it if
+                            successful (otherwise exception will abort)*/
+                        network = NetworkManager.createNetwork(netInfo);
+                    }
+                    catch (IllegalArgumentException i)
+                    {
+                        System.out.println(i.getMessage());
+                        System.out.println("The existing network has not been" +
+                                "changed.");
+                    }
+//                    //NOTE: Probably not a thing?
+//                    System.out.print("Input name of events file to read: ");
+//                    String eventFile = sc.nextLine();
+//                    //TODO read event file
                     break;
-                case 2:
-                    /*TODO*/
-                    inputDouble("Input probability of liking a post",
-                            0.0, 1.0);
-                    inputDouble("Input probability of following the original poster",
-                            0.0, 1.0);
+                case 2: //Set probabilities
+                    network.setLikeChance(inputDouble("Input " +
+                                    "probability of liking/sharing a post " +
+                                    "(current is " + network.getLikeChance() +
+                                    "):", 0.0, 1.0));
+                    network.setFollowChance(inputDouble("Input " +
+                                    "probability of following the original " +
+                                    "poster (current is " +
+                                    network.getFollowChance() + "):", 0.0, 1.0));
                     break;
-                case 3:
-                    //TODO
+                case 3: //User operations
+                    userMenu(network);
                     break;
-                case 4:
-                    //TODO
+                case 4: //Relationship operations
+                    relationshipMenu(network);
                     break;
-                case 5:
+                case 5: //Create post
                     System.out.print("Input name of user to make post: ");
-                    postUser = sc.nextLine();
+                    String postUser = sc.nextLine();
                     //TODO
                     break;
-                case 6:
-                    //TODO (How? Just do a traversal? Do you have to display followers?)
+                case 6: //Display Network
+                    //Displaying network as graph adjacency list (NOTE: Is this good enough?)
+                    network.displayAsList();
                     break;
-                case 7:
+                case 7: //Statistics menu
                     statisticsMenu(network);
                     break;
-                case 8:
-                    //TODO
+                case 8: //Next timestep
+                    if (network.getLikeChance();)
                     break;
-                case 9:
+                case 9: //Save network
                     System.out.println("Exiting...");
                     end = true;
                     break;
@@ -150,7 +187,8 @@ public class SocialSim {
      *  NOTE: How many timesteps???
      */
     public static void simulation(String netFile, String eventFile,
-                                  double likeProb, double followProb) {
+                                  double likeProb, double followProb)
+    {
         //Creating network for use in simulation
         Network network = new Network();
         //TODO
@@ -159,7 +197,8 @@ public class SocialSim {
     /* Displays the statistics menu to the user & returns the information
      *  requested.
      */
-    public static void statisticsMenu(Network network) {
+    public static void statisticsMenu(Network network)
+    {
         int menuChoice;
         String recordUser;
         Scanner sc = new Scanner(System.in);
@@ -167,7 +206,8 @@ public class SocialSim {
                 "\t2. Show users in order of popularity\n" +
                 "\t3. Show a user record"); //TODO any more?
         menuChoice = inputInt("Choice", 1, 3);
-        switch (menuChoice) {
+        switch (menuChoice)
+        {
             case 1:
                 //TODO
                 break;
@@ -185,14 +225,17 @@ public class SocialSim {
     /* Processes and validates user input of an integer using the imported
      *  prompt between the imported minimum and maximum
      */
-    public static int inputInt(String initalPrompt, int min, int max) {
+    public static int inputInt(String initalPrompt, int min, int max)
+    {
         Scanner sc = new Scanner(System.in);
         int input = 0;
         String prompt = initalPrompt;
 
         //Repeating input prompt until user input is within range
-        do {
-            try {
+        do
+        {
+            try
+            {
                 System.out.print(prompt);
                 input = sc.nextInt();
 
@@ -201,7 +244,9 @@ public class SocialSim {
                     again)*/
                 prompt = "Invalid Input! Please input an integer between " +
                         min + " & " + max + " (inclusive)";
-            } catch (NumberFormatException n) {
+            }
+            catch (NumberFormatException n)
+            {
                 //Modifying prompt to include message for invalid integer input
                 prompt = "Invalid Input! Please input an integer (whole number)"
                         + "\n" + initalPrompt;
@@ -218,14 +263,17 @@ public class SocialSim {
      *  prompt between the imported minimum and maximum
      */
     public static double inputDouble(String initalPrompt, double min,
-                                     double max) {
+                                     double max)
+    {
         Scanner sc = new Scanner(System.in);
         double input = 0.0;
         String prompt = initalPrompt;
 
         //Repeating input prompt until user input is within range
-        do {
-            try {
+        do
+        {
+            try
+            {
                 System.out.print(prompt);
                 input = sc.nextDouble();
 
@@ -234,7 +282,9 @@ public class SocialSim {
                     again)*/
                 prompt = "Invalid Input! Please input a decimal number " +
                         "between " + min + " & " + max + " (inclusive)";
-            } catch (NumberFormatException n) {
+            }
+            catch (NumberFormatException n)
+            {
                 /*Modifying prompt to include message for invalid data type
                     input*/
                 prompt = "Invalid Input! Please input a decimal number"
@@ -248,5 +298,12 @@ public class SocialSim {
         return input;
     }
 
+    /* Returns whether the two imported double values are equal up to an
+     *  imported tolerance value
+     */
+    boolean doubleCompare(double n1, double n2)
+    {
+        return Math.abs(n1 - n2) > 0.0001;
+    }
 
 }

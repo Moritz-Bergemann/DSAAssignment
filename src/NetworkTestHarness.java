@@ -34,24 +34,6 @@ public class NetworkTestHarness
         }
         out.println();
 
-        //Delete User //TODO
-        /*
-        out.println("Deleting user 'user3' from network 1...");
-        network1.removeUser("user3");
-        out.println("Attempting to delete user 'user3' to network 1 (already " +
-                "deleted)");
-        try
-        {
-            network1.removeUser("user3");
-            out.println("Succeeded (SHOULDN'T HAVE)");
-        }
-        catch (IllegalArgumentException i)
-        {
-            out.println("Exception caught:" + i.getMessage());
-        }
-        out.println();
-        */
-
         //Add follower
         out.println("Adding followers to network 1:");
         out.println("user1 follows user2");
@@ -62,6 +44,12 @@ public class NetworkTestHarness
         network1.addFollower("user2", "user5");
         out.println("user4 follows user5");
         network1.addFollower("user4", "user5");
+        out.println("user3 follows user2");
+        network1.addFollower("user3", "user2");
+        out.println("user1 follows user3");
+        network1.addFollower("user1", "user3");
+        out.println("user5 follows user3");
+        network1.addFollower("user5", "user3");
         out.println("Attempting to add follower 'user2 follows user5' to " +
                 "network 1 (already exists)");
         try
@@ -108,6 +96,23 @@ public class NetworkTestHarness
         }
         out.println();
 
+        //Delete User
+        out.println("Deleting user 'user3' from network 1...");
+        network1.removeUser("user3");
+        out.println("Attempting to delete user 'user3' to network 1 (already " +
+                "deleted)");
+        try
+        {
+            network1.removeUser("user3");
+            out.println("Succeeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("Exception caught:" + i.getMessage());
+        }
+        out.println();
+
+
         //Remove follower
         out.println("Removing followers from network 1:");
         out.println("user2 follows user1");
@@ -142,6 +147,19 @@ public class NetworkTestHarness
         network1.displayAsList();
         out.println();
 
+        //NetworkManager Tests
+        out.println("Reading in network from 'netfile1.txt'");
+        DSALinkedList networkFile1 = FileManager.readFile("netfile1.txt");
+        Network fileNetwork1 = NetworkManager.createNetwork(networkFile1);
+        out.println("Displaying network from file");
+        fileNetwork1.displayAsList();
+        out.println();
 
+        out.println("Reading in network from 'netfile2.txt'");
+        DSALinkedList networkFile2 = FileManager.readFile("netfile2.txt");
+        Network fileNetwork2 = NetworkManager.createNetwork(networkFile2);
+        out.println("Displaying network from file");
+        fileNetwork2.displayAsList();
+        out.println();
     }
 }

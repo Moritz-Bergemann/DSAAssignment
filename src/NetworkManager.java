@@ -11,7 +11,7 @@ public class NetworkManager
      *  information strings. Throws an exception if any of the imported strings
      *  are invalid.
      */
-    public Network createNetwork(DSALinkedList networkList)
+    public static Network createNetwork(DSALinkedList networkList)
     {
         Network newNetwork = new Network();
 
@@ -20,6 +20,7 @@ public class NetworkManager
         String curLine;
         String[] splitLine;
         int lineNum = 0;
+        String user, user1, user2;
 
         while (networkIter.hasNext())
         {
@@ -44,9 +45,10 @@ public class NetworkManager
                             + lineNum + "): Followed & follower cannot be " +
                             "empty line");
                 }
-                else if (splitLine[0].length() > 30 ||
-                        splitLine[1].length() > 30) /*If either of 2 usernames
-                        input are longer than 30 characters*/
+                else if (splitLine[0].trim().length() > 30 ||
+                        splitLine[1].trim().length() > 30) /*If either of 2
+                        usernames input are longer than 30 characters (not
+                        counting trailing whitespace)*/
                 {
                     throw new IllegalArgumentException("Invalid Format (line "
                             + lineNum + "): Followed/follower name cannot be " +
@@ -58,7 +60,8 @@ public class NetworkManager
                     {
                         /*Attempt to add follower-followed relationship to
                             network*/
-                        newNetwork.addFollower(splitLine[1], splitLine[0]);
+                        newNetwork.addFollower(splitLine[1].trim(),
+                                splitLine[0].trim());
                     }
                     catch (IllegalArgumentException i) /*If relationship failed
                         to add as network rule was broken*/
@@ -75,8 +78,8 @@ public class NetworkManager
                     throw new IllegalArgumentException("Invalid Format (line "
                             + lineNum + "): New user cannot be empty line");
                 }
-                else if (curLine.length() > 30) /*If name of user to be added
-                    is >30 characters*/
+                else if (curLine.trim().length() > 30) /*If name of user to be
+                    added is >30 characters*/
                 {
                     throw new IllegalArgumentException("Invalid Format (line "
                             + lineNum + "): New user name cannot be greater " +
@@ -87,7 +90,7 @@ public class NetworkManager
                     try
                     {
                         //Try to add user to network
-                        newNetwork.addUser(curLine);
+                        newNetwork.addUser(curLine.trim());
                     }
                     catch (IllegalArgumentException i) /*If user failed to add
                         as network rule was broken*/

@@ -66,7 +66,8 @@ public class Network extends DSAGraph
             }
             else
             {
-                throw new IllegalArgumentException("Post content cannot be negative");
+                throw new IllegalArgumentException("Post content cannot be " +
+                        "negative");
             }
         }
     }
@@ -79,6 +80,52 @@ public class Network extends DSAGraph
         super(); //Constructing DSAGraph Superclass
         posts = new DSALinkedList();
         curTime = 0;
+    }
+
+    /*Sets the chance to like a post to the imported double if valid, throws
+     *  exception otherwise
+     */
+    public void setLikeChance(double inChance)
+    {
+        if (inChance >= 0.0 && inChance <= 1.0)
+        {
+            likeChance = inChance;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Like chance must be between" +
+                    "0.0 & 1.0");
+        }
+    }
+
+    /* Gets the chance of liking a post
+     */
+    public double getLikeChance()
+    {
+        return likeChance;
+    }
+
+    /*Sets the chance to follow the OP after linking a post to the imported
+     *  double if valid, throws exception otherwise
+     */
+    public void setFollowChance(double inChance)
+    {
+        if (inChance >= 0.0 && inChance <= 1.0)
+        {
+            followChance = inChance;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Follow chance must be between" +
+                    "0.0 & 1.0");
+        }
+    }
+
+    /* Gets the chance of following the OP after liking a post
+     */
+    public double getFollowChance()
+    {
+        return followChance;
     }
 
     /* Adds new user to network (using their name as label), throws exception
@@ -96,6 +143,22 @@ public class Network extends DSAGraph
         else
         {
             throw new IllegalArgumentException("User with name already in " +
+                    "network");
+        }
+    }
+
+    /* Removes a user from the network via their name, throws exception if user
+     *  is not in network
+     */
+    public void removeUser(String inName)
+    {
+        if (super.hasVertex(inName))
+        {
+            super.removeVertex(inName);
+        }
+        else
+        {
+            throw new IllegalArgumentException("User does not exist in " +
                     "network");
         }
     }
@@ -169,24 +232,30 @@ public class Network extends DSAGraph
      */
     public void removeFollower(String inUser1, String inUser2)
     {
-        try
+        if (!super.hasVertex(inUser1)) //If first user doesn't exist
         {
-            if (super.hasEdge(inUser2, inUser1)) /*If network has a follower-
-                followed relationship between user1 & user2*/
-            {
-                super.removeEdge(inUser2, inUser1);
-
-                //Decreasing following user's 'following' count by 1
-                ((UserInfo)super.getVertex(inUser1).value).following--;
-
-                //Decreasing followed user's 'follower' count by 1
-                ((UserInfo)super.getVertex(inUser2).value).followers--;
-            }
+            throw new IllegalArgumentException("User '" + inUser1 + "' not in" +
+                    " network");
         }
-        catch (IllegalArgumentException i) /*If one of the imported vertices
-            does not exist*/
+        else if (!super.hasVertex(inUser2)) //If 2nd user doesn't exist
         {
-            throw new IllegalArgumentException("One of users does not exist");
+            throw new IllegalArgumentException("User '" + inUser2 + "' not in" +
+                    " network");
+        } else if (!super.hasEdge(inUser2, inUser1)) /*If relationship does not
+            exist*/
+        {
+            throw new IllegalArgumentException("Relationship does not exist");
+        }
+        else
+        {
+            //Removing relationship from graph
+            super.removeEdge(inUser2, inUser1);
+
+            //Decreasing following user's 'following' count by 1
+            ((UserInfo)super.getVertex(inUser1).value).following--;
+
+            //Decreasing followed user's 'follower' count by 1
+            ((UserInfo)super.getVertex(inUser2).value).followers--;
         }
     }
 

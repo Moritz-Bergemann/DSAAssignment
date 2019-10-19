@@ -509,6 +509,75 @@ public class DSAGraph
                 "' already exists in graph");
         }
     }
+
+    /* Removes vertex with given label from graph (and returns its value) if it
+     *  exists, throws exception otherwise
+     */
+    public Object removeVertex(String inLabel)
+    {
+        Iterator vertexListIter, adjListIter;
+        DSAGraphVertex curVertex, curAdjVertex;
+        boolean found = false;
+        Object vertexValue = null;
+        int vertexListIndex, adjListIdx; /*Stores indexes in vertex/adjacency
+            lists to remove*/
+
+        if (hasVertex(inLabel))
+        {
+            //Getting value of vertex to return
+            vertexValue = getVertex(inLabel).value;
+
+            //Removing vertex from overall list of vertices
+            vertexListIter = vertexList.iterator();
+            vertexListIndex = 0;
+            while (vertexListIter.hasNext() && !found) /*For each vertex in
+                graph & while vertex to remove has not been found*/
+            {
+                curVertex = (DSAGraphVertex)vertexListIter.next();
+
+                if (curVertex.label.equals(inLabel))
+                {
+                    vertexList.removeAt(vertexListIndex);
+                    found = true;
+                }
+
+                vertexListIndex++;
+            }
+
+            //Removing vertex from every vertex's adjacency list
+            vertexListIter = vertexList.iterator();
+            while (vertexListIter.hasNext())
+            {
+                curVertex = (DSAGraphVertex)vertexListIter.next();
+
+                adjListIter = curVertex.adjacencyList.iterator();
+                adjListIdx = 0;
+                found = false;
+                while (adjListIter.hasNext() && !found) /*For each vertex in the
+                    current vertex's adjacency list & while the vertex to remove
+                    has not been found*/
+                {
+                    curAdjVertex = (DSAGraphVertex)adjListIter.next();
+
+                    if (curAdjVertex.label.equals(inLabel)) /*If current vertex
+                        in adjacency list has label of vertex to be removed*/
+                    {
+                        curVertex.adjacencyList.removeAt(adjListIdx);
+                        found = true;
+                    }
+
+                    adjListIdx++;
+                }
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException("Vertex with label '" + inLabel +
+                    "' does not exist in graph");
+        }
+
+        return vertexValue;
+    }
     
     /* Adds directional edge connecting vertex with first label (source) to
      *  one with second label (sink) if vertices with both labels exist
