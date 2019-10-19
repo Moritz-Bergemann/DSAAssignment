@@ -100,7 +100,8 @@ public class SocialSim
                 "\t6. Display network" + "\n" +
                 "\t7. Statistics" + "\n" +
                 "\t8. Next Timestep" + "\n" +
-                "\t9. Save network";
+                "\t9. Save network" + "\n" +
+                "\t10. Exit Program";
 
         //Creating network for use in simulation
         Network network = new Network();
@@ -113,7 +114,7 @@ public class SocialSim
             System.out.println("MAIN MENU:");
             System.out.println("Please choose one of the following options:");
             System.out.println(optionText);
-            menuChoice = inputInt("Choice", 1, 9);
+            menuChoice = inputInt("Choice", 1, 10);
 
             switch (menuChoice) /*NOTE: Maybe move a lot of this into
                 NetworkManager if you can extensively modify the graph*/
@@ -131,12 +132,14 @@ public class SocialSim
                             network file & setting used network to it if
                             successful (otherwise exception will abort)*/
                         network = NetworkManager.createNetwork(netInfo);
+                        System.out.println("File read successfully. The " +
+                                "previous network has been overwritten.");
                     }
                     catch (IllegalArgumentException i)
                     {
                         System.out.println(i.getMessage());
-                        System.out.println("The existing network has not been" +
-                                "changed.");
+                        System.out.println("The existing network has not " +
+                                "been changed.");
                     }
 //                    //NOTE: Probably not a thing?
 //                    System.out.print("Input name of events file to read: ");
@@ -147,11 +150,11 @@ public class SocialSim
                     network.setLikeChance(inputDouble("Input " +
                                     "probability of liking/sharing a post " +
                                     "(current is " + network.getLikeChance() +
-                                    "):", 0.0, 1.0));
+                                    ")", 0.0, 1.0));
                     network.setFollowChance(inputDouble("Input " +
                                     "probability of following the original " +
                                     "poster (current is " +
-                                    network.getFollowChance() + "):", 0.0, 1.0));
+                                    network.getFollowChance() + ")", 0.0, 1.0));
                     break;
                 case 3: //User operations
                     userMenu(network);
@@ -171,14 +174,30 @@ public class SocialSim
                 case 7: //Statistics menu
                     statisticsMenu(network);
                     break;
-                case 8: //Next timestep
-                    if (network.getLikeChance();)
+                case 8: //Next timestep NOTE: UNTESTED
+                    if (network.getLikeChance() > 0.0 &&
+                            network.getFollowChance() > 0.0) /*If like & follow
+                                chance settings have been set*/
+                    {
+                        network.timeStep();
+                    }
+                    else
+                    {
+                        System.out.println("Failed: Please set the like & " +
+                                "follow chances for the simulation (option " +
+                                "2) before running the first timestep.");
+                    }
                     break;
                 case 9: //Save network
+                    //TODO
+                    break;
+                case 10: //Exit
                     System.out.println("Exiting...");
                     end = true;
                     break;
+
             }
+            System.out.println();
         } while (!end);
     }
 
@@ -200,12 +219,15 @@ public class SocialSim
     public static void statisticsMenu(Network network)
     {
         int menuChoice;
-        String recordUser;
+        String inputUser;
         Scanner sc = new Scanner(System.in);
+        System.out.println("Statistics Menu:");
+        System.out.println("Please choose one of the following options:");
         System.out.println("\t1. Show posts in order of popularity\n" +
                 "\t2. Show users in order of popularity\n" +
-                "\t3. Show a user record"); //TODO any more?
-        menuChoice = inputInt("Choice", 1, 3);
+                "\t3. Show a user record\n" +
+                "\t4. Cancel"); //TODO any more?
+        menuChoice = inputInt("Choice", 1, 4);
         switch (menuChoice)
         {
             case 1:
@@ -216,20 +238,167 @@ public class SocialSim
                 break;
             case 3:
                 System.out.print("Input name of user to display record:");
-                recordUser = sc.nextLine();
-                //TODO display user record
+                inputUser = sc.nextLine();
+                try
+                {
+                    System.out.println(network.getUserInfo(inputUser));
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to display user record: " +
+                            i.getMessage());
+                }
+                break;
         }
+    }
 
+    /* Displays menu & performs functionality for user operations
+     */
+    public static void userMenu(Network network)
+    {
+        int menuChoice;
+        String inputUser;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("User Operations Menu:");
+        System.out.println("Please choose one of the following options:");
+        System.out.println("\t1. Find User & Display Info\n" +
+                "\t2. Insert New User\n" +
+                "\t3. Delete Existing User\n" +
+                "\t4. Cancel");
+        menuChoice = inputInt("Choice", 1, 4);
+        switch (menuChoice)
+        {
+            case 1: //Find/Display user
+                System.out.print("Input name of user to display information: ");
+                inputUser = sc.nextLine();
+                try
+                {
+                    System.out.println(network.getUserInfo(inputUser));
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to display user: " +
+                            i.getMessage());
+                }
+                break;
+            case 2: //Insert user
+                System.out.print("Input name of new user to insert: ");
+                inputUser = sc.nextLine();
+                try
+                {
+                    network.addUser(inputUser);
+                    System.out.println("User added successfully.");
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to add user: " +
+                            i.getMessage());
+                }
+                break;
+            case 3: //Delete user
+                System.out.print("Input name of user to delete: ");
+                inputUser = sc.nextLine();
+                try
+                {
+                    network.removeUser(inputUser);
+                    System.out.println("User deleted successfully.");
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to delete user: " +
+                            i.getMessage());
+                }
+                break;
+        }
+    }
+
+    /* Displays menu & performs functionality for follower/followed relationship
+     *  operations
+     */
+    public static void relationshipMenu(Network network)
+    {
+        int menuChoice;
+        Scanner sc = new Scanner(System.in);
+        String inUser1, inUser2;
+
+        System.out.println("Relationship Operations Menu:");
+        System.out.println("Please choose one of the following options:");
+        System.out.println("\t1. Determine if graph contains relationship\n" +
+                "\t2. Add Follower-Followed Relationship\n" +
+                "\t3. Delete Existing Follower-Followed Relationship\n" +
+                "\t4. Cancel");
+        menuChoice = inputInt("Choice", 1, 4);
+
+        switch (menuChoice)
+        {
+            case 1: //Find relationship
+                System.out.print("Input name of following user: ");
+                inUser1 = sc.nextLine();
+                System.out.print("Input name of followed user: ");
+                inUser2 = sc.nextLine();
+                try
+                {
+                    if (network.hasFollower(inUser1, inUser2))
+                    {
+                        System.out.println("The relationship exists.");
+                    }
+                    else
+                    {
+                        System.out.println("The relationship does not exist.");
+                    }
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to search for relationship: " +
+                            i.getMessage());
+                }
+                break;
+            case 2: //Insert relationship
+                System.out.print("Input name of following user: ");
+                inUser1 = sc.nextLine();
+                System.out.print("Input name of followed user: ");
+                inUser2 = sc.nextLine();
+                try
+                {
+                    network.addFollower(inUser1, inUser2);
+                    System.out.println("Relationship added successfully.");
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to add relationship: " +
+                            i.getMessage());
+                }
+                break;
+            case 3: //Delete relationship
+                System.out.print("Input name of following user: ");
+                inUser1 = sc.nextLine();
+                System.out.print("Input name of followed user: ");
+                inUser2 = sc.nextLine();
+                try
+                {
+                    network.removeFollower(inUser1, inUser2);
+                    System.out.println("Relationship deleted successfully.");
+                }
+                catch (IllegalArgumentException i)
+                {
+                    System.out.println("Failed to remove relationship: " +
+                            i.getMessage());
+                }
+                break;
+        }
     }
 
     /* Processes and validates user input of an integer using the imported
      *  prompt between the imported minimum and maximum
      */
-    public static int inputInt(String initalPrompt, int min, int max)
+    public static int inputInt(String initialPrompt, int min, int max)
     {
         Scanner sc = new Scanner(System.in);
         int input = 0;
-        String prompt = initalPrompt;
+
+        initialPrompt += ": ";
+        String prompt = initialPrompt;
 
         //Repeating input prompt until user input is within range
         do
@@ -243,13 +412,16 @@ public class SocialSim
                     range (in case input was out of range and loop is run
                     again)*/
                 prompt = "Invalid Input! Please input an integer between " +
-                        min + " & " + max + " (inclusive)";
+                        min + " & " + max + " (inclusive)" + "\n" +
+                        initialPrompt;
             }
-            catch (NumberFormatException n)
+            catch (InputMismatchException i)
             {
                 //Modifying prompt to include message for invalid integer input
                 prompt = "Invalid Input! Please input an integer (whole number)"
-                        + "\n" + initalPrompt;
+                        + "\n" + initialPrompt;
+
+                sc.nextLine(); //Clears input buffer for next input
 
                 //Putting user input outside valid range so loop continues
                 input = min - 1;
@@ -262,12 +434,14 @@ public class SocialSim
     /* Processes and validates user input of a double using the imported
      *  prompt between the imported minimum and maximum
      */
-    public static double inputDouble(String initalPrompt, double min,
+    public static double inputDouble(String initialPrompt, double min,
                                      double max)
     {
         Scanner sc = new Scanner(System.in);
         double input = 0.0;
-        String prompt = initalPrompt;
+
+        initialPrompt += ": ";
+        String prompt = initialPrompt;
 
         //Repeating input prompt until user input is within range
         do
@@ -283,12 +457,14 @@ public class SocialSim
                 prompt = "Invalid Input! Please input a decimal number " +
                         "between " + min + " & " + max + " (inclusive)";
             }
-            catch (NumberFormatException n)
+            catch (InputMismatchException i)
             {
                 /*Modifying prompt to include message for invalid data type
                     input*/
                 prompt = "Invalid Input! Please input a decimal number"
-                        + "\n" + initalPrompt;
+                        + "\n" + initialPrompt;
+
+                sc.nextLine(); //Clears input buffer for next input
 
                 //Putting user input outside valid range so loop continues
                 input = min - 1;
@@ -301,9 +477,8 @@ public class SocialSim
     /* Returns whether the two imported double values are equal up to an
      *  imported tolerance value
      */
-    boolean doubleCompare(double n1, double n2)
+    public static boolean doubleCompare(double n1, double n2)
     {
         return Math.abs(n1 - n2) > 0.0001;
     }
-
 }

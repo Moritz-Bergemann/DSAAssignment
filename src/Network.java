@@ -1,4 +1,4 @@
-import java.util.Iterator;
+import java.util.*;
 
 /* Network by Moritz Bergemann
  * Uses contains methods for simulation of social network using a graph object,
@@ -39,7 +39,7 @@ public class Network extends DSAGraph
 
     /* Stores all information on a post made within the network
      */
-    private class Post
+    private class Post implements Comparable<Post>
     {
         //CLASS FIELDS
         private String op; //Label of original poster
@@ -70,6 +70,14 @@ public class Network extends DSAGraph
                         "negative");
             }
         }
+
+        //PUBLIC ACCESSORS
+        /* Compares this post to another post by the number of likes
+         */
+        public int compareTo(Post compPost)
+        {
+            return likes - compPost.likes;
+        }
     }
 
     //CONSTRUCTORS
@@ -80,6 +88,8 @@ public class Network extends DSAGraph
         super(); //Constructing DSAGraph Superclass
         posts = new DSALinkedList();
         curTime = 0;
+        likeChance = -1.0;
+        followChance = -1.0;
     }
 
     /*Sets the chance to like a post to the imported double if valid, throws
@@ -137,14 +147,49 @@ public class Network extends DSAGraph
 
         if (!super.hasVertex(inName)) //If user not already in network
         {
-            newUserInfo = new UserInfo(curTime);
-            super.addVertex(inName, newUserInfo);
+            if (inName.indexOf(':') < 0) /*If input username does not contain
+                any semicolons*/
+            {
+                newUserInfo = new UserInfo(curTime);
+                super.addVertex(inName, newUserInfo);
+            }
+            else
+            {
+                throw new IllegalArgumentException("User name cannot contain" +
+                        "semicolons (':')");
+            }
         }
         else
         {
             throw new IllegalArgumentException("User with name already in " +
                     "network");
         }
+    }
+
+    /* Returns information on the user with the imported name as a string,
+     *  throws exception is user does not exist
+     */
+    public String getUserInfo(String inName)
+    {
+        UserInfo inUserInfo;
+        String infoString;
+
+        if (super.hasVertex(inName))
+        {
+            //Getting user info from graph
+            inUserInfo = (UserInfo)super.getVertex(inName).value;
+
+            infoString = "User: " + inName + "\n" +
+                    "Followers: " + inUserInfo.followers + "\n" +
+                    "Following: " + inUserInfo.following + "\n";
+        }
+        else
+        {
+            throw new IllegalArgumentException("User does not exist in " +
+                    "network");
+        }
+
+        return infoString;
     }
 
     /* Removes a user from the network via their name, throws exception if user

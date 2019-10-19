@@ -16,7 +16,7 @@ public class DSAGraph
      * Implements sortable so that it can be sorted by its label fields
      *  in the DSALinkedList class
      */
-    protected class DSAGraphVertex implements Sortable
+    protected class DSAGraphVertex implements Sortable, Comparable<DSAGraphVertex>
     {
         //CLASS FIELDS
         String label;
@@ -43,6 +43,14 @@ public class DSAGraph
         public String getSortValue()
         {
             return label;
+        }
+
+        /* Returns custom comparison result for comparing graph vertices with
+         *  each other for sorting (i.e. the string label)
+         */
+        public int compareTo(DSAGraphVertex compVertex)
+        {
+            return label.compareTo(compVertex.label);
         }
     }
 
@@ -501,7 +509,7 @@ public class DSAGraph
             vertexList.insertLast(newVertex);
 
             //Sorting list of vertices to be in ASCII order
-            vertexList.sortSortable();
+            vertexList.sort();
         }
         else
         {
@@ -597,8 +605,8 @@ public class DSAGraph
         vertex1.adjacencyList.insertLast(vertex2);
 
         //Sorting both vertice's adjacency lists to be in ASCII order
-        vertex1.adjacencyList.sortSortable();
-        vertex2.adjacencyList.sortSortable();
+        vertex1.adjacencyList.sort();
+        vertex2.adjacencyList.sort();
     }
 
     /* Removes the edge connecting the 2 imported labels (directionally) if it
