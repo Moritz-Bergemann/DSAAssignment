@@ -158,7 +158,21 @@ public class DSALinkedList implements Iterable, Serializable
 
         count++;
     }
-    
+
+    /* Appends the contents of the imported linked list to the end of this
+     *  linked list
+     */
+    public void append(DSALinkedList inList)
+    {
+        DSAListNode curNode = inList.head;
+        while (curNode != null) /*For each node in imported list*/
+        {
+            //Adding value of current node in imported list to this list
+            insertLast(curNode.value);
+            curNode = curNode.next;
+        }
+    }
+
     /* Remove first node in list & return its value
      */
     public Object removeFirst()

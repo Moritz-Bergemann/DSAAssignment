@@ -209,10 +209,36 @@ public class Network extends DSAGraph
         {
             /*Getting label of current vertex (user) & adding it to list to
                 return*/
-            userList.insertLast(((DSAGraphVertex)vertexListIter.next()).value);
+            userList.insertLast(((DSAGraphVertex)vertexListIter.next()).label);
         }
 
         return userList;
+    }
+
+    /* Returns a linked list of the names of all users following the user with
+     *  the imported name if they exist, throws exception otherwise
+     */
+    public DSALinkedList getFollowers(String inName)
+    {
+        DSALinkedList followerList = new DSALinkedList();
+        if (super.hasVertex(inName))
+        {
+            DSALinkedList userAdjacencyList =
+                    super.getVertex(inName).adjacencyList;
+
+            Iterator adjListIter = userAdjacencyList.iterator();
+            while (adjListIter.hasNext())
+            {
+                followerList.insertLast(
+                        ((DSAGraphVertex)adjListIter.next()).label);
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException("User does not exist in " +
+                    "network");
+        }
+        return followerList;
     }
 
     /* Adds new user to network (using their name as label), throws exception
@@ -461,7 +487,7 @@ public class Network extends DSAGraph
     /* Creates a post with given content, posted by the imported user and shares
      *  it with the OPs followers
     */
-    public void makePost(String userName, String content, double inClickbait)
+    public void makePost(String userName, String content, double inClickbait) //TODO clickbait functionality
     {
         Post newPost;
         if (super.hasVertex(userName))

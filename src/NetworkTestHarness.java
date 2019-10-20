@@ -152,6 +152,27 @@ public class NetworkTestHarness
         network1.displayAsList();
         out.println();
 
+        //Getting followers & posts
+        out.println("Getting list of users in network 1:");
+        DSALinkedList userList = network1.getUserList();
+        Iterator userIter = userList.iterator();
+        while (userIter.hasNext()) { out.print((String)userIter.next() + " "); } out.println();
+        out.println("Getting list of followers to user1 in network 1:");
+        DSALinkedList followerList = network1.getFollowers("user1");
+        Iterator followerIter = followerList.iterator();
+        while (followerIter.hasNext()) { out.print((String)followerIter.next() + " "); } out.println();
+        out.println("Attempting to get follower list of nonexistant user user11");
+        try
+        {
+            network1.getFollowers("user11");
+            out.println("\tSucceeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("\tException caught:" + i.getMessage());
+        }
+        out.println();
+
         //Setting network probabilities
         out.println("Setting network's like & follow probabilities to 0.5");
         network1.setLikeChance(1.0);
@@ -226,7 +247,7 @@ public class NetworkTestHarness
 
         //Display Users
         out.println("Displaying all of network 1's users by number of followers:");
-        Iterator userIter = network1.getUsersByFollowers().iterator();
+        userIter = network1.getUsersByFollowers().iterator();
         while (userIter.hasNext()) { out.println(userIter.next()); }
         out.println();
 
@@ -261,5 +282,18 @@ public class NetworkTestHarness
         out.println("Displaying network from file");
         fileNetwork2.displayAsList();
         out.println();
+
+        out.println("Displaying network 1 before saving");
+        network1.displayAsList();
+
+        out.println("Saving network 1 to NetworkTestOut.txt");
+        DSALinkedList saveList = NetworkManager.saveNetwork(network1);
+        FileManager.writeFile("NetworkTestOut.txt", saveList);
+        out.println();
+
+        out.println("Reloading & displaying saved network:");
+        DSALinkedList reloadedFile = FileManager.readFile("NetworkTestOut.txt");
+        Network reloadedNetwork = NetworkManager.loadNetwork(reloadedFile);
+        reloadedNetwork.displayAsList();
     }
 }

@@ -109,17 +109,38 @@ public class NetworkManager
      *  the imported network in the network file format, each line being
      *  an element in the list.
      */
-    public DSALinkedList saveNetwork(Network network)
+    public static DSALinkedList saveNetwork(Network network)
     {
         DSALinkedList networkList = new DSALinkedList();
 
         //Getting list of users
         DSALinkedList userList = network.getUserList();
 
+        //Appending list of users to output list
+        networkList.append(userList);
+
+        Iterator userListIter = userList.iterator();
+        String curUserName, curFollowerName;
+        DSALinkedList followerList;
+        Iterator followerListIter;
+        while (userListIter.hasNext()) /*For all users in network*/
+        {
+            curUserName = (String) userListIter.next();
+
+            //Getting list of all users following current user
+            followerList = network.getFollowers(curUserName);
+
+            followerListIter = followerList.iterator();
+            while (followerListIter.hasNext()) /*For all followers of current
+                user*/
+            {
+                curFollowerName = (String) followerListIter.next();
+
+                //Adding follower-followed relationship to output list
+                networkList.insertLast(curUserName + ":" + curFollowerName);
+            }
+        }
 
         return networkList;
     }
-    //TODO all in one method (that calls 2 others) or 2 separate methods?
-
-    //TODO save network
 }

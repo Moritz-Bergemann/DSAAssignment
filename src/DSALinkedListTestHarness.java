@@ -3,6 +3,7 @@
  */
 import java.util.*;
 
+import static java.lang.System.load;
 import static java.lang.System.out;
 public class DSALinkedListTestHarness
 {
@@ -131,15 +132,16 @@ public class DSALinkedListTestHarness
         out.println("Checking if not empty list is empty: " + loadedList.isEmpty());
         out.println("Checking if empty list is empty: " + lists[1].isEmpty());
         out.println();
-    
+
+
         //Iterators
         out.println("Creating 2 iterators for created linked lists:");
-        Iterator[] iterators = new Iterator[2];
+        Iterator[] iterators = new Iterator[3];
 
         iterators[0] = loadedList.iterator();
         iterators[1] = lists[1].iterator();
     
-        out.println("Cycling through all entries in filled list using through iterator:");
+        out.println("Cycling through all entries in loaded list:");
         while (iterators[0].hasNext())
         {
             out.println(iterators[0].next());
@@ -149,8 +151,19 @@ public class DSALinkedListTestHarness
         out.println("Seeing if iterator for empty list has next element: " + iterators[1].hasNext());
         out.println("Attempting to get first element of empty list:  " + iterators[1].next());
         out.println("Attempting to get second element of empty list:  " + iterators[1].next());
+        out.println();
 
-        
+        //Append
+        out.println("Appending original list to loaded version of itself");
+        loadedList.append(lists[0]);
+        out.println();
+
+        iterators[0] = loadedList.iterator();
+        out.println("Cycling through all entries in loaded list with its original appended to back:");
+        while (iterators[0].hasNext())
+        {
+            out.println(iterators[0].next());
+        }
         out.println();
 
         out.println("Attempting to use remove function on iterator: ");

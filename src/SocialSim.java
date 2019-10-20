@@ -137,13 +137,13 @@ public class SocialSim
                     try
                     {
                         //Reading file at filename input by user
-                        DSALinkedList netInfo =
+                        DSALinkedList loadList =
                                 FileManager.readFile(netFileName);
 
                         /*Attempting to create new network from contents of
                             network file & setting used network to it if
                             successful (otherwise exception will abort)*/
-                        network = NetworkManager.loadNetwork(netInfo);
+                        network = NetworkManager.loadNetwork(loadList);
                         System.out.println("File read successfully. The " +
                                 "previous network has been overwritten.");
                     }
@@ -211,7 +211,28 @@ public class SocialSim
                     }
                     break;
                 case 9: //Save network
-                    //TODO
+                    if (network.getUserCount() > 0)
+                    {
+                        System.out.print("Input filename to save to: ");
+                        String filename = sc.nextLine();
+                        try
+                        {
+                            //Creating network file format list from network
+                            DSALinkedList saveList =
+                                    NetworkManager.saveNetwork(network);
+                            FileManager.writeFile(filename, saveList);
+                        }
+                        catch (IllegalArgumentException i)
+                        {
+                            System.out.println("Failed to save network: " +
+                                    i.getMessage());
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Nothing to save - network is " +
+                                "empty");
+                    }
                     break;
                 case 10: //Exit
                     System.out.println("Exiting...");
