@@ -11,7 +11,7 @@ public class NetworkManager
      *  information strings. Throws an exception if any of the imported strings
      *  are invalid.
      */
-    public static Network createNetwork(DSALinkedList networkList)
+    public static Network loadNetwork(DSALinkedList networkList)
     {
         Network newNetwork = new Network();
 
@@ -105,6 +105,20 @@ public class NetworkManager
         return newNetwork;
     }
 
+    /* Returns a linked list containing the user/relationship information of
+     *  the imported network in the network file format, each line being
+     *  an element in the list.
+     */
+    public DSALinkedList saveNetwork(Network network)
+    {
+        DSALinkedList networkList = new DSALinkedList();
+
+        //Getting list of users
+        DSALinkedList userList = network.getUserList();
+
+
+        return networkList;
+    }
     //TODO all in one method (that calls 2 others) or 2 separate methods?
 
     //TODO save network

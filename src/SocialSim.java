@@ -6,7 +6,6 @@
  *  timesteps the program should be run?
  */
 
-import java.security.cert.CertificateEncodingException;
 import java.util.*;
 
 public class SocialSim
@@ -85,6 +84,19 @@ public class SocialSim
                 "network live. Requires no further command line arguments.");
     }
 
+
+    /*Creates a network based on the imported simulation files and simulates
+     *  the network using the imported like and follow probabilities.
+     *  NOTE: How many timesteps???
+     */
+    public static void simulation(String netFile, String eventFile,
+                                  double likeProb, double followProb)
+    {
+        //Creating network for use in simulation
+        Network network = new Network();
+        //TODO
+    }
+
     /*Runs (and repeats) the menu for the program's interactive mode, and calls
      * the required functions to perform the selected tasks.
      */
@@ -131,7 +143,7 @@ public class SocialSim
                         /*Attempting to create new network from contents of
                             network file & setting used network to it if
                             successful (otherwise exception will abort)*/
-                        network = NetworkManager.createNetwork(netInfo);
+                        network = NetworkManager.loadNetwork(netInfo);
                         System.out.println("File read successfully. The " +
                                 "previous network has been overwritten.");
                     }
@@ -141,20 +153,16 @@ public class SocialSim
                         System.out.println("The existing network has not " +
                                 "been changed.");
                     }
-//                    //NOTE: Probably not a thing?
-//                    System.out.print("Input name of events file to read: ");
-//                    String eventFile = sc.nextLine();
-//                    //TODO read event file
                     break;
                 case 2: //Set probabilities
                     network.setLikeChance(inputDouble("Input " +
-                                    "probability of liking/sharing a post " +
-                                    "(current is " + network.getLikeChance() +
-                                    ")", 0.0, 1.0));
+                            "probability of liking/sharing a post " +
+                            "(current is " + network.getLikeChance() +
+                            ")", 0.0, 1.0));
                     network.setFollowChance(inputDouble("Input " +
-                                    "probability of following the original " +
-                                    "poster (current is " +
-                                    network.getFollowChance() + ")", 0.0, 1.0));
+                            "probability of following the original " +
+                            "poster (current is " +
+                            network.getFollowChance() + ")", 0.0, 1.0));
                     break;
                 case 3: //User operations
                     userMenu(network);
@@ -215,18 +223,6 @@ public class SocialSim
         } while (!end);
     }
 
-    /*Creates a network based on the imported simulation files and simulates
-     *  the network using the imported like and follow probabilities.
-     *  NOTE: How many timesteps???
-     */
-    public static void simulation(String netFile, String eventFile,
-                                  double likeProb, double followProb)
-    {
-        //Creating network for use in simulation
-        Network network = new Network();
-        //TODO
-    }
-
     /* Displays the statistics menu to the user & returns the information
      *  requested.
      */
@@ -240,16 +236,16 @@ public class SocialSim
         System.out.println("\t1. Show posts in order of popularity\n" +
                 "\t2. Show users in order of popularity\n" +
                 "\t3. Show a user record\n" +
-                "\t4. Cancel"); //TODO any more?
+                "\t4. Cancel");
         menuChoice = inputInt("Choice", 1, 4);
         switch (menuChoice)
         {
-            case 1: //Show posts by popularity
+            case 1: //Show posts by popularity TODO Add more info to this (namely who has liked posts)
                 if (network.getPostCount() > 0)
                 {
                     int postNum = 1;
                     Iterator popularPostIter =
-                            network.getPostsByPopularity().iterator();
+                            network.getPostsByLikes().iterator();
                     while (popularPostIter.hasNext())
                     {
                         System.out.println(postNum + ".");
@@ -265,8 +261,22 @@ public class SocialSim
                 }
                 break;
             case 2: //Show users by popularity
-                //TODO
-                System.out.println("NOT DONE");
+                if (network.getUserCount() > 0)
+                {
+                    int userNum = 1;
+                    Iterator popularUserIter =
+                            network.getUsersByFollowers().iterator();
+                    while (popularUserIter.hasNext())
+                    {
+                        System.out.println(userNum + ".");
+                        System.out.println(popularUserIter.next());
+                        userNum++;
+                    }
+                }
+                else
+                {
+                    System.out.println("Nothing to show: Network has no users");
+                }
                 break;
             case 3: //Show user record
                 System.out.print("Input name of user to display record:");

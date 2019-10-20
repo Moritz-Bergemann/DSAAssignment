@@ -475,7 +475,7 @@ public class DSAGraph
             vertexList.insertLast(newVertex);
 
             //Sorting list of vertices to be in ASCII order
-            vertexList.sort();
+            vertexList.sortAsc();
         }
         else
         {
@@ -571,8 +571,8 @@ public class DSAGraph
         vertex1.adjacencyList.insertLast(vertex2);
 
         //Sorting both vertice's adjacency lists to be in ASCII order
-        vertex1.adjacencyList.sort();
-        vertex2.adjacencyList.sort();
+        vertex1.adjacencyList.sortAsc();
+        vertex2.adjacencyList.sortAsc();
     }
 
     /* Removes the edge connecting the 2 imported labels (directionally) if it

@@ -18,9 +18,11 @@ public class Network extends DSAGraph
     /* Stores user information (excluding the user name as this will be the
      *  node label in the graph) of a user in the network
      */
-    private class UserInfo
+    private class UserInfo implements Comparable<UserInfo>
     {
         //CLASS FIELDS
+        private String name; /*Exists for sorting (user name is also graph
+            vertex label which it should otherwise be retrieved by*/
         private int followers;
         private int following;
         private int createdTime; /*Timestep at which user was added to network
@@ -28,12 +30,31 @@ public class Network extends DSAGraph
 
         /* Alternate Constructor (takes in created time)
          */
-        private UserInfo(int inCreatedTime)
+        private UserInfo(String inName, int inCreatedTime)
         {
             assert createdTime >= 0 : "User's created time below 0";
+            name = inName; //Validation occurs externally
             followers = 0;
             following = 0;
             createdTime = inCreatedTime;
+        }
+
+        /* Returns user information as string
+         */
+        public String toString()
+        {
+            return "User: " + name + "\n" +
+                    "Followers: " + followers + "\n" +
+                    "Following: " + following;
+
+        }
+
+        /* Returns integer defining comparison between this and another userInfo
+         *  class based on the number of post followers.
+         */
+        public int compareTo(UserInfo compInfo)
+        {
+            return followers - compInfo.followers;
         }
     }
 
@@ -177,6 +198,23 @@ public class Network extends DSAGraph
         return followChance;
     }
 
+    /* Returns a list of the names of all users in the network (sorted
+     *  alphabetically)
+     */
+    public DSALinkedList getUserList()
+    {
+        DSALinkedList userList = new DSALinkedList();
+        Iterator vertexListIter = super.vertexList.iterator();
+        while (vertexListIter.hasNext())
+        {
+            /*Getting label of current vertex (user) & adding it to list to
+                return*/
+            userList.insertLast(((DSAGraphVertex)vertexListIter.next()).value);
+        }
+
+        return userList;
+    }
+
     /* Adds new user to network (using their name as label), throws exception
      *  if user with imported name already in network
      */
@@ -189,7 +227,7 @@ public class Network extends DSAGraph
             if (inName.indexOf(':') < 0) /*If input username does not contain
                 any semicolons*/
             {
-                newUserInfo = new UserInfo(curTime);
+                newUserInfo = new UserInfo(inName, curTime);
                 super.addVertex(inName, newUserInfo);
             }
             else
@@ -218,9 +256,7 @@ public class Network extends DSAGraph
             //Getting user info from graph
             inUserInfo = (UserInfo)super.getVertex(inName).value;
 
-            infoString = "User: " + inName + "\n" +
-                    "Followers: " + inUserInfo.followers + "\n" +
-                    "Following: " + inUserInfo.following + "\n";
+            infoString = inUserInfo.toString();
         }
         else
         {
@@ -229,6 +265,49 @@ public class Network extends DSAGraph
         }
 
         return infoString;
+    }
+
+    /*Returns a linked list of descriptions of all users in network ordered by
+     *  number of followers (decreasing)
+     */
+    public DSALinkedList getUsersByFollowers()
+    {
+        DSALinkedList userInfoList = new DSALinkedList();
+        DSAGraphVertex curUserVertex;
+
+        /*Getting all userInfo objects in network into new array for sorting by
+            likes*/
+        Iterator userListIter = super.vertexList.iterator();
+        while (userListIter.hasNext())
+        {
+            curUserVertex = (DSAGraphVertex)userListIter.next();
+            userInfoList.insertLast((UserInfo)curUserVertex.value);
+        }
+
+        /*Sorting list of user info by number of followers (using Comparable
+            interface that userInfo implements)*/
+        userInfoList.sortDesc();
+
+        DSALinkedList userStringList = new DSALinkedList();
+
+        /*Creating list of user information strings from sorted userInfo list
+            for returning*/
+        Iterator userInfoListIter = userInfoList.iterator();
+        UserInfo curUserInfo;
+        while (userInfoListIter.hasNext())
+        {
+            curUserInfo = (UserInfo)userInfoListIter.next();
+            userStringList.insertLast(curUserInfo.toString());
+        }
+
+        return userInfoList;
+    }
+
+    /* Returns the number of users in the network
+     */
+    public int getUserCount()
+    {
+        return super.vertexList.getCount();
     }
 
     /* Removes a user from the network via their name, throws exception if user
@@ -343,6 +422,35 @@ public class Network extends DSAGraph
         }
     }
 
+    /* Returns a linked list of strings, each string being the information of a
+     *  post made in the network (sorted by number of likes the post has
+     *  received (descending))
+     */
+    public DSALinkedList getPostsByLikes()
+    {
+        DSALinkedList sortedPosts = new DSALinkedList();
+        DSALinkedList postInfoList = new DSALinkedList();
+
+        //Creating copy of post list to be sorted
+        Iterator postIter = posts.iterator();
+        while (postIter.hasNext()) /*For each post in network*/
+        {
+            sortedPosts.insertLast(postIter.next());
+        }
+
+        //Sorting created list (descendingly) by post's number of likes
+        sortedPosts.sortDesc();
+
+        //Adding list of post info strings to list to return (from sorted list)
+        Iterator sortedPostIter = sortedPosts.iterator();
+        while (sortedPostIter.hasNext()) /*For each post in sorted list*/
+        {
+            postInfoList.insertLast(sortedPostIter.next().toString());
+        }
+
+        return postInfoList;
+    }
+
     /* Returns the number of posts currently in the network.
      */
     public int getPostCount()
@@ -380,35 +488,6 @@ public class Network extends DSAGraph
         {
             throw new IllegalArgumentException("User is not in network");
         }
-    }
-
-    /* Returns a linked list of strings, each string being the information of a
-     *  post made in the network (sorted by number of likes the post has
-     *  received)
-     */
-    public DSALinkedList getPostsByPopularity()
-    {
-        DSALinkedList sortedPosts = new DSALinkedList();
-        DSALinkedList postInfoList = new DSALinkedList();
-
-        //Creating copy of post list to be sorted
-        Iterator postIter = posts.iterator();
-        while (postIter.hasNext()) /*For each post in network*/
-        {
-            sortedPosts.insertLast(postIter.next());
-        }
-
-        //Sorting created list by post's number of likes
-        sortedPosts.sort();
-
-        //Adding list of post info strings to list to return (from sorted list)
-        Iterator sortedPostIter = sortedPosts.iterator();
-        while (sortedPostIter.hasNext()) /*For each post in sorted list*/
-        {
-            postInfoList.insertLast(sortedPostIter.next().toString());
-        }
-
-        return postInfoList;
     }
 
     /* Shares the imported post to all the followers of the imported user

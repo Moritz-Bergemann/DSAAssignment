@@ -281,11 +281,10 @@ public class DSALinkedList implements Iterable, Serializable
         return nodeValue;
     }
 
-    /* Sorts nodes in link list based on string comparison of node values,
-     *  algorithm used is effectively bubble sort
-     *  (ONLY WORKS IF ALL NODE VALUES ARE STRINGS)
+    /* Sorts nodes in link list in ascending order based on comparable
+     *  comparison of node values, algorithm used is effectively bubble sort
      */
-    public void sort()
+    public void sortAsc()
     {
         DSAListNode currentNode;
         Object temp;
@@ -308,10 +307,56 @@ public class DSALinkedList implements Iterable, Serializable
                 }
                 if (currentNode.next != null) //If current node isn't last node
                 {
-                    //If current node's value greater than next node's value
-                    //FIXME This is extremely dodgy but seems to work. If you stick with this REALLY test it.
+                    /*If current node's value greater than next node's value
+                        (using the comparable interface's compareTo function*/
                     if (((Comparable)currentNode.value).compareTo(
                             (Comparable)currentNode.next.value) > 0)
+                    {
+                        sorted = false;
+
+                        //Swapping values of current & next node
+                        temp = currentNode.value;
+                        currentNode.value = currentNode.next.value;
+                        currentNode.next.value = temp;
+                    }
+                }
+
+                //Moving to next node
+                currentNode = currentNode.next;
+            }
+        }
+    }
+
+    /* Sorts nodes in link list in descending order based on comparable
+     *  comparison of node values, algorithm used is effectively bubble sort
+     */
+    public void sortDesc()
+    {
+        DSAListNode currentNode;
+        Object temp;
+        boolean sorted = false;
+
+        while (sorted == false)
+        {
+            sorted = true; /*Setting sorted to true until disproven if 2
+                elements are out of order*/
+
+            //Iterating through list
+            currentNode = head;
+            while (currentNode != null)
+            {
+                if (!(currentNode.value instanceof Comparable)) /*If the current
+                    node's value doesn't implement the comparable interface*/
+                {
+                    throw new IllegalStateException("Node does not " +
+                            "implement sortable");
+                }
+                if (currentNode.next != null) //If current node isn't last node
+                {
+                    /*If current node's value greater than next node's value
+                        (using the comparable interface's compareTo function*/
+                    if (((Comparable)currentNode.value).compareTo(
+                            (Comparable)currentNode.next.value) < 0)
                     {
                         sorted = false;
 

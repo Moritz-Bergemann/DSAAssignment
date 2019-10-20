@@ -3,7 +3,6 @@
  */
 import java.util.*;
 
-import static java.lang.System.load;
 import static java.lang.System.out;
 public class DSALinkedListTestHarness
 {
@@ -166,7 +165,7 @@ public class DSALinkedListTestHarness
         }
         out.println();
         
-        //Sort
+        //Sort Ascending
         String[] reverseArr = {"H", "G", "F", "E", "D", "C", "B", "A"};
         String[] randomArr = {"D", "H", "A", "C", "B", "G", "E", "F"};
         String[] sortedArr = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -196,10 +195,56 @@ public class DSALinkedListTestHarness
         while (iter.hasNext()) { out.print(iter.next() + " "); }
         out.println();
 
-        out.println("Performing sorts...");
-        reverseList.sort();
-        randomList.sort();
-        sortedList.sort();
+        out.println("Performing ascending sorts...");
+        reverseList.sortAsc();
+        randomList.sortAsc();
+        sortedList.sortAsc();
+        out.println();
+
+        out.println("RESULTS:");
+        out.print("Reverse List: ");
+        iter = reverseList.iterator();
+        while (iter.hasNext()) { out.print(iter.next() + " "); }
+        out.println();
+        out.print("Sorted List: ");
+        iter = randomList.iterator();
+        while (iter.hasNext()) { out.print(iter.next() + " "); }
+        out.println();
+        out.print("Sorted List: ");
+        iter = sortedList.iterator();
+        while (iter.hasNext()) { out.print(iter.next() + " "); }
+        out.println();
+        out.println();
+
+        //Sort Descending
+        reverseList = new DSALinkedList();
+        randomList = new DSALinkedList();
+        sortedList = new DSALinkedList();
+
+        out.println("Creating 3 lists to test sorting...");
+        for (int ii = 0; ii < 8; ii++)
+        {
+            reverseList.insertLast(reverseArr[ii]);
+            randomList.insertLast(randomArr[ii]);
+            sortedList.insertLast(sortedArr[ii]);
+        }
+        out.print("Reverse List: ");
+        iter = reverseList.iterator();
+        while (iter.hasNext()) { out.print(iter.next() + " "); }
+        out.println();
+        out.print("Random List: ");
+        iter = randomList.iterator();
+        while (iter.hasNext()) { out.print(iter.next() + " "); }
+        out.println();
+        out.print("Sorted List: ");
+        iter = sortedList.iterator();
+        while (iter.hasNext()) { out.print(iter.next() + " "); }
+        out.println();
+
+        out.println("Performing descending sorts...");
+        reverseList.sortDesc();
+        randomList.sortDesc();
+        sortedList.sortDesc();
         out.println();
 
         out.println("RESULTS:");

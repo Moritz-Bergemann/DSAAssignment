@@ -182,11 +182,11 @@ public class NetworkTestHarness
         out.println("Adding 3 posts to network 1");
         out.println("Adding post by user1 (content 'this is post1')");
         network1.makePost("user1", "this is post1", 1.0);
-//        out.println("Adding post by user4 (content 'this is post2')");
-//        network1.makePost("user4", "this is post2");
-//        out.println("Adding post by user1 (content 'this is post3')");
-//        network1.makePost("user1", "this is post3");
-//        out.println("Attempting to create post by non-existent user11");
+        out.println("Adding post by user4 (content 'this is post2')");
+        network1.makePost("user4", "this is post2", 1.0);
+        out.println("Adding post by user1 (content 'this is post3')");
+        network1.makePost("user1", "this is post3", 1.0);
+        out.println("Attempting to create post by non-existent user11");
         try
         {
             network1.makePost("user11", "invalid post", 1.0);
@@ -220,8 +220,14 @@ public class NetworkTestHarness
 
         //Display Posts
         out.println("Displaying all of network 1's posts by popularity:");
-        Iterator postIter = network1.getPostsByPopularity().iterator();
+        Iterator postIter = network1.getPostsByLikes().iterator();
         while (postIter.hasNext()) { out.println(postIter.next()); }
+        out.println();
+
+        //Display Users
+        out.println("Displaying all of network 1's users by number of followers:");
+        Iterator userIter = network1.getUsersByFollowers().iterator();
+        while (userIter.hasNext()) { out.println(userIter.next()); }
         out.println();
 
         //Timestep
@@ -231,7 +237,7 @@ public class NetworkTestHarness
         network1.timeStep();
 
         out.println("Again displaying all of network 1's posts by popularity (after timesteps):");
-        postIter = network1.getPostsByPopularity().iterator();
+        postIter = network1.getPostsByLikes().iterator();
         while (postIter.hasNext()) { out.println(postIter.next()); }
         out.println();
 
@@ -244,14 +250,14 @@ public class NetworkTestHarness
         //NetworkManager Tests
         out.println("Reading in network from 'netfile1.txt'");
         DSALinkedList networkFile1 = FileManager.readFile("netfile1.txt");
-        Network fileNetwork1 = NetworkManager.createNetwork(networkFile1);
+        Network fileNetwork1 = NetworkManager.loadNetwork(networkFile1);
         out.println("Displaying network from file");
         fileNetwork1.displayAsList();
         out.println();
 
         out.println("Reading in network from 'netfile2.txt'");
         DSALinkedList networkFile2 = FileManager.readFile("netfile2.txt");
-        Network fileNetwork2 = NetworkManager.createNetwork(networkFile2);
+        Network fileNetwork2 = NetworkManager.loadNetwork(networkFile2);
         out.println("Displaying network from file");
         fileNetwork2.displayAsList();
         out.println();

@@ -42,7 +42,8 @@ public class FileManager
                 try { fileStrm.close(); } catch (IOException io2) { }
             }
 
-            /*TODO something here (depending on how IO failure should be handled)*/
+            throw new IllegalArgumentException("Failed to write to file: " +
+                    io.getMessage());
         }
     }
 
