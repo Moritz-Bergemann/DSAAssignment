@@ -143,4 +143,14 @@ public class NetworkManager
 
         return networkList;
     }
+
+    //TODO
+    /* Applies the imported list of events to the imported network if valid.
+     *  Throws exception & aborts if any event invalid.
+    public static void applyEvents(Network network, DSALinkedList eventList)
+    {
+
+    }
+
+     */
 }

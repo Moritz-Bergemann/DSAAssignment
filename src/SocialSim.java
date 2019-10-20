@@ -24,8 +24,17 @@ public class SocialSim
                 provided for simulation mode NOTE: Should this even be 8? Don't
                 you need more information (i.e. timesteps)*/
             {
-                simulation(args[1], args[2], Double.parseDouble(args[3]),
-                        Double.parseDouble(args[4]));
+                try
+                {
+                    simulation(args[1], args[2], Double.parseDouble(args[3]),
+                            Double.parseDouble(args[4]));
+                }
+                catch (NumberFormatException n)
+                {
+                    System.out.println("Failed to initiate simulation mode: " +
+                            "3rd & 4th parameters (like & follow " +
+                            "probabilities) must be numbers");
+                }
             }
             else
             {
@@ -89,12 +98,62 @@ public class SocialSim
      *  the network using the imported like and follow probabilities.
      *  NOTE: How many timesteps???
      */
-    public static void simulation(String netFile, String eventFile,
+    public static void simulation(String networkFilename, String eventFilename,
                                   double likeProb, double followProb)
     {
-        //Creating network for use in simulation
-        Network network = new Network();
-        //TODO
+        Network network;
+
+        /*Performing setup for simulation mode & aborting if invalid command
+            line parameters given (based on exceptions thrown by setup
+            methods)*/
+        try
+        {
+            //Loading network from network file
+            DSALinkedList netInfo = FileManager.readFile(networkFilename);
+            network = NetworkManager.loadNetwork(netInfo);
+
+            //Setting network like/follow probabilities
+            network.setLikeChance(likeProb);
+            network.setFollowChance(followProb);
+
+            //Applying events from event file
+            DSALinkedList eventInfo = FileManager.readFile(eventFilename);
+            NetworkManager.applyEvents(network, eventInfo);
+
+            String logFileName = FileManager.createLogFileName(networkFilename,
+                    eventFilename);
+            System.out.println("Saving logs to " + networkFilename);
+
+            /*Running simulation (Any unhandled exceptions thrown will abort
+                simulation (should never happen if inputs were valid)*/
+            try
+            {
+                System.out.println("Starting simulation.");
+
+                DSALinkedList timeStepLog;
+                while (!network.allPostsStale) /*While all posts in network
+                    can still be shared further (i.e. Further timesteps will
+                    continue to perform actions*/
+                {
+                    //Running timeStep
+                    network.timeStep();
+
+                    timeStepLog = NetworkManager.logTimeStep(network); //NOTE: NetworkManager or network?
+                    FileManager.appendFile(timeStepLog);
+                }
+                System.out.println("Simulation completed successfully.");
+            }
+            catch (IllegalArgumentException i)
+            {
+                System.out.println("Simulation Aborted: " + i.getMessage());
+            }
+
+        }
+        catch (IllegalArgumentException i)
+        {
+            System.out.println("Failed to run simulation mode: " +
+                    i.getMessage());
+        }
     }
 
     /*Runs (and repeats) the menu for the program's interactive mode, and calls
@@ -221,6 +280,7 @@ public class SocialSim
                             DSALinkedList saveList =
                                     NetworkManager.saveNetwork(network);
                             FileManager.writeFile(filename, saveList);
+                            System.out.println("Network saved successfully.");
                         }
                         catch (IllegalArgumentException i)
                         {

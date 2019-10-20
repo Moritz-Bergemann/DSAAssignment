@@ -68,7 +68,7 @@ public class Network extends DSAGraph
         private int likes; //Number of likes post has received
         private int createdTime; //Timestep post was created
         private double clickbait;
-        private boolean complete; //Whether post can be shared any further
+        private boolean stale; //Whether post can be shared any further
         private DSALinkedList usersLiked; //Users who have liked this post
         private DSALinkedList usersShared; //Users who have had this post shared to them
         private DSALinkedList usersToLike; /*Users who will have a chance to like/share
@@ -108,7 +108,7 @@ public class Network extends DSAGraph
                 likes = 0; //Likes starts initially at 0
                 createdTime = inCreatedTime;
                 clickbait = inClickbait;
-                complete = false;
+                stale = false;
                 usersLiked = new DSALinkedList();
                 usersShared = new DSALinkedList();
                 usersToLike = new DSALinkedList();
@@ -136,7 +136,7 @@ public class Network extends DSAGraph
                     "Content: " + content + "\n" +
                     "Number of Likes: " + likes + "\n" +
                     "Created Time: " + createdTime
-                    + "\nComplete:" + complete; //NOTE: ONLY FOR DEBUGGING
+                    + "\nStale:" + stale; //NOTE: ONLY FOR DEBUGGING
         }
     }
 
@@ -588,7 +588,7 @@ public class Network extends DSAGraph
         {
             curPost = (Post)postIter.next();
 
-            if (!curPost.complete)
+            if (!curPost.stale)
             {
                 toLikeIter = curPost.usersToLike.iterator();
 
@@ -635,10 +635,10 @@ public class Network extends DSAGraph
                 }
                 else
                 {
-                    /*Marking post as complete (as there is are no users that
+                    /*Marking post as stale (as there is are no users that
                         may share it in the next timestep and therefore no
                         chance of it being shared again)*/
-                    curPost.complete = true;
+                    curPost.stale = true;
                     curPost.usersToLike = null;
                 }
             }
@@ -673,6 +673,15 @@ public class Network extends DSAGraph
         }
         return seen;
     }
+
+    //TODO
+    /* Returns whether every post currently in the network is stale (cannot be
+     *  shared any further) or not. Returns true if no posts in network.
+    public boolean allPostsStale()
+    {
+
+    }
+     */
 
     /*Returns a boolean that has the imported chance (between 0.0 & 1.0) of
      *  being true.

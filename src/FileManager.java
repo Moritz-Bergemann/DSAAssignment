@@ -83,4 +83,13 @@ public class FileManager
 
         return lineList;
     }
+
+    //TODO
+    /* Appends the imported list of line strings to the file with the imported
+     *  name.
+    public void appendFile(String filename, DSALinkedList linkedList)
+    {
+
+    }
+     */
 }
