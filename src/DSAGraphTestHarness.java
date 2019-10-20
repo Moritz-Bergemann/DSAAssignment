@@ -89,21 +89,21 @@ public class DSAGraphTestHarness
         try
         {
             graph2.removeEdge("A", "J");
-            out.println("Succeeded (shouldn't have)");
+            out.println("\tSucceeded (shouldn't have)");
         }
         catch (IllegalArgumentException i)
         {
-            out.println("Exception Caught: " + i.getMessage());
+            out.println("\tException Caught: " + i.getMessage());
         }
         out.println("Attempting to remove edge {A, X} (vertex X doesn't exist)");
         try
         {
             graph2.removeEdge("A", "X");
-            out.println("Succeeded (shouldn't have)");
+            out.println("\tSucceeded (shouldn't have)");
         }
         catch (IllegalArgumentException i)
         {
-            out.println("Exception Caught: " + i.getMessage());
+            out.println("\tException Caught: " + i.getMessage());
         }
         out.println();
 

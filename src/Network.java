@@ -47,27 +47,41 @@ public class Network extends DSAGraph
         private int likes; //Number of likes post has received
         private int createdTime; //Timestep post was created
         private boolean complete; //Whether post can be shared any further
-        DSALinkedList usersLiked; //Users who have liked this post
-        DSALinkedList usersShared; //Users who have had this post shared to them
-        DSALinkedList usersToLike; /*Users who will have a chance to like/share
+        private DSALinkedList usersLiked; //Users who have liked this post
+        private DSALinkedList usersShared; //Users who have had this post shared to them
+        private DSALinkedList usersToLike; /*Users who will have a chance to like/share
             the next post in the next timestep*/
 
         /* Alternate Constructor
          */
         private Post(String inOP, String inContent, int inCreatedTime)
         {
-            if (!inContent.equals("")) //If content of post is not empty
+            if (!hasVertex(inOP)) /*If network doesn't have user with imported
+                name*/
+            {
+                throw new IllegalArgumentException("User to make post does" +
+                        "not exist in network");
+            }
+            else if (inContent.equals("")) //If content of post is not empty
+            {
+                throw new IllegalArgumentException("Post content cannot be " +
+                        "empty");
+            }
+            else if (inContent.indexOf(':') > 0) /*If post content contains
+                colon*/
+            {
+                throw new IllegalArgumentException("Post content cannot " +
+                        "contain colon");
+            }
+            else
             {
                 op = inOP;
                 content = inContent;
                 likes = 0; //Likes starts initially at 0
                 createdTime = inCreatedTime;
-
-            }
-            else
-            {
-                throw new IllegalArgumentException("Post content cannot be " +
-                        "negative");
+                usersLiked = new DSALinkedList();
+                usersShared = new DSALinkedList();
+                usersToLike = new DSALinkedList();
             }
         }
 
@@ -77,6 +91,16 @@ public class Network extends DSAGraph
         public int compareTo(Post compPost)
         {
             return likes - compPost.likes;
+        }
+
+        /* Returns post information as a string
+         */
+        public String toString()
+        {
+            return "Original Poster: " + op + "\n" +
+                    "Content: " + content + "\n" +
+                    "Number of Likes: " + likes + "\n" +
+                    "Created Time: " + createdTime;
         }
     }
 
@@ -103,7 +127,7 @@ public class Network extends DSAGraph
         }
         else
         {
-            throw new IllegalArgumentException("Like chance must be between" +
+            throw new IllegalArgumentException("Like chance must be between " +
                     "0.0 & 1.0");
         }
     }
@@ -126,8 +150,8 @@ public class Network extends DSAGraph
         }
         else
         {
-            throw new IllegalArgumentException("Follow chance must be between" +
-                    "0.0 & 1.0");
+            throw new IllegalArgumentException("Follow chance must be " +
+                    "between 0.0 & 1.0");
         }
     }
 
@@ -334,6 +358,35 @@ public class Network extends DSAGraph
         {
             throw new IllegalArgumentException("User is not in network");
         }
+    }
+
+    /* Returns a linked list of strings, each string being the information of a
+     *  post made in the network (sorted by number of likes the post has
+     *  received)
+     */
+    public DSALinkedList getPostsByPopularity()
+    {
+        DSALinkedList sortedPosts = new DSALinkedList();
+        DSALinkedList postInfoList = new DSALinkedList();
+
+        //Creating copy of post list to be sorted
+        Iterator postIter = posts.iterator();
+        while (postIter.hasNext()) /*For each post in network*/
+        {
+            sortedPosts.insertLast(postIter.next());
+        }
+
+        //Sorting created list by post's number of likes
+        sortedPosts.sort();
+
+        //Adding list of post info strings to list to return (from sorted list)
+        Iterator sortedPostIter = sortedPosts.iterator();
+        while (sortedPostIter.hasNext()) /*For each post in sorted list*/
+        {
+            postInfoList.insertLast(sortedPostIter.next().toString());
+        }
+
+        return postInfoList;
     }
 
     /* Shares the imported post to all the followers of the imported user

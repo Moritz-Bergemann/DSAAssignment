@@ -4,6 +4,7 @@
  */
 
 import static java.lang.System.out;
+import java.util.*;
 
 public class NetworkTestHarness
 {
@@ -146,6 +147,92 @@ public class NetworkTestHarness
         out.println("Displaying network 1 (for readability)");
         network1.displayAsList();
         out.println();
+
+        //Setting network probabilities
+        out.println("Setting network's like & follow probabilities to 0.5");
+        network1.setLikeChance(0.5);
+        network1.setFollowChance(0.5);
+        out.println("Attempting to set like chance to -0.5 in network 2");
+        try
+        {
+            network2.setLikeChance(-0.5);
+            out.println("\tSucceeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("\tException caught: " + i.getMessage());
+        }
+        out.println("Attempting to set follow chance to 1.01 in network 2");
+        try
+        {
+            network2.setFollowChance(1.01);
+            out.println("\tSucceeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("\tException caught: " + i.getMessage());
+        }
+        out.println();
+
+        //Make Posts
+        out.println("Adding 3 posts to network 1");
+        out.println("Adding post by user1 (content 'this is post1')");
+        network1.makePost("user1", "this is post1");
+        out.println("Adding post by user4 (content 'this is post2')");
+        network1.makePost("user4", "this is post2");
+        out.println("Adding post by user1 (content 'this is post3')");
+        network1.makePost("user1", "this is post3");
+        out.println("Attempting to create post by non-existent user11");
+        try
+        {
+            network1.makePost("user11", "invalid post");
+            out.println("\tSucceeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("\tException caught: " + i.getMessage());
+        }
+        out.println("Attempting to create post with empty content");
+        try
+        {
+            network1.makePost("user1", "");
+            out.println("\tSucceeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("\tException caught: " + i.getMessage());
+        }
+        out.println("Attempting to create post where content contains colon");
+        try
+        {
+            network1.makePost("user1", "invalid : post");
+            out.println("\tSucceeded (SHOULDN'T HAVE)");
+        }
+        catch (IllegalArgumentException i)
+        {
+            out.println("\tException caught: " + i.getMessage());
+        }
+        out.println();
+
+        //Display Posts
+        out.println("Displaying all of network 1's posts by popularity:");
+        Iterator postIter = network1.getPostsByPopularity().iterator();
+        while (postIter.hasNext()) { out.println(postIter.next()); }
+        out.println();
+
+        //Timestep
+        out.println("Running 3 timesteps in network 1 (random but should do something");
+        network1.timeStep();
+        network1.timeStep();
+        network1.timeStep();
+
+        out.println("Again displaying all of network 1's posts by popularity (after timesteps):");
+        postIter = network1.getPostsByPopularity().iterator();
+        while (postIter.hasNext()) { out.println(postIter.next()); }
+        out.println();
+
+        out.println("Redisplaying network 1 (after timesteps):");
+        network1.displayAsList();
 
         //NetworkManager Tests
         out.println("Reading in network from 'netfile1.txt'");

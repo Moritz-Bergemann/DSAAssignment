@@ -181,13 +181,13 @@ public class DSALinkedListTestHarness
         {
             reverseList.insertLast(reverseArr[ii]);
             randomList.insertLast(randomArr[ii]);
-            sortedList.insertLast(reverseArr[ii]);
+            sortedList.insertLast(sortedArr[ii]);
         }
         out.print("Reverse List: ");
         iter = reverseList.iterator();
         while (iter.hasNext()) { out.print(iter.next() + " "); }
         out.println();
-        out.print("Sorted List: ");
+        out.print("Random List: ");
         iter = randomList.iterator();
         while (iter.hasNext()) { out.print(iter.next() + " "); }
         out.println();

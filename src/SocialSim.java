@@ -165,7 +165,19 @@ public class SocialSim
                 case 5: //Create post
                     System.out.print("Input name of user to make post: ");
                     String postUser = sc.nextLine();
-                    //TODO
+                    System.out.print("Input content of post: ");
+                    String postContent = sc.nextLine();
+                    try
+                    {
+                        network.makePost(postUser, postContent);
+                        System.out.println("Post created successfully.");
+                    }
+                    catch (IllegalArgumentException i)
+                    {
+                        System.out.println("Failed to create post: " +
+                                i.getMessage());
+                    }
+
                     break;
                 case 6: //Display Network
                     //Displaying network as graph adjacency list (NOTE: Is this good enough?)
@@ -230,13 +242,13 @@ public class SocialSim
         menuChoice = inputInt("Choice", 1, 4);
         switch (menuChoice)
         {
-            case 1:
+            case 1: //Show posts by popularity
                 //TODO
                 break;
-            case 2:
+            case 2: //Show users by popularity
                 //TODO
                 break;
-            case 3:
+            case 3: //Show user record
                 System.out.print("Input name of user to display record:");
                 inputUser = sc.nextLine();
                 try
@@ -269,17 +281,16 @@ public class SocialSim
         menuChoice = inputInt("Choice", 1, 4);
         switch (menuChoice)
         {
-            case 1: //Find/Display user
+            case 1: //Find user
                 System.out.print("Input name of user to display information: ");
                 inputUser = sc.nextLine();
-                try
+                if (network.hasVertex(inputUser))
                 {
-                    System.out.println(network.getUserInfo(inputUser));
+                    System.out.println("User exists in network!");
                 }
-                catch (IllegalArgumentException i)
+                else
                 {
-                    System.out.println("Failed to display user: " +
-                            i.getMessage());
+                    System.out.println("User does not exist in network.");
                 }
                 break;
             case 2: //Insert user

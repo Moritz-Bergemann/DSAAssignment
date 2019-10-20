@@ -12,5 +12,9 @@ All users in the network were stored as strings as this made returning informati
 Putting all post information on the post itself means posts can easily be added/deleted from the network at any point
     without actually interfering with the structure/functionality of the graph.
 
+I chose not to just sort the post list directly as I thought this information (the order in which the posts were created)
+    could be useful in the future and would make additions to the program easier.
+
 REALLY IMPORTANT:
     You messed up, there's one chance to like+share the post & another to follow the OP
+
