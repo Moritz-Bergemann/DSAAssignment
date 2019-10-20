@@ -43,8 +43,12 @@ public class NetworkTestHarness
         network1.addFollower("user2", "user1");
         out.println("user2 follows user5");
         network1.addFollower("user2", "user5");
-        out.println("user4 follows user5");
+        out.println("user1 follows user5");
         network1.addFollower("user4", "user5");
+        out.println("user5 follows user1");
+        network1.addFollower("user5", "user1");
+        out.println("user1 follows user4");
+        network1.addFollower("user1", "user4");
         out.println("user3 follows user2");
         network1.addFollower("user3", "user2");
         out.println("user1 follows user3");
@@ -82,7 +86,7 @@ public class NetworkTestHarness
         //Has follower
         out.println("Checking if network 1 has follower 'user1 follows user2'" +
                 " (true):" + network1.hasFollower("user1", "user2"));
-        out.println("Checking if network 1 has follower 'user5 follows user2'" +
+        out.println("Checking if network 1 has follower 'user4 follows user1'" +
                 " (false):" + network1.hasFollower("user5", "user2"));
         out.println("Attempting to see if network 1 has follower 'user100 " +
                 "follows user4' (1st user doesn't exist)");
@@ -150,8 +154,8 @@ public class NetworkTestHarness
 
         //Setting network probabilities
         out.println("Setting network's like & follow probabilities to 0.5");
-        network1.setLikeChance(0.5);
-        network1.setFollowChance(0.5);
+        network1.setLikeChance(1.0);
+        network1.setFollowChance(1.0);
         out.println("Attempting to set like chance to -0.5 in network 2");
         try
         {
@@ -177,15 +181,15 @@ public class NetworkTestHarness
         //Make Posts
         out.println("Adding 3 posts to network 1");
         out.println("Adding post by user1 (content 'this is post1')");
-        network1.makePost("user1", "this is post1");
-        out.println("Adding post by user4 (content 'this is post2')");
-        network1.makePost("user4", "this is post2");
-        out.println("Adding post by user1 (content 'this is post3')");
-        network1.makePost("user1", "this is post3");
-        out.println("Attempting to create post by non-existent user11");
+        network1.makePost("user1", "this is post1", 1.0);
+//        out.println("Adding post by user4 (content 'this is post2')");
+//        network1.makePost("user4", "this is post2");
+//        out.println("Adding post by user1 (content 'this is post3')");
+//        network1.makePost("user1", "this is post3");
+//        out.println("Attempting to create post by non-existent user11");
         try
         {
-            network1.makePost("user11", "invalid post");
+            network1.makePost("user11", "invalid post", 1.0);
             out.println("\tSucceeded (SHOULDN'T HAVE)");
         }
         catch (IllegalArgumentException i)
@@ -195,7 +199,7 @@ public class NetworkTestHarness
         out.println("Attempting to create post with empty content");
         try
         {
-            network1.makePost("user1", "");
+            network1.makePost("user1", "", 1.0);
             out.println("\tSucceeded (SHOULDN'T HAVE)");
         }
         catch (IllegalArgumentException i)
@@ -205,7 +209,7 @@ public class NetworkTestHarness
         out.println("Attempting to create post where content contains colon");
         try
         {
-            network1.makePost("user1", "invalid : post");
+            network1.makePost("user1", "invalid : post", 1.0);
             out.println("\tSucceeded (SHOULDN'T HAVE)");
         }
         catch (IllegalArgumentException i)
@@ -221,7 +225,7 @@ public class NetworkTestHarness
         out.println();
 
         //Timestep
-        out.println("Running 3 timesteps in network 1 (random but should do something");
+        out.println("Running 3 timesteps in network 1");
         network1.timeStep();
         network1.timeStep();
         network1.timeStep();
@@ -233,6 +237,9 @@ public class NetworkTestHarness
 
         out.println("Redisplaying network 1 (after timesteps):");
         network1.displayAsList();
+
+        out.println();
+        out.println();
 
         //NetworkManager Tests
         out.println("Reading in network from 'netfile1.txt'");

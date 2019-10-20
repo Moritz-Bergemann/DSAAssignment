@@ -167,9 +167,11 @@ public class SocialSim
                     String postUser = sc.nextLine();
                     System.out.print("Input content of post: ");
                     String postContent = sc.nextLine();
+                    double postClickbait = inputDouble("Input " +
+                            "clickbait factor", 0.0, 100000.0);
                     try
                     {
-                        network.makePost(postUser, postContent);
+                        network.makePost(postUser, postContent, postClickbait);
                         System.out.println("Post created successfully.");
                     }
                     catch (IllegalArgumentException i)
@@ -243,10 +245,28 @@ public class SocialSim
         switch (menuChoice)
         {
             case 1: //Show posts by popularity
-                //TODO
+                if (network.getPostCount() > 0)
+                {
+                    int postNum = 1;
+                    Iterator popularPostIter =
+                            network.getPostsByPopularity().iterator();
+                    while (popularPostIter.hasNext())
+                    {
+                        System.out.println(postNum + ".");
+                        System.out.println(popularPostIter.next());
+                        postNum++;
+                    }
+                }
+                else
+                {
+                    System.out.println("Nothing to show: No posts have been " +
+                            "made.");
+
+                }
                 break;
             case 2: //Show users by popularity
                 //TODO
+                System.out.println("NOT DONE");
                 break;
             case 3: //Show user record
                 System.out.print("Input name of user to display record:");
@@ -466,7 +486,8 @@ public class SocialSim
                     range (in case input was out of range and loop is run
                     again)*/
                 prompt = "Invalid Input! Please input a decimal number " +
-                        "between " + min + " & " + max + " (inclusive)";
+                        "between " + min + " & " + max + " (inclusive)" + "\n" +
+                        initialPrompt;
             }
             catch (InputMismatchException i)
             {

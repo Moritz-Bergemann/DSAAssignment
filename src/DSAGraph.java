@@ -184,40 +184,6 @@ public class DSAGraph
         return areAdjacent;
     }
 
-    //TODO String[] getAdjacent(String inLabel)
-
-
-    //Removed Method as Probably Not Required
-//    /* Returns true if 2 vertices with imported labels are adjacent & false if
-//     *  not, throws exception if one/both of vertices are not in graph
-//     */
-//    public boolean isAdjacent(String inLabel1, String inLabel2)
-//    {
-//        boolean areAdjacent = false;
-//        DSAGraphVertex vertex1, vertex2, currentAdjacentVertex;
-//
-//        /*Getting 2 vertices using their labels (throws IllegalArgumentException
-//            if either doesn't exist*/
-//        vertex1 = getVertex(inLabel1);
-//        vertex2 = getVertex(inLabel2);
-//
-//        //Creating iterator for vertex 1's adjacency list (2 would also work)
-//        Iterator vertex1AdjacencyListIterator =
-//            vertex1.adjacencyList.iterator();
-//
-//        while (vertex1AdjacencyListIterator.hasNext())
-//        {
-//            currentAdjacentVertex =
-//                (DSAGraphVertex)vertex1AdjacencyListIterator.next();
-//            if (currentAdjacentVertex == vertex2) /*If vertex 1's adjacency
-//                list contains link to vertex 2*/
-//            {
-//                areAdjacent = true;
-//            }
-//        }
-//        return areAdjacent;
-//    }
-
     /* Prints the graph's vertices to the console in adjacency list form
      */
     public void displayAsList()

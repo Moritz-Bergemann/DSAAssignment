@@ -46,6 +46,7 @@ public class Network extends DSAGraph
         private String content; /*Actual content of post*/
         private int likes; //Number of likes post has received
         private int createdTime; //Timestep post was created
+        private double clickbait;
         private boolean complete; //Whether post can be shared any further
         private DSALinkedList usersLiked; //Users who have liked this post
         private DSALinkedList usersShared; //Users who have had this post shared to them
@@ -54,7 +55,8 @@ public class Network extends DSAGraph
 
         /* Alternate Constructor
          */
-        private Post(String inOP, String inContent, int inCreatedTime)
+        private Post(String inOP, String inContent, double inClickbait,
+                     int inCreatedTime)
         {
             if (!hasVertex(inOP)) /*If network doesn't have user with imported
                 name*/
@@ -73,15 +75,27 @@ public class Network extends DSAGraph
                 throw new IllegalArgumentException("Post content cannot " +
                         "contain colon");
             }
+            else if (inClickbait < 0.0)
+            {
+                throw new IllegalArgumentException("Clickbait factor must be" +
+                        "greater than 0.0");
+            }
             else
             {
                 op = inOP;
                 content = inContent;
                 likes = 0; //Likes starts initially at 0
                 createdTime = inCreatedTime;
+                clickbait = inClickbait;
+                complete = false;
                 usersLiked = new DSALinkedList();
                 usersShared = new DSALinkedList();
                 usersToLike = new DSALinkedList();
+
+                /*Adding OP to list of users who have had this post shared with
+                   them (so that OP does not have their own post shared to
+                   them)*/
+                usersShared.insertLast(inOP);
             }
         }
 
@@ -100,7 +114,8 @@ public class Network extends DSAGraph
             return "Original Poster: " + op + "\n" +
                     "Content: " + content + "\n" +
                     "Number of Likes: " + likes + "\n" +
-                    "Created Time: " + createdTime;
+                    "Created Time: " + createdTime
+                    + "\nComplete:" + complete; //NOTE: ONLY FOR DEBUGGING
         }
     }
 
@@ -328,17 +343,24 @@ public class Network extends DSAGraph
         }
     }
 
+    /* Returns the number of posts currently in the network.
+     */
+    public int getPostCount()
+    {
+        return posts.getCount();
+    }
+
     /* Creates a post with given content, posted by the imported user and shares
      *  it with the OPs followers
     */
-    public void makePost(String userName, String content)
+    public void makePost(String userName, String content, double inClickbait)
     {
         Post newPost;
         if (super.hasVertex(userName))
         {
             try
             {
-                newPost = new Post(userName, content, curTime);
+                newPost = new Post(userName, content, inClickbait, curTime);
 
                 //Add post to list of posts
                 posts.insertLast(newPost);
@@ -397,7 +419,7 @@ public class Network extends DSAGraph
                            DSALinkedList justSharedUsers)
     {
         Iterator followerIter;
-        DSAGraphVertex curFollower;
+        String curFollower;
 
         if (super.hasVertex(inUser))
         {
@@ -405,12 +427,12 @@ public class Network extends DSAGraph
 
             while (followerIter.hasNext())
             {
-                curFollower = (DSAGraphVertex)followerIter.next();
+                curFollower = ((DSAGraphVertex)followerIter.next()).label;
 
-                if (!seenPost(inPost, inUser)) /*If user has not already seen
-                    the imported post*/
+                if (!seenPost(inPost, curFollower)) /*If follower has not
+                    already seen the imported post*/
                 {
-                    /*Adding user to list of users post has been shared with
+                    /*Adding follower to list of users post has been shared with
                         in this timestep*/
                     justSharedUsers.insertLast(curFollower);
 
@@ -461,15 +483,16 @@ public class Network extends DSAGraph
         {
             curPost = (Post)postIter.next();
 
-            toLikeIter = curPost.usersToLike.iterator();
-
             if (!curPost.complete)
             {
+                toLikeIter = curPost.usersToLike.iterator();
+
                 /*Creating linked list of users who have had this post shared
                     with them on this timestep*/
                 justSharedUsers = new DSALinkedList();
 
-                while (toLikeIter.hasNext())
+                while (toLikeIter.hasNext()) /*For each person who has a chance
+                    to like this post this timestep*/
                 {
                     curUser = (String)toLikeIter.next();
 
