@@ -16,7 +16,7 @@ public class DSAGraph
      * Implements sortable so that it can be sorted by its label fields
      *  in the DSALinkedList class
      */
-    protected class DSAGraphVertex implements Sortable, Comparable<DSAGraphVertex>
+    protected class DSAGraphVertex implements Comparable<DSAGraphVertex>
     {
         //CLASS FIELDS
         String label;

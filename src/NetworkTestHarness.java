@@ -289,8 +289,9 @@ public class NetworkTestHarness
         out.println("Reading in network from 'netfile2.txt'");
         DSALinkedList networkFile2 = FileManager.readFile("netfile2.txt");
         Network fileNetwork2 = NetworkManager.loadNetwork(networkFile2);
-        out.println("Applying events file 'eventsfile2-2' to read network");
-        DSALinkedList eventsFile2_2 = FileManager.readFile("eventsfile2-2");
+        out.println("Applying events file 'eventsfile2-2.txt' to read network");
+        DSALinkedList eventsFile2_2 = FileManager.readFile("eventsfile2-2.txt");
+        NetworkManager.applyEvents(fileNetwork2, eventsFile2_2);
 
         out.println("Displaying network from file");
         fileNetwork2.displayAsList();

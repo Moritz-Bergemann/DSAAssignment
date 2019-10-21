@@ -111,12 +111,16 @@ public class SocialSim
             //Loading network from network file
             DSALinkedList netInfo = FileManager.readFile(networkFilename);
             network = NetworkManager.loadNetwork(netInfo);
+            System.out.println("Settings file read successfully.");
 
             //Setting network like/follow probabilities
             network.setLikeChance(likeProb);
             network.setFollowChance(followProb);
 
-            //Applying events from event file
+            /*Applying events from event file (will not abort program even if
+                entire file invalid, invalid lines are simply skipped & error
+                message printed*/
+            System.out.println("Reading events file:");
             DSALinkedList eventInfo = FileManager.readFile(eventFilename);
             NetworkManager.applyEvents(network, eventInfo);
 
@@ -124,11 +128,13 @@ public class SocialSim
                 of network to it*/
             String logFileName = FileManager.createLogFileName(networkFilename,
                     eventFilename);
-            System.out.println("Saving logs to " + networkFilename);
+            System.out.println("Saving logs to " + logFileName);
 
             DSALinkedList timeStepLog = NetworkManager.logTimeStep(network);
             FileManager.writeFile(logFileName, timeStepLog, false); /*
                 append is false as must initially create log file*/
+
+            System.out.println();
 
             /*Running simulation (Any unhandled exceptions thrown will abort
                 simulation, should never happen if inputs were valid*/

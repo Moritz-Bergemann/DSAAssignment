@@ -145,7 +145,8 @@ public class NetworkManager
     }
 
     /* Applies the imported list of events to the imported network if valid.
-     *  Throws exception & aborts if any event invalid.
+     *  If line invalid, error message is printed to console & reading
+     *  continues on next line.
      */
     public static void applyEvents(Network network, DSALinkedList eventList)
     {
@@ -155,115 +156,125 @@ public class NetworkManager
         int lineNum = 0;
         while (eventIter.hasNext()) //For each string in imported list
         {
-            curLine = (String)eventIter.next();
+            curLine = (String) eventIter.next();
             lineNum++;
 
-            if (curLine.equals("")) //If line to read is empty
+            try
             {
-                throw new IllegalArgumentException("Invalid Format (line "
-                        + lineNum + "): Line cannot be empty");
-            }
-            else if (curLine.indexOf(':') < 0) /*If current line does not
-                contain a semicolon*/
-            {
-                throw new IllegalArgumentException("Invalid Format (line "
-                        + lineNum + "): Line must contain at least 1 colon");
-            }
-            switch (curLine.charAt(0)) /*Getting first character in line (should
-                define event to occur*/
-            {
-                case 'A': //Add User
-                    splitLine = curLine.split(":");
-                    if (splitLine.length == 2)
-                    {
-                        try
-                        {
-                            network.addUser(splitLine[1]);
-                        }
-                        catch (IllegalArgumentException i)
-                        {
-                            throw new IllegalArgumentException("Logical " +
-                                    "Error (line " + lineNum + "): " +
-                                    i.getMessage());
-                        }
-                    }
-                    else
-                    {
-                        throw new IllegalArgumentException("Invalid Format " +
-                                "(line " + lineNum + "): Add-User line " +
-                                "must contain 2 sections");
-                    }
-                    break;
-                case 'F': //Add follower
-                    splitLine = curLine.split(":");
-                    if (splitLine.length == 3)
-                    {
-                        try
-                        {
-                            network.addFollower(splitLine[2].trim(),
-                                    splitLine[1].trim());
-                        }
-                        catch (IllegalArgumentException i)
-                        {
-                            throw new IllegalArgumentException("Logical " +
-                                    "Error (line " + lineNum + "): " +
-                                    i.getMessage());
-                        }
-                    }
-                    else
-                    {
-                        throw new IllegalArgumentException("Invalid Format " +
-                                "(line " + lineNum + "): Add-Follower line " +
-                                "must contain 3 sections");
-                    }
-                    break;
-                case 'P': //Add post
-                    splitLine = curLine.split(":");
-                    if (splitLine.length == 3) //No clickbait factor
-                    {
-                        try
-                        {
-                            network.makePost(splitLine[1].trim(),
-                                    splitLine[2].trim(), 1);
-                        }
-                        catch (IllegalArgumentException i)
-                        {
-                            throw new IllegalArgumentException("Logical " +
-                                    "Error (line " + lineNum + "): " +
-                                    i.getMessage());
-                        }
-                    }
-                    else if (splitLine.length == 4) //Clickbait factor
-                    {
-                        try
-                        {
-                            network.makePost(splitLine[1].trim(),
-                                    splitLine[2].trim(),
-                                    Double.parseDouble(splitLine[3]));
-                        }
-                        catch (NumberFormatException n)
-                        {
-                            throw new IllegalArgumentException("Invalid " +
-                                    "Format (line " + lineNum + "): Clickbait" +
-                                    " factor is not a number");
-                        }
-                        catch (IllegalArgumentException i)
-                        {
-                            throw new IllegalArgumentException("Logical " +
-                                    "Error (line " + lineNum + "): " +
-                                    i.getMessage());
-                        }
-                    }
-                    else
-                    {
-                        throw new IllegalArgumentException("Invalid Format " +
-                                "(line " + lineNum + "): Add-Follower line " +
-                                "must contain 3 or 4 sections");
-                    }
-                    break;
-                default:
+                if (curLine.equals("")) //If line to read is empty
+                {
                     throw new IllegalArgumentException("Invalid Format (line "
-                            + lineNum + "): Event descriptor must ");
+                            + lineNum + "): Line cannot be empty");
+                }
+                else if (curLine.indexOf(':') < 0) /*If current line does not
+                    contain a semicolon*/
+                {
+                    throw new IllegalArgumentException("Invalid Format (line "
+                            + lineNum + "): Line must contain at least 1 colon");
+                }
+                switch (curLine.charAt(0)) /*Getting first character in line (should
+                    define event to occur*/
+                {
+                    case 'A': //Add User
+                        splitLine = curLine.split(":");
+                        if (splitLine.length == 2)
+                        {
+                            try
+                            {
+                                network.addUser(splitLine[1]);
+                            }
+                            catch (IllegalArgumentException i)
+                            {
+                                throw new IllegalArgumentException("Logical " +
+                                        "Error (line " + lineNum + "): " +
+                                        i.getMessage());
+                            }
+                        }
+                        else
+                        {
+                            throw new IllegalArgumentException("Invalid Format " +
+                                    "(line " + lineNum + "): Add-User line " +
+                                    "must contain 2 sections");
+                        }
+                        break;
+                    case 'F': //Add follower
+                        splitLine = curLine.split(":");
+                        if (splitLine.length == 3)
+                        {
+                            try
+                            {
+                                network.addFollower(splitLine[2].trim(),
+                                        splitLine[1].trim());
+                            }
+                            catch (IllegalArgumentException i)
+                            {
+                                throw new IllegalArgumentException("Logical " +
+                                        "Error (line " + lineNum + "): " +
+                                        i.getMessage());
+                            }
+                        }
+                        else
+                        {
+                            throw new IllegalArgumentException("Invalid Format " +
+                                    "(line " + lineNum + "): Add-Follower line " +
+                                    "must contain 3 sections");
+                        }
+                        break;
+                    case 'P': //Add post
+                        splitLine = curLine.split(":");
+                        if (splitLine.length == 3) //No clickbait factor
+                        {
+                            try
+                            {
+                                network.makePost(splitLine[1].trim(),
+                                        splitLine[2].trim(), 1);
+                            }
+                            catch (IllegalArgumentException i)
+                            {
+                                throw new IllegalArgumentException("Logical " +
+                                        "Error (line " + lineNum + "): " +
+                                        i.getMessage());
+                            }
+                        }
+                        else if (splitLine.length == 4) //Clickbait factor
+                        {
+                            try
+                            {
+                                network.makePost(splitLine[1].trim(),
+                                        splitLine[2].trim(),
+                                        Double.parseDouble(splitLine[3]));
+                            }
+                            catch (NumberFormatException n)
+                            {
+                                throw new IllegalArgumentException("Invalid " +
+                                        "Format (line " + lineNum + "): Clickbait" +
+                                        " factor is not a number");
+                            }
+                            catch (IllegalArgumentException i)
+                            {
+                                throw new IllegalArgumentException("Logical " +
+                                        "Error (line " + lineNum + "): " +
+                                        i.getMessage());
+                            }
+                        }
+                        else
+                        {
+                            throw new IllegalArgumentException("Invalid Format " +
+                                    "(line " + lineNum + "): Add-Follower line " +
+                                    "must contain 3 or 4 sections");
+                        }
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid Format (line "
+                                + lineNum + "): Event descriptor must be " +
+                                "either A (add user), F (add follower) or " +
+                                "P (make post)");
+                }
+            }
+            catch (IllegalArgumentException i) /*If failed to read current
+                line*/
+            {
+                System.out.println(i.getMessage());
             }
         }
     }
