@@ -71,6 +71,13 @@ public class UnitTestBinarySearchTree
         }
         out.println();
 
+        //Has
+        out.println("Checking if tree 0 has key '044' (should be true): " + trees[0].has("044"));
+        out.println("Checking if tree 0 has key '111' (should be false): " + trees[0].has("111"));
+        out.println("Checking if empty tree 1 has key '050' (should be false): " + trees[1].has("050"));
+
+        out.println();
+
         //Delete
         out.println("Deleting node from tree 0 with key 019 (0 children)...");
         trees[0].delete("019");

@@ -201,6 +201,26 @@ public class DSABinarySearchTree implements Serializable
     }
 
     //ACCESSORS
+    /* Returns true if tree has node with imported key, throws exception
+     *  otherwise
+     */
+    public boolean has(String inKey) //FIXME is this dodgy?
+    {
+        boolean found;
+        try
+        {
+            //Attempting to find key in tree (throws exception if not found)
+            find(inKey);
+            found = true;
+        }
+        catch (IllegalArgumentException i) //If key was not found
+        {
+            found = false;
+        }
+
+        return found;
+    }
+
     /* Returns value held by node with imported key (throws exception if node
      *  does not exist)
      */

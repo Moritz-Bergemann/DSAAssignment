@@ -9,7 +9,7 @@ import java.util.*;
 public class DSAGraph
 {
     //CLASS FIELDS
-    protected DSALinkedList vertexList; //List of vertices in graph (ordered)
+    protected DSABinarySearchTree vertexes;
 
     //INNER CLASSES
     /* Model class for vertices within linked list
@@ -59,7 +59,7 @@ public class DSAGraph
      */
     public DSAGraph()
     {
-        vertexList = new DSALinkedList();
+        vertexes = new DSABinarySearchTree();
     }
 
     //PUBLIC ACCESSORS
