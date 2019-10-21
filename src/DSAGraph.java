@@ -227,6 +227,55 @@ public class DSAGraph
         }
     }
 
+    /* Returns each of the graph's vertices with their adjacency lists as
+        a linked list of strings
+     */
+    public DSALinkedList returnAsList()
+    {
+        //Creating linked list to return
+        DSALinkedList graphList = new DSALinkedList();
+
+        Iterator vertexListIterator = vertexList.iterator();
+        Iterator adjacencyListIterator;
+        DSAGraphVertex currentVertex, currentAdjacentVertex;
+        String vertexString; /*String containing label of current vertex &
+            labels of all adjacent vertices*/
+
+        //Iterating through each vertex in vertex list
+        while (vertexListIterator.hasNext())
+        {
+            vertexString = "";
+
+            currentVertex = (DSAGraphVertex)vertexListIterator.next();
+
+            //Adding current vertex's label to vertex string
+            vertexString += currentVertex.label + ": ";
+
+            //Iterating through adjacency list of current vertex
+            adjacencyListIterator = currentVertex.adjacencyList.iterator();
+            while (adjacencyListIterator.hasNext())
+            {
+                currentAdjacentVertex =
+                        (DSAGraphVertex)adjacencyListIterator.next();
+
+                //Adding label of current adjacent vertex to printed list
+                vertexString += currentAdjacentVertex.label;
+
+                /*Conditionally adding comma & space (if this wasn't last vertex
+                    in adjacency list)*/
+                if (adjacencyListIterator.hasNext())
+                {
+                    vertexString += ", ";
+                }
+            }
+
+            //Adding label + adjacency list of current vertex to list to return
+            graphList.insertLast(vertexString);
+        }
+
+        return graphList;
+    }
+
     public void displayAsMatrix()
     {
         int vertexCount = getVertexCount();

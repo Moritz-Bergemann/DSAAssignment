@@ -133,7 +133,6 @@ public class DSALinkedListTestHarness
         out.println("Checking if empty list is empty: " + lists[1].isEmpty());
         out.println();
 
-
         //Iterators
         out.println("Creating 2 iterators for created linked lists:");
         Iterator[] iterators = new Iterator[3];

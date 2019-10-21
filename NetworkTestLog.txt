@@ -1,0 +1,55 @@
+TIMESTEP 3:
+Network Diagram:
+	user1: user2, user5
+	user2: user1
+	user4: user1, user2, user5
+	user5: user2
+
+Users by Popularity:
+	1.
+	User: user4
+	Followers: 3
+	Following: 0
+	Number of Posts: 1
+	2.
+	User: user1
+	Followers: 2
+	Following: 3
+	Number of Posts: 2
+	3.
+	User: user2
+	Followers: 2
+	Following: 3
+	Number of Posts: 0
+	4.
+	User: user5
+	Followers: 1
+	Following: 3
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: user4
+	Content: this is post2
+	Number of Likes: 3
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:true
+	Users Who Liked This: user1, user5, user2
+	2.
+	Original Poster: user1
+	Content: this is post1
+	Number of Likes: 2
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	Users Who Liked This: user5, user2
+	3.
+	Original Poster: user1
+	Content: this is post3
+	Number of Likes: 2
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	Users Who Liked This: user5, user2
+

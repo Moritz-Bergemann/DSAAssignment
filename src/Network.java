@@ -25,6 +25,7 @@ public class Network extends DSAGraph
             vertex label which it should otherwise be retrieved by*/
         private int followers;
         private int following;
+        private int numPosts;
         private int createdTime; /*Timestep at which user was added to network
             (0 if initial*/
 
@@ -32,10 +33,11 @@ public class Network extends DSAGraph
          */
         private UserInfo(String inName, int inCreatedTime)
         {
-            assert createdTime >= 0 : "User's created time below 0";
+            assert createdTime >= 0 : "User's created time below 0"; //Sanity
             name = inName; //Validation occurs externally
             followers = 0;
             following = 0;
+            numPosts = 0;
             createdTime = inCreatedTime;
         }
 
@@ -45,7 +47,8 @@ public class Network extends DSAGraph
         {
             return "User: " + name + "\n" +
                     "Followers: " + followers + "\n" +
-                    "Following: " + following;
+                    "Following: " + following + "\n" +
+                    "Number of Posts: " + numPosts;
 
         }
 
@@ -64,15 +67,16 @@ public class Network extends DSAGraph
     {
         //CLASS FIELDS
         private String op; //Label of original poster
-        private String content; /*Actual content of post*/
+        private String content; //Actual content of post
         private int likes; //Number of likes post has received
         private int createdTime; //Timestep post was created
-        private double clickbait;
+        private double clickbait; //Clickbait factor (like chance multiplier)
         private boolean stale; //Whether post can be shared any further
         private DSALinkedList usersLiked; //Users who have liked this post
-        private DSALinkedList usersShared; //Users who have had this post shared to them
-        private DSALinkedList usersToLike; /*Users who will have a chance to like/share
-            the next post in the next timestep*/
+        private DSALinkedList usersSeen; /*Users who have had this post shared
+            to them*/
+        private DSALinkedList usersToLike; /*Users who will have a chance to
+            like/share the next post in the next timestep*/
 
         /* Alternate Constructor
          */
@@ -109,14 +113,16 @@ public class Network extends DSAGraph
                 createdTime = inCreatedTime;
                 clickbait = inClickbait;
                 stale = false;
-                usersLiked = new DSALinkedList();
-                usersShared = new DSALinkedList();
+                usersLiked = new DSALinkedList(); /*String labels of users who
+                    have liked this post*/
+                usersSeen = new DSALinkedList(); /*String labels of users who
+                    have had this post shared with them*/
                 usersToLike = new DSALinkedList();
 
                 /*Adding OP to list of users who have had this post shared with
                    them (so that OP does not have their own post shared to
                    them)*/
-                usersShared.insertLast(inOP);
+                usersSeen.insertLast(inOP);
             }
         }
 
@@ -132,11 +138,32 @@ public class Network extends DSAGraph
          */
         public String toString()
         {
-            return "Original Poster: " + op + "\n" +
+            String string = "Original Poster: " + op + "\n" +
                     "Content: " + content + "\n" +
                     "Number of Likes: " + likes + "\n" +
-                    "Created Time: " + createdTime
-                    + "\nStale:" + stale; //NOTE: ONLY FOR DEBUGGING
+                    "Clickbait Factor: " + Math.round(clickbait * 100.0) / 100.0 + "\n" +
+                    "Created Time: " + createdTime + "\n"
+                    + "Stale:" + stale + "\n"; //NOTE: ONLY FOR DEBUGGING
+
+            /*Adding list of users who liked/shared post to post's toString
+                (if any have liked post)*/
+            if (!usersLiked.isEmpty()) //If list of users liked not empty
+            {
+                string += "Users Who Liked This: ";
+                Iterator usersLikedIter = usersLiked.iterator();
+                while (usersLikedIter.hasNext())
+                {
+                    string += usersLikedIter.next();
+
+                    //Adding separation if list has another element
+                    if (usersLikedIter.hasNext())
+                    {
+                        string += ", ";
+                    }
+                }
+            }
+
+            return string;
         }
     }
 
@@ -148,54 +175,17 @@ public class Network extends DSAGraph
         super(); //Constructing DSAGraph Superclass
         posts = new DSALinkedList();
         curTime = 0;
-        likeChance = -1.0;
-        followChance = -1.0;
+
+        //Like & follow probabilities default to 0.5
+        likeChance = 0.5;
+        followChance = 0.5;
     }
 
-    /*Sets the chance to like a post to the imported double if valid, throws
-     *  exception otherwise
+    /* Returns current timestep of network
      */
-    public void setLikeChance(double inChance)
+    public int getCurTime()
     {
-        if (inChance >= 0.0 && inChance <= 1.0)
-        {
-            likeChance = inChance;
-        }
-        else
-        {
-            throw new IllegalArgumentException("Like chance must be between " +
-                    "0.0 & 1.0");
-        }
-    }
-
-    /* Gets the chance of liking a post
-     */
-    public double getLikeChance()
-    {
-        return likeChance;
-    }
-
-    /*Sets the chance to follow the OP after linking a post to the imported
-     *  double if valid, throws exception otherwise
-     */
-    public void setFollowChance(double inChance)
-    {
-        if (inChance >= 0.0 && inChance <= 1.0)
-        {
-            followChance = inChance;
-        }
-        else
-        {
-            throw new IllegalArgumentException("Follow chance must be " +
-                    "between 0.0 & 1.0");
-        }
-    }
-
-    /* Gets the chance of following the OP after liking a post
-     */
-    public double getFollowChance()
-    {
-        return followChance;
+        return curTime;
     }
 
     /* Returns a list of the names of all users in the network (sorted
@@ -326,7 +316,7 @@ public class Network extends DSAGraph
             userStringList.insertLast(curUserInfo.toString());
         }
 
-        return userInfoList;
+        return userStringList;
     }
 
     /* Returns the number of users in the network
@@ -455,7 +445,7 @@ public class Network extends DSAGraph
     public DSALinkedList getPostsByLikes()
     {
         DSALinkedList sortedPosts = new DSALinkedList();
-        DSALinkedList postInfoList = new DSALinkedList();
+        DSALinkedList postStringList = new DSALinkedList();
 
         //Creating copy of post list to be sorted
         Iterator postIter = posts.iterator();
@@ -471,10 +461,10 @@ public class Network extends DSAGraph
         Iterator sortedPostIter = sortedPosts.iterator();
         while (sortedPostIter.hasNext()) /*For each post in sorted list*/
         {
-            postInfoList.insertLast(sortedPostIter.next().toString());
+            postStringList.insertLast(sortedPostIter.next().toString());
         }
 
-        return postInfoList;
+        return postStringList;
     }
 
     /* Returns the number of posts currently in the network.
@@ -487,7 +477,7 @@ public class Network extends DSAGraph
     /* Creates a post with given content, posted by the imported user and shares
      *  it with the OPs followers
     */
-    public void makePost(String userName, String content, double inClickbait) //TODO clickbait functionality
+    public void makePost(String userName, String content, double inClickbait)
     {
         Post newPost;
         if (super.hasVertex(userName))
@@ -499,9 +489,12 @@ public class Network extends DSAGraph
                 //Add post to list of posts
                 posts.insertLast(newPost);
 
+                //Increase user's number of posts by 1
+                ((UserInfo)super.getVertex(userName).value).numPosts++;
+
                 /*Do initial share of post to all of OP's
                     followers*/
-                sharePost(newPost, userName, newPost.usersToLike); //NOTE does this make sense?
+                sharePost(newPost, userName, newPost.usersToLike);
             }
             catch (IllegalArgumentException i) /*If post
             constructor threw exception*/
@@ -543,7 +536,7 @@ public class Network extends DSAGraph
 
                     /*Adding user to post's list of users it has been shared
                         with*/
-                    inPost.usersShared.insertLast(curFollower);
+                    inPost.usersSeen.insertLast(curFollower);
                 }
             }
         }
@@ -572,6 +565,11 @@ public class Network extends DSAGraph
         }
     }
 
+    /* Runs a single timestep in the network, running the probabilities
+     *  for sharing each post by each user currently seeing it & for following
+     *  the original poster, taking the required actions if the probabilites are
+     *  hit.
+     */
     public void timeStep()
     {
         Iterator postIter, toLikeIter;
@@ -588,7 +586,7 @@ public class Network extends DSAGraph
         {
             curPost = (Post)postIter.next();
 
-            if (!curPost.stale)
+            if (!curPost.stale) //If current post can be shared any further
             {
                 toLikeIter = curPost.usersToLike.iterator();
 
@@ -601,8 +599,9 @@ public class Network extends DSAGraph
                 {
                     curUser = (String)toLikeIter.next();
 
-                    if (chance(likeChance)) /*If the chance to like the post is
-                        met*/
+                    if (chance(likeChance * curPost.clickbait)) /*If
+                        the chance to like the post is met (dependant on overall
+                        like chance and the post's clickbait factor)*/
                     {
                         //Make the current user like the post
                         likePost(curPost, curUser);
@@ -657,7 +656,7 @@ public class Network extends DSAGraph
 
         if (super.hasVertex(inUser))
         {
-            sharedUserIter = inPost.usersShared.iterator();
+            sharedUserIter = inPost.usersSeen.iterator();
 
             while (sharedUserIter.hasNext() && !seen) /*For each user post has
                 been shared to & while it has not been determined imported user
@@ -674,14 +673,74 @@ public class Network extends DSAGraph
         return seen;
     }
 
-    //TODO
     /* Returns whether every post currently in the network is stale (cannot be
      *  shared any further) or not. Returns true if no posts in network.
+     */
     public boolean allPostsStale()
     {
+        boolean allStale = true;
 
+        Iterator postIter = posts.iterator();
+        Post curPost;
+
+        while (postIter.hasNext() && allStale) /*For each post in network &
+            while not-stale post hasn't been found*/
+        {
+            curPost = (Post) postIter.next();
+            if (!curPost.stale) //If current post is not stale
+            {
+                allStale = false;
+            }
+        }
+
+        return allStale;
     }
+
+    /*Sets the chance to like a post to the imported double if valid, throws
+     *  exception otherwise
      */
+    public void setLikeChance(double inChance)
+    {
+        if (inChance >= 0.0 && inChance <= 1.0)
+        {
+            likeChance = inChance;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Like chance must be between " +
+                    "0.0 & 1.0");
+        }
+    }
+
+    /* Gets the chance of liking a post
+     */
+    public double getLikeChance()
+    {
+        return likeChance;
+    }
+
+    /*Sets the chance to follow the OP after linking a post to the imported
+     *  double if valid, throws exception otherwise
+     */
+    public void setFollowChance(double inChance)
+    {
+        if (inChance >= 0.0 && inChance <= 1.0)
+        {
+            followChance = inChance;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Follow chance must be " +
+                    "between 0.0 & 1.0");
+        }
+    }
+
+    /* Gets the chance of following the OP after liking a post
+     */
+    public double getFollowChance()
+    {
+        return followChance;
+    }
 
     /*Returns a boolean that has the imported chance (between 0.0 & 1.0) of
      *  being true.
@@ -689,8 +748,12 @@ public class Network extends DSAGraph
     private boolean chance(double inChance)
     {
         //Sanity check
-        assert (inChance >= 0.0) && (inChance <= 1.0) : "Chance not >0 & <1";
+        assert (inChance >= 0.0) : "Chance not >0";
 
+        /*Returns whether random number between 0.0 & 1.0 is smaller than
+            imported chance. If imported chance is bigger than 1 (should only
+            occur due to clickbait multiplier) effective chance is still 100%
+            as expression will simply always be true.*/
         return (inChance >= Math.random());
     }
 }

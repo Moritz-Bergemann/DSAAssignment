@@ -5,14 +5,19 @@
  */
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class FileManager
 {
     /* Writes the imported linked list of strings (each representing a line)
-     * to the file at the imported filename.
+     *  to the file at the imported filename. Overwrites if the 'append'
+     *  parameter is false & appends if true.
      */
-    public static void writeFile(String filename, DSALinkedList lineList)
+    public static void writeFile(String filename, DSALinkedList lineList,
+                                 boolean append)
     {
         FileOutputStream fileStrm = null;
         PrintWriter pw;
@@ -21,7 +26,7 @@ public class FileManager
 
         try
         {
-            fileStrm = new FileOutputStream(filename);
+            fileStrm = new FileOutputStream(filename, append);
             pw = new PrintWriter(fileStrm);
 
             lineIterator = lineList.iterator();
@@ -29,8 +34,7 @@ public class FileManager
             //Printing all lines in imported linked list to file
             while (lineIterator.hasNext())
             {
-                line = (String) lineIterator.next(); /*NOTE: Will this throw
-                    exception if line is not of type string?*/
+                line = (String) lineIterator.next();
                 pw.println(line);
             }
             pw.close();
@@ -84,12 +88,39 @@ public class FileManager
         return lineList;
     }
 
-    //TODO
-    /* Appends the imported list of line strings to the file with the imported
-     *  name.
-    public void appendFile(String filename, DSALinkedList linkedList)
-    {
-
-    }
+    /* Creates a logfile name for the imported network being run in simulation
+     *  mode based on the name of the input network & events files and the
+     *  current time.
+     *  Result Format: log-<netfilename>-<eventfilename>_<year>-<month>-<...>
+     *      <...><day>_<hour>-<min>-<sec>.txt
      */
+    public static String createLogFileName(String networkFileName,
+                                           String eventFileName)
+    {
+        String logFileName;
+        if (!networkFileName.equals("") && !eventFileName.equals("")) /*If
+            neither of input file names to create log file name from are empty*/
+        {
+            logFileName = "log-" + networkFileName + "-" + eventFileName + "_";
+
+            //Creating format of current date/time to add to log file name
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(
+                    "yyyy-MM-dd_HH-mm-ss");
+
+            //Getting current date & time
+            LocalDateTime now = LocalDateTime.now();
+
+            //Adding current date & time to log file name in specified format
+            logFileName += dtf.format(now);
+
+            //Adding file extension to log file name
+            logFileName += ".txt";
+        }
+        else
+        {
+            throw new IllegalArgumentException("Network/Event file names " +
+                    "cannot be empty");
+        }
+        return logFileName;
+    }
 }

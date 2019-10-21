@@ -120,26 +120,32 @@ public class SocialSim
             DSALinkedList eventInfo = FileManager.readFile(eventFilename);
             NetworkManager.applyEvents(network, eventInfo);
 
+            /*Creating log file with auto-generated name & saving initial state
+                of network to it*/
             String logFileName = FileManager.createLogFileName(networkFilename,
                     eventFilename);
             System.out.println("Saving logs to " + networkFilename);
 
+            DSALinkedList timeStepLog = NetworkManager.logTimeStep(network);
+            FileManager.writeFile(logFileName, timeStepLog, false); /*
+                append is false as must initially create log file*/
+
             /*Running simulation (Any unhandled exceptions thrown will abort
-                simulation (should never happen if inputs were valid)*/
+                simulation, should never happen if inputs were valid*/
             try
             {
                 System.out.println("Starting simulation.");
 
-                DSALinkedList timeStepLog;
-                while (!network.allPostsStale) /*While all posts in network
+                while (!network.allPostsStale()) /*While all posts in network
                     can still be shared further (i.e. Further timesteps will
                     continue to perform actions*/
                 {
                     //Running timeStep
                     network.timeStep();
 
-                    timeStepLog = NetworkManager.logTimeStep(network); //NOTE: NetworkManager or network?
-                    FileManager.appendFile(timeStepLog);
+                    //Appending log of current timestep to log file
+                    timeStepLog = NetworkManager.logTimeStep(network);
+                    FileManager.writeFile(logFileName, timeStepLog, true);
                 }
                 System.out.println("Simulation completed successfully.");
             }
@@ -235,7 +241,7 @@ public class SocialSim
                     System.out.print("Input content of post: ");
                     String postContent = sc.nextLine();
                     double postClickbait = inputDouble("Input " +
-                            "clickbait factor", 0.0, 100000.0);
+                            "clickbait factor", 0.0, 100.0);
                     try
                     {
                         network.makePost(postUser, postContent, postClickbait);
@@ -255,19 +261,10 @@ public class SocialSim
                 case 7: //Statistics menu
                     statisticsMenu(network);
                     break;
-                case 8: //Next timestep NOTE: UNTESTED
-                    if (network.getLikeChance() > 0.0 &&
-                            network.getFollowChance() > 0.0) /*If like & follow
-                                chance settings have been set*/
-                    {
+                case 8: //Next timestep
                         network.timeStep();
-                    }
-                    else
-                    {
-                        System.out.println("Failed: Please set the like & " +
-                                "follow chances for the simulation (option " +
-                                "2) before running the first timestep.");
-                    }
+                        System.out.println("Timestep run. New Time: " +
+                                network.getCurTime());
                     break;
                 case 9: //Save network
                     if (network.getUserCount() > 0)
@@ -279,7 +276,7 @@ public class SocialSim
                             //Creating network file format list from network
                             DSALinkedList saveList =
                                     NetworkManager.saveNetwork(network);
-                            FileManager.writeFile(filename, saveList);
+                            FileManager.writeFile(filename, saveList, false);
                             System.out.println("Network saved successfully.");
                         }
                         catch (IllegalArgumentException i)
@@ -321,7 +318,7 @@ public class SocialSim
         menuChoice = inputInt("Choice", 1, 4);
         switch (menuChoice)
         {
-            case 1: //Show posts by popularity TODO Add more info to this (namely who has liked posts)
+            case 1: //Show posts by popularity
                 if (network.getPostCount() > 0)
                 {
                     int postNum = 1;

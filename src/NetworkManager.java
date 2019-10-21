@@ -144,13 +144,182 @@ public class NetworkManager
         return networkList;
     }
 
-    //TODO
     /* Applies the imported list of events to the imported network if valid.
      *  Throws exception & aborts if any event invalid.
+     */
     public static void applyEvents(Network network, DSALinkedList eventList)
     {
+        Iterator eventIter = eventList.iterator();
+        String curLine;
+        String[] splitLine;
+        int lineNum = 0;
+        while (eventIter.hasNext()) //For each string in imported list
+        {
+            curLine = (String)eventIter.next();
+            lineNum++;
 
+            if (curLine.equals("")) //If line to read is empty
+            {
+                throw new IllegalArgumentException("Invalid Format (line "
+                        + lineNum + "): Line cannot be empty");
+            }
+            else if (curLine.indexOf(':') < 0) /*If current line does not
+                contain a semicolon*/
+            {
+                throw new IllegalArgumentException("Invalid Format (line "
+                        + lineNum + "): Line must contain at least 1 colon");
+            }
+            switch (curLine.charAt(0)) /*Getting first character in line (should
+                define event to occur*/
+            {
+                case 'A': //Add User
+                    splitLine = curLine.split(":");
+                    if (splitLine.length == 2)
+                    {
+                        try
+                        {
+                            network.addUser(splitLine[1]);
+                        }
+                        catch (IllegalArgumentException i)
+                        {
+                            throw new IllegalArgumentException("Logical " +
+                                    "Error (line " + lineNum + "): " +
+                                    i.getMessage());
+                        }
+                    }
+                    else
+                    {
+                        throw new IllegalArgumentException("Invalid Format " +
+                                "(line " + lineNum + "): Add-User line " +
+                                "must contain 2 sections");
+                    }
+                    break;
+                case 'F': //Add follower
+                    splitLine = curLine.split(":");
+                    if (splitLine.length == 3)
+                    {
+                        try
+                        {
+                            network.addFollower(splitLine[2].trim(),
+                                    splitLine[1].trim());
+                        }
+                        catch (IllegalArgumentException i)
+                        {
+                            throw new IllegalArgumentException("Logical " +
+                                    "Error (line " + lineNum + "): " +
+                                    i.getMessage());
+                        }
+                    }
+                    else
+                    {
+                        throw new IllegalArgumentException("Invalid Format " +
+                                "(line " + lineNum + "): Add-Follower line " +
+                                "must contain 3 sections");
+                    }
+                    break;
+                case 'P': //Add post
+                    splitLine = curLine.split(":");
+                    if (splitLine.length == 3) //No clickbait factor
+                    {
+                        try
+                        {
+                            network.makePost(splitLine[1].trim(),
+                                    splitLine[2].trim(), 1);
+                        }
+                        catch (IllegalArgumentException i)
+                        {
+                            throw new IllegalArgumentException("Logical " +
+                                    "Error (line " + lineNum + "): " +
+                                    i.getMessage());
+                        }
+                    }
+                    else if (splitLine.length == 4) //Clickbait factor
+                    {
+                        try
+                        {
+                            network.makePost(splitLine[1].trim(),
+                                    splitLine[2].trim(),
+                                    Double.parseDouble(splitLine[3]));
+                        }
+                        catch (NumberFormatException n)
+                        {
+                            throw new IllegalArgumentException("Invalid " +
+                                    "Format (line " + lineNum + "): Clickbait" +
+                                    " factor is not a number");
+                        }
+                        catch (IllegalArgumentException i)
+                        {
+                            throw new IllegalArgumentException("Logical " +
+                                    "Error (line " + lineNum + "): " +
+                                    i.getMessage());
+                        }
+                    }
+                    else
+                    {
+                        throw new IllegalArgumentException("Invalid Format " +
+                                "(line " + lineNum + "): Add-Follower line " +
+                                "must contain 3 or 4 sections");
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid Format (line "
+                            + lineNum + "): Event descriptor must ");
+            }
+        }
     }
 
+    /* Creates a log containing information of the imported network at the
+     *  current timestep and returns as a linked list of strings.
      */
+    public static DSALinkedList logTimeStep(Network network)
+    {
+        DSALinkedList timeStepList = new DSALinkedList();
+
+        //Adding header
+        timeStepList.insertLast("TIMESTEP " + network.getCurTime() + ":");
+
+        //Adding Network Diagram:
+        timeStepList.insertLast("Network Diagram:");
+
+        Iterator diagramIter = network.returnAsList().iterator();
+        while (diagramIter.hasNext())
+        {
+            //Indenting each part of network description for readability
+            timeStepList.insertLast("\t" + (String)diagramIter.next());
+        }
+        timeStepList.insertLast("");
+
+        //Adding Users by Popularity
+        timeStepList.insertLast("Users by Popularity:");
+        Iterator userIter = network.getUsersByFollowers().iterator();
+        int userNum = 1; //Used to number users for readability
+        String curUserInfo;
+        while (userIter.hasNext())
+        {
+            /*Adding tab characters to end of all line breaks in returned string
+                so all of it is indented*/
+            curUserInfo = ((String)userIter.next()).replaceAll("\n", "\n\t");
+            timeStepList.insertLast("\t" + userNum + ".");
+            timeStepList.insertLast("\t" + curUserInfo);
+            userNum++;
+        }
+        timeStepList.insertLast("");
+
+        //Adding Posts by Popularity
+        timeStepList.insertLast("Posts by Popularity:");
+        Iterator postIter = network.getPostsByLikes().iterator();
+        int postNum = 1; //Used to number users for readability
+        String curPostInfo;
+        while (postIter.hasNext())
+        {
+            //Adding tab characters after line breaks for readability
+            curPostInfo = ((String) postIter.next()).replaceAll("\n", "\n\t");
+            timeStepList.insertLast("\t" + postNum + ".");
+            timeStepList.insertLast("\t" + curPostInfo);
+            postNum++;
+        }
+        timeStepList.insertLast("");
+
+        return timeStepList;
+    }
 }

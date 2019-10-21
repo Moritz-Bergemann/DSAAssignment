@@ -4,6 +4,8 @@
  */
 
 import static java.lang.System.out;
+
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class NetworkTestHarness
@@ -203,8 +205,8 @@ public class NetworkTestHarness
         out.println("Adding 3 posts to network 1");
         out.println("Adding post by user1 (content 'this is post1')");
         network1.makePost("user1", "this is post1", 1.0);
-        out.println("Adding post by user4 (content 'this is post2')");
-        network1.makePost("user4", "this is post2", 1.0);
+        out.println("Adding post by user4 (content 'this is post2') (CLICKBAIT FACTOR 2)");
+        network1.makePost("user4", "this is post2", 2);
         out.println("Adding post by user1 (content 'this is post3')");
         network1.makePost("user1", "this is post3", 1.0);
         out.println("Attempting to create post by non-existent user11");
@@ -251,15 +253,23 @@ public class NetworkTestHarness
         while (userIter.hasNext()) { out.println(userIter.next()); }
         out.println();
 
+        //AllStale
+        out.println("Checking if all posts in network 1 are stale (shouldn't be) :" + network1.allPostsStale());
+        out.println();
+
         //Timestep
         out.println("Running 3 timesteps in network 1");
         network1.timeStep();
         network1.timeStep();
         network1.timeStep();
 
+
         out.println("Again displaying all of network 1's posts by popularity (after timesteps):");
         postIter = network1.getPostsByLikes().iterator();
         while (postIter.hasNext()) { out.println(postIter.next()); }
+        out.println();
+
+        out.println("Checking if all posts in network 1 are stale after timesteps (should be) :" + network1.allPostsStale());
         out.println();
 
         out.println("Redisplaying network 1 (after timesteps):");
@@ -279,6 +289,9 @@ public class NetworkTestHarness
         out.println("Reading in network from 'netfile2.txt'");
         DSALinkedList networkFile2 = FileManager.readFile("netfile2.txt");
         Network fileNetwork2 = NetworkManager.loadNetwork(networkFile2);
+        out.println("Applying events file 'eventsfile2-2' to read network");
+        DSALinkedList eventsFile2_2 = FileManager.readFile("eventsfile2-2");
+
         out.println("Displaying network from file");
         fileNetwork2.displayAsList();
         out.println();
@@ -288,8 +301,12 @@ public class NetworkTestHarness
 
         out.println("Saving network 1 to NetworkTestOut.txt");
         DSALinkedList saveList = NetworkManager.saveNetwork(network1);
-        FileManager.writeFile("NetworkTestOut.txt", saveList);
+        FileManager.writeFile("NetworkTestOut.txt", saveList, false);
         out.println();
+
+        out.println("Saving log of network 1's current timestep to NetworkTestLog.txt");
+        DSALinkedList logList = NetworkManager.logTimeStep(network1);
+        FileManager.writeFile("NetworkTestLog.txt", logList, false);
 
         out.println("Reloading & displaying saved network:");
         DSALinkedList reloadedFile = FileManager.readFile("NetworkTestOut.txt");
