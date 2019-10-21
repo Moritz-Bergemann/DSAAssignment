@@ -143,7 +143,7 @@ public class Network extends DSAGraph
                     "Number of Likes: " + likes + "\n" +
                     "Clickbait Factor: " + Math.round(clickbait * 100.0) / 100.0 + "\n" +
                     "Created Time: " + createdTime + "\n"
-                    + "Stale:" + stale + "\n"; //NOTE: ONLY FOR DEBUGGING
+                    + "Stale:" + stale; //NOTE: ONLY FOR DEBUGGING
 
             /*Adding list of users who liked/shared post to post's toString
                 (if any have liked post)*/

@@ -5,7 +5,7 @@
 
 import static java.lang.System.out;
 import java.util.*;
-public class DSAGraphTestHarness
+public class UnitTestDSAGraph
 {
     public static void main (String[] args)
     {

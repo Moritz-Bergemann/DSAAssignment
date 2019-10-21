@@ -12,10 +12,21 @@ import java.util.*;
 
 public class FileManager
 {
+    public static void main(String[] args)
+    {
+        DSALinkedList n = new DSALinkedList();
+        n.insertLast("A");
+        n.insertLast("B");
+        n.insertLast("C");
+        n.insertLast("D");
+
+        writeFile("test.txt", n, false);
+    }
+
     /* Writes the imported linked list of strings (each representing a line)
      *  to the file at the imported filename. Overwrites if the 'append'
      *  parameter is false & appends if true.
-     */
+     */ //TODO fix this leaving empty line(s) at end
     public static void writeFile(String filename, DSALinkedList lineList,
                                  boolean append)
     {

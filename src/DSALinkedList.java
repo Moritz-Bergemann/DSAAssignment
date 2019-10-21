@@ -295,6 +295,8 @@ public class DSALinkedList implements Iterable, Serializable
         return nodeValue;
     }
 
+    //TODO change sorts to quicksort
+
     /* Sorts nodes in link list in ascending order based on comparable
      *  comparison of node values, algorithm used is effectively bubble sort
      */

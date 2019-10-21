@@ -8,7 +8,7 @@ import static java.lang.System.out;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class NetworkTestHarness
+public class UnitTestNetwork
 {
     public static void main(String[] args)
     {

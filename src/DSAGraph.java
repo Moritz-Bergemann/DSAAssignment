@@ -428,7 +428,7 @@ public class DSAGraph
      */
     public DSALinkedList breadthFirstSearch()
     {
-        DSAQueueList vertexQueue = new DSAQueueList(); /*Queue for storing 
+        DSAQueue vertexQueue = new DSAQueue(); /*Queue for storing
             vertices during search*/
         DSALinkedList traversalList = new DSALinkedList();
         

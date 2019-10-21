@@ -5,7 +5,7 @@ import java.util.*;
 
 import static java.lang.System.load;
 import static java.lang.System.out;
-public class DSALinkedListTestHarness
+public class UnitTestDSALinkedList
 {
     public static void main(String[] args)
     {
@@ -62,26 +62,18 @@ public class DSALinkedListTestHarness
         }
         out.println();
     
-        //Saving/Loading List
-        out.println("Attempting to save 20-item list to file...");
-        SaveLoad.saveList(lists[0], "SavedList.ser");
-        System.out.println("Attempting to load 20-item list from file...");
-        DSALinkedList loadedList = SaveLoad.loadList("SavedList.ser");
-        out.println("The following operations will be tested on the loaded list.");
-        out.println();
-
         //Removing Elements
         out.println("Removing last 5 elements from 20-item list:");
         for (int ii = 1; ii <= 5; ii++)
         {
-            out.println(loadedList.removeLast());
+            out.println(lists[0].removeLast());
         }
         out.println();
         
         out.println("Removing first 5 elements from 20-item list:");
         for (int ii = 1; ii <= 5; ii++)
         {
-            out.println(loadedList.removeFirst());
+            out.println(lists[0].removeFirst());
         }
         out.println();
     
@@ -108,18 +100,18 @@ public class DSALinkedListTestHarness
         out.println();
         out.println("Removing element at position 4 (5th element) of now " +
                 "10-item list:");
-        out.println(loadedList.removeAt(4));
+        out.println(lists[0].removeAt(4));
         out.println("Removing element at position 0 (1st element) of now " +
                 "9-item list:");
-        out.println(loadedList.removeAt(0));
+        out.println(lists[0].removeAt(0));
         out.println("Removing element at position 7 (last element) of now " +
                 "8-item list:");
-        out.println(loadedList.removeAt(7));
+        out.println(lists[0].removeAt(7));
         out.println("Attempting to remove element at position 10 (out of range)" +
                 "of now 7-item list:");
         try
         {
-            out.println(loadedList.removeAt(10));
+            out.println(lists[0].removeAt(10));
             out.println("Succeeded (shouldn't have)");
         }
         catch (Exception e)
@@ -129,7 +121,7 @@ public class DSALinkedListTestHarness
         out.println();
 
         //isEmpty
-        out.println("Checking if not empty list is empty: " + loadedList.isEmpty());
+        out.println("Checking if not empty list is empty: " + lists[0].isEmpty());
         out.println("Checking if empty list is empty: " + lists[1].isEmpty());
         out.println();
 
@@ -137,7 +129,7 @@ public class DSALinkedListTestHarness
         out.println("Creating 2 iterators for created linked lists:");
         Iterator[] iterators = new Iterator[3];
 
-        iterators[0] = loadedList.iterator();
+        iterators[0] = lists[0].iterator();
         iterators[1] = lists[1].iterator();
     
         out.println("Cycling through all entries in loaded list:");
@@ -153,11 +145,11 @@ public class DSALinkedListTestHarness
         out.println();
 
         //Append
-        out.println("Appending original list to loaded version of itself");
-        loadedList.append(lists[0]);
+        out.println("Appending filled list to itself");
+        lists[0].append(lists[0]);
         out.println();
 
-        iterators[0] = loadedList.iterator();
+        iterators[0] = lists[0].iterator();
         out.println("Cycling through all entries in loaded list with its original appended to back:");
         while (iterators[0].hasNext())
         {

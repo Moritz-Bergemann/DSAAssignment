@@ -5,7 +5,7 @@
  */
 import java.util.*;
 
-public class DSAQueueList implements Iterable /*Does not extend DSAQueue as 
+public class DSAQueue implements Iterable /*Does not extend DSAQueue as
     there are too many differences for this to be useful*/
 {
     //CLASS FIELDS
@@ -14,7 +14,7 @@ public class DSAQueueList implements Iterable /*Does not extend DSAQueue as
 
     //CONSTRUCTORS
     //Default Constructor
-    public DSAQueueList()
+    public DSAQueue()
     {
         queue = new DSALinkedList();
         count = 0;
