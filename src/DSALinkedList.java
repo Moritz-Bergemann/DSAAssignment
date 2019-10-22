@@ -78,7 +78,7 @@ public class DSALinkedList implements Iterable, Serializable
                 value = iterNext.value;
 
                 //Moving cursor to next node
-                iterNext = iterNext.next; 
+                iterNext = iterNext.next;
             }
 
             return value;
@@ -99,10 +99,10 @@ public class DSALinkedList implements Iterable, Serializable
     public DSALinkedList()
     {
         //Head/tail initially point to no node (empty list) 
-        head = null; 
+        head = null;
         tail = null;
     }
-    
+
     //MUTATORS
     /* Insert node as first in list
      */
@@ -131,7 +131,7 @@ public class DSALinkedList implements Iterable, Serializable
 
         count++;
     }
-    
+
     /* Insert node as last in list
      */
     public void insertLast(Object newValue)
@@ -191,7 +191,7 @@ public class DSALinkedList implements Iterable, Serializable
             /*Making head node current head node's next (null if was last
                 node in list*/
             head = head.next;
-            
+
             if (head == null) //If removing head node made list empty
             {
                 tail = null;
@@ -225,7 +225,7 @@ public class DSALinkedList implements Iterable, Serializable
             /*Making tail node current tail node's previous (null if tail was
                 only element in list*/
             tail = tail.prev;
-            
+
             if (tail == null) //If removing tail node made list empty
             {
                 head = null;
@@ -308,9 +308,9 @@ public class DSALinkedList implements Iterable, Serializable
 
         while (sorted == false)
         {
-            sorted = true; /*Setting sorted to true until disproven if 2 
+            sorted = true; /*Setting sorted to true until disproven if 2
                 elements are out of order*/
-            
+
             //Iterating through list
             currentNode = head;
             while (currentNode != null)
@@ -427,7 +427,7 @@ public class DSALinkedList implements Iterable, Serializable
             //Getting value of head node to return
             nodeValue = head.value;
         }
-        
+
         return nodeValue;
     }
 
@@ -446,7 +446,7 @@ public class DSALinkedList implements Iterable, Serializable
             //Getting value of tail node to return
             nodeValue = tail.value;
         }
-        
+
         return nodeValue;
     }
 }

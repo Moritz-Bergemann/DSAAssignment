@@ -1,0 +1,2175 @@
+TIMESTEP 0:
+Network Diagram:
+	Alien1: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien10: 
+	Alien2: 
+	Alien3: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien4: 
+	Alien5: 
+	Alien6: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	Alien7: 
+	Alien8: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	Alien9: 
+	Andy: Bo Peep, Hamm, Lenny, Mr. PotatoHead, Rex, Sergeant, Slinky Dog, Woody
+	Bo Peep: Woody
+	Buzz Lightyear: Alien1, Bo Peep, Lenny, Rex, Slinky Dog
+	Hamm: Mr. PotatoHead
+	Hannah: Janey, Mrs Nesbitt, Sally
+	Janey: 
+	Lenny: 
+	Mr. PotatoHead: Hamm
+	Mrs Nesbitt: 
+	Rex: 
+	Sally: 
+	Scud: 
+	Sergeant: Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	Sid: Scud
+	Sid's Mom: Hannah, Sid
+	Slinky Dog: 
+	Soldier1: 
+	Soldier2: 
+	Soldier3: 
+	Soldier4: 
+	Soldier5: 
+	Soldier6: 
+	The Claw: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Woody: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+
+Users by Popularity:
+	1.
+	User: The Claw
+	Followers: 10
+	Following: 0
+	Number of Posts: 0
+	2.
+	User: Alien3
+	Followers: 9
+	Following: 4
+	Number of Posts: 1
+	3.
+	User: Alien6
+	Followers: 9
+	Following: 4
+	Number of Posts: 1
+	4.
+	User: Alien8
+	Followers: 9
+	Following: 4
+	Number of Posts: 1
+	5.
+	User: Alien1
+	Followers: 8
+	Following: 5
+	Number of Posts: 2
+	6.
+	User: Andy
+	Followers: 8
+	Following: 0
+	Number of Posts: 0
+	7.
+	User: Sergeant
+	Followers: 6
+	Following: 2
+	Number of Posts: 0
+	8.
+	User: Buzz Lightyear
+	Followers: 5
+	Following: 0
+	Number of Posts: 7
+	9.
+	User: Woody
+	Followers: 5
+	Following: 2
+	Number of Posts: 7
+	10.
+	User: Hannah
+	Followers: 3
+	Following: 1
+	Number of Posts: 1
+	11.
+	User: Sid's Mom
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	12.
+	User: Bo Peep
+	Followers: 1
+	Following: 3
+	Number of Posts: 1
+	13.
+	User: Hamm
+	Followers: 1
+	Following: 2
+	Number of Posts: 0
+	14.
+	User: Mr. PotatoHead
+	Followers: 1
+	Following: 2
+	Number of Posts: 1
+	15.
+	User: Sid
+	Followers: 1
+	Following: 1
+	Number of Posts: 2
+	16.
+	User: Alien10
+	Followers: 0
+	Following: 4
+	Number of Posts: 1
+	17.
+	User: Alien2
+	Followers: 0
+	Following: 5
+	Number of Posts: 2
+	18.
+	User: Alien4
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	19.
+	User: Alien5
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	20.
+	User: Alien7
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	21.
+	User: Alien9
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	22.
+	User: Janey
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	23.
+	User: Lenny
+	Followers: 0
+	Following: 3
+	Number of Posts: 0
+	24.
+	User: Mrs Nesbitt
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	25.
+	User: Rex
+	Followers: 0
+	Following: 3
+	Number of Posts: 0
+	26.
+	User: Sally
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	27.
+	User: Scud
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	28.
+	User: Slinky Dog
+	Followers: 0
+	Following: 3
+	Number of Posts: 1
+	29.
+	User: Soldier1
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	30.
+	User: Soldier2
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	31.
+	User: Soldier3
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	32.
+	User: Soldier4
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	33.
+	User: Soldier5
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	34.
+	User: Soldier6
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Mr. PotatoHead
+	Content: Ages three and up! It's on my box! Ages three and up! I'm not supposed to be babysitting Princess Drool!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	2.
+	Original Poster: Buzz Lightyear
+	Content: Greetings, I am Buzz Lightyear. I come in peace.
+	Number of Likes: 0
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:false
+	3.
+	Original Poster: Buzz Lightyear
+	Content: To infininty and beyond!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	4.
+	Original Poster: Bo Peep
+	Content: I've got my moving buddy
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	5.
+	Original Poster: Woody
+	Content: And another thing, *stop* with this *spaceman* thing! It's getting on my nerves.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	6.
+	Original Poster: Buzz Lightyear
+	Content: How dare you open a spaceman's helmet on an uncharted planet! My eyeballs could've been sucked from their sockets!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	7.
+	Original Poster: Woody
+	Content: BUZZ, LOOK, AN ALIEN!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	8.
+	Original Poster: Buzz Lightyear
+	Content: You are a sad, strange little man, and you have my pity.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	9.
+	Original Poster: Woody
+	Content: Oh, yeah? Well, good riddance, ya loony!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	10.
+	Original Poster: Slinky Dog
+	Content: It's too short. We need more monkeys!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	11.
+	Original Poster: Buzz Lightyear
+	Content: This is an intergalactic emergency. I need to commandeer your vessel to Sector 12. Who's in charge here?.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	12.
+	Original Poster: Alien1
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	13.
+	Original Poster: Alien2
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	14.
+	Original Poster: Alien3
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	15.
+	Original Poster: Alien4
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	16.
+	Original Poster: Alien5
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	17.
+	Original Poster: Alien6
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	18.
+	Original Poster: Alien7
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	19.
+	Original Poster: Alien8
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	20.
+	Original Poster: Alien9
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	21.
+	Original Poster: Alien10
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	22.
+	Original Poster: Alien1
+	Content: The claw is our master.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	23.
+	Original Poster: Alien2
+	Content: The claw chooses who will go and who will stay.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	24.
+	Original Poster: Buzz Lightyear
+	Content: You see the hat? I am Mrs. Nes-bitt!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	25.
+	Original Poster: Sid
+	Content: I'll have to perform one of my... operations!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	26.
+	Original Poster: Buzz Lightyear
+	Content: I don't believe that man's ever been to medical school!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	27.
+	Original Poster: Hannah
+	Content: Mom! Mom, have you seen my Sally doll? ... Never mind.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	28.
+	Original Poster: Woody
+	Content: Reach for the sky!
+	Number of Likes: 0
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:false
+	29.
+	Original Poster: Woody
+	Content: This town ain't big enough for the two of us!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	30.
+	Original Poster: Sid
+	Content: The Toys! The Toys are alive!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+	31.
+	Original Poster: Woody
+	Content: Hey, Buzz! You're flying!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	32.
+	Original Poster: Woody
+	Content: To infinity and beyond!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:false
+
+TIMESTEP 1:
+Network Diagram:
+	Alien1: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien10: 
+	Alien2: 
+	Alien3: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien4: 
+	Alien5: 
+	Alien6: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	Alien7: 
+	Alien8: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	Alien9: 
+	Andy: Bo Peep, Hamm, Lenny, Mr. PotatoHead, Rex, Sergeant, Slinky Dog, Woody
+	Bo Peep: Woody
+	Buzz Lightyear: Alien1, Bo Peep, Lenny, Rex, Slinky Dog
+	Hamm: Mr. PotatoHead
+	Hannah: Janey, Mrs Nesbitt, Sally
+	Janey: 
+	Lenny: 
+	Mr. PotatoHead: Hamm
+	Mrs Nesbitt: 
+	Rex: 
+	Sally: 
+	Scud: 
+	Sergeant: Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	Sid: Scud
+	Sid's Mom: Hannah, Sid
+	Slinky Dog: 
+	Soldier1: 
+	Soldier2: 
+	Soldier3: 
+	Soldier4: 
+	Soldier5: 
+	Soldier6: 
+	The Claw: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Woody: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+
+Users by Popularity:
+	1.
+	User: The Claw
+	Followers: 10
+	Following: 0
+	Number of Posts: 0
+	2.
+	User: Alien3
+	Followers: 9
+	Following: 4
+	Number of Posts: 1
+	3.
+	User: Alien6
+	Followers: 9
+	Following: 4
+	Number of Posts: 1
+	4.
+	User: Alien8
+	Followers: 9
+	Following: 4
+	Number of Posts: 1
+	5.
+	User: Alien1
+	Followers: 8
+	Following: 5
+	Number of Posts: 2
+	6.
+	User: Andy
+	Followers: 8
+	Following: 0
+	Number of Posts: 0
+	7.
+	User: Sergeant
+	Followers: 6
+	Following: 2
+	Number of Posts: 0
+	8.
+	User: Buzz Lightyear
+	Followers: 5
+	Following: 0
+	Number of Posts: 7
+	9.
+	User: Woody
+	Followers: 5
+	Following: 2
+	Number of Posts: 7
+	10.
+	User: Hannah
+	Followers: 3
+	Following: 1
+	Number of Posts: 1
+	11.
+	User: Sid's Mom
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	12.
+	User: Bo Peep
+	Followers: 1
+	Following: 3
+	Number of Posts: 1
+	13.
+	User: Hamm
+	Followers: 1
+	Following: 2
+	Number of Posts: 0
+	14.
+	User: Mr. PotatoHead
+	Followers: 1
+	Following: 2
+	Number of Posts: 1
+	15.
+	User: Sid
+	Followers: 1
+	Following: 1
+	Number of Posts: 2
+	16.
+	User: Alien10
+	Followers: 0
+	Following: 4
+	Number of Posts: 1
+	17.
+	User: Alien2
+	Followers: 0
+	Following: 5
+	Number of Posts: 2
+	18.
+	User: Alien4
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	19.
+	User: Alien5
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	20.
+	User: Alien7
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	21.
+	User: Alien9
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	22.
+	User: Janey
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	23.
+	User: Lenny
+	Followers: 0
+	Following: 3
+	Number of Posts: 0
+	24.
+	User: Mrs Nesbitt
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	25.
+	User: Rex
+	Followers: 0
+	Following: 3
+	Number of Posts: 0
+	26.
+	User: Sally
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	27.
+	User: Scud
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	28.
+	User: Slinky Dog
+	Followers: 0
+	Following: 3
+	Number of Posts: 1
+	29.
+	User: Soldier1
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	30.
+	User: Soldier2
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	31.
+	User: Soldier3
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	32.
+	User: Soldier4
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	33.
+	User: Soldier5
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	34.
+	User: Soldier6
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Alien3
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	2.
+	Original Poster: Alien6
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	3.
+	Original Poster: Alien8
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	4.
+	Original Poster: Alien1
+	Content: The Claw!
+	Number of Likes: 8
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	5.
+	Original Poster: Alien1
+	Content: The claw is our master.
+	Number of Likes: 8
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	6.
+	Original Poster: Woody
+	Content: And another thing, *stop* with this *spaceman* thing! It's getting on my nerves.
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	7.
+	Original Poster: Woody
+	Content: BUZZ, LOOK, AN ALIEN!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	8.
+	Original Poster: Woody
+	Content: Oh, yeah? Well, good riddance, ya loony!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	9.
+	Original Poster: Buzz Lightyear
+	Content: This is an intergalactic emergency. I need to commandeer your vessel to Sector 12. Who's in charge here?.
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog
+	10.
+	Original Poster: Buzz Lightyear
+	Content: You see the hat? I am Mrs. Nes-bitt!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog
+	11.
+	Original Poster: Buzz Lightyear
+	Content: I don't believe that man's ever been to medical school!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog
+	12.
+	Original Poster: Woody
+	Content: Reach for the sky!
+	Number of Likes: 5
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	13.
+	Original Poster: Woody
+	Content: This town ain't big enough for the two of us!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	14.
+	Original Poster: Woody
+	Content: Hey, Buzz! You're flying!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	15.
+	Original Poster: Woody
+	Content: To infinity and beyond!
+	Number of Likes: 5
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog
+	16.
+	Original Poster: Buzz Lightyear
+	Content: Greetings, I am Buzz Lightyear. I come in peace.
+	Number of Likes: 4
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog
+	17.
+	Original Poster: Buzz Lightyear
+	Content: To infininty and beyond!
+	Number of Likes: 4
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog
+	18.
+	Original Poster: Buzz Lightyear
+	Content: How dare you open a spaceman's helmet on an uncharted planet! My eyeballs could've been sucked from their sockets!
+	Number of Likes: 4
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog
+	19.
+	Original Poster: Buzz Lightyear
+	Content: You are a sad, strange little man, and you have my pity.
+	Number of Likes: 4
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog
+	20.
+	Original Poster: Hannah
+	Content: Mom! Mom, have you seen my Sally doll? ... Never mind.
+	Number of Likes: 3
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Janey, Mrs Nesbitt, Sally
+	21.
+	Original Poster: Mr. PotatoHead
+	Content: Ages three and up! It's on my box! Ages three and up! I'm not supposed to be babysitting Princess Drool!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Hamm
+	22.
+	Original Poster: Bo Peep
+	Content: I've got my moving buddy
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Woody
+	23.
+	Original Poster: Sid
+	Content: I'll have to perform one of my... operations!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	24.
+	Original Poster: Sid
+	Content: The Toys! The Toys are alive!
+	Number of Likes: 1
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	25.
+	Original Poster: Slinky Dog
+	Content: It's too short. We need more monkeys!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	26.
+	Original Poster: Alien2
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	27.
+	Original Poster: Alien4
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	28.
+	Original Poster: Alien5
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	29.
+	Original Poster: Alien7
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	30.
+	Original Poster: Alien9
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	31.
+	Original Poster: Alien10
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	32.
+	Original Poster: Alien2
+	Content: The claw chooses who will go and who will stay.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+
+TIMESTEP 2:
+Network Diagram:
+	Alien1: Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien10: 
+	Alien2: 
+	Alien3: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien4: 
+	Alien5: 
+	Alien6: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	Alien7: 
+	Alien8: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	Alien9: 
+	Andy: Bo Peep, Hamm, Lenny, Mr. PotatoHead, Rex, Sergeant, Slinky Dog, Woody
+	Bo Peep: Lenny, Rex, Sergeant, Slinky Dog, Woody
+	Buzz Lightyear: Alien1, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Bo Peep, Lenny, Rex, Slinky Dog, Woody
+	Hamm: Mr. PotatoHead
+	Hannah: Janey, Mrs Nesbitt, Sally
+	Janey: 
+	Lenny: 
+	Mr. PotatoHead: Hamm
+	Mrs Nesbitt: 
+	Rex: 
+	Sally: 
+	Scud: 
+	Sergeant: Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	Sid: Scud
+	Sid's Mom: Hannah, Sid
+	Slinky Dog: 
+	Soldier1: 
+	Soldier2: 
+	Soldier3: 
+	Soldier4: 
+	Soldier5: 
+	Soldier6: 
+	The Claw: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Woody: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+
+Users by Popularity:
+	1.
+	User: Buzz Lightyear
+	Followers: 14
+	Following: 0
+	Number of Posts: 7
+	2.
+	User: Woody
+	Followers: 11
+	Following: 3
+	Number of Posts: 7
+	3.
+	User: The Claw
+	Followers: 10
+	Following: 0
+	Number of Posts: 0
+	4.
+	User: Alien1
+	Followers: 9
+	Following: 5
+	Number of Posts: 2
+	5.
+	User: Alien3
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	6.
+	User: Alien6
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	7.
+	User: Alien8
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	8.
+	User: Andy
+	Followers: 8
+	Following: 0
+	Number of Posts: 0
+	9.
+	User: Sergeant
+	Followers: 6
+	Following: 3
+	Number of Posts: 0
+	10.
+	User: Bo Peep
+	Followers: 5
+	Following: 3
+	Number of Posts: 1
+	11.
+	User: Hannah
+	Followers: 3
+	Following: 1
+	Number of Posts: 1
+	12.
+	User: Sid's Mom
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	13.
+	User: Hamm
+	Followers: 1
+	Following: 2
+	Number of Posts: 0
+	14.
+	User: Mr. PotatoHead
+	Followers: 1
+	Following: 2
+	Number of Posts: 1
+	15.
+	User: Sid
+	Followers: 1
+	Following: 1
+	Number of Posts: 2
+	16.
+	User: Alien10
+	Followers: 0
+	Following: 5
+	Number of Posts: 1
+	17.
+	User: Alien2
+	Followers: 0
+	Following: 6
+	Number of Posts: 2
+	18.
+	User: Alien4
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	19.
+	User: Alien5
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	20.
+	User: Alien7
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	21.
+	User: Alien9
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	22.
+	User: Janey
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	23.
+	User: Lenny
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	24.
+	User: Mrs Nesbitt
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	25.
+	User: Rex
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	26.
+	User: Sally
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	27.
+	User: Scud
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	28.
+	User: Slinky Dog
+	Followers: 0
+	Following: 4
+	Number of Posts: 1
+	29.
+	User: Soldier1
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	30.
+	User: Soldier2
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	31.
+	User: Soldier3
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	32.
+	User: Soldier4
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	33.
+	User: Soldier5
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	34.
+	User: Soldier6
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Buzz Lightyear
+	Content: This is an intergalactic emergency. I need to commandeer your vessel to Sector 12. Who's in charge here?.
+	Number of Likes: 14
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody
+	2.
+	Original Poster: Buzz Lightyear
+	Content: You see the hat? I am Mrs. Nes-bitt!
+	Number of Likes: 14
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody
+	3.
+	Original Poster: Buzz Lightyear
+	Content: I don't believe that man's ever been to medical school!
+	Number of Likes: 14
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody
+	4.
+	Original Poster: Woody
+	Content: And another thing, *stop* with this *spaceman* thing! It's getting on my nerves.
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	5.
+	Original Poster: Woody
+	Content: BUZZ, LOOK, AN ALIEN!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	6.
+	Original Poster: Woody
+	Content: Oh, yeah? Well, good riddance, ya loony!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	7.
+	Original Poster: Woody
+	Content: Reach for the sky!
+	Number of Likes: 11
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	8.
+	Original Poster: Woody
+	Content: This town ain't big enough for the two of us!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	9.
+	Original Poster: Woody
+	Content: Hey, Buzz! You're flying!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	10.
+	Original Poster: Woody
+	Content: To infinity and beyond!
+	Number of Likes: 11
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	11.
+	Original Poster: Alien1
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Alien10
+	12.
+	Original Poster: Alien3
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	13.
+	Original Poster: Alien6
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	14.
+	Original Poster: Alien8
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	15.
+	Original Poster: Alien1
+	Content: The claw is our master.
+	Number of Likes: 9
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Alien10
+	16.
+	Original Poster: Buzz Lightyear
+	Content: Greetings, I am Buzz Lightyear. I come in peace.
+	Number of Likes: 5
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody
+	17.
+	Original Poster: Buzz Lightyear
+	Content: To infininty and beyond!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody
+	18.
+	Original Poster: Bo Peep
+	Content: I've got my moving buddy
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Woody, Lenny, Rex, Sergeant, Slinky Dog
+	19.
+	Original Poster: Buzz Lightyear
+	Content: How dare you open a spaceman's helmet on an uncharted planet! My eyeballs could've been sucked from their sockets!
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody
+	20.
+	Original Poster: Buzz Lightyear
+	Content: You are a sad, strange little man, and you have my pity.
+	Number of Likes: 5
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody
+	21.
+	Original Poster: Hannah
+	Content: Mom! Mom, have you seen my Sally doll? ... Never mind.
+	Number of Likes: 3
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Janey, Mrs Nesbitt, Sally
+	22.
+	Original Poster: Mr. PotatoHead
+	Content: Ages three and up! It's on my box! Ages three and up! I'm not supposed to be babysitting Princess Drool!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Hamm
+	23.
+	Original Poster: Sid
+	Content: I'll have to perform one of my... operations!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	24.
+	Original Poster: Sid
+	Content: The Toys! The Toys are alive!
+	Number of Likes: 1
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	25.
+	Original Poster: Slinky Dog
+	Content: It's too short. We need more monkeys!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	26.
+	Original Poster: Alien2
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	27.
+	Original Poster: Alien4
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	28.
+	Original Poster: Alien5
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	29.
+	Original Poster: Alien7
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	30.
+	Original Poster: Alien9
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	31.
+	Original Poster: Alien10
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	32.
+	Original Poster: Alien2
+	Content: The claw chooses who will go and who will stay.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+
+TIMESTEP 3:
+Network Diagram:
+	Alien1: Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien10: 
+	Alien2: 
+	Alien3: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien4: 
+	Alien5: 
+	Alien6: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	Alien7: 
+	Alien8: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	Alien9: 
+	Andy: Bo Peep, Hamm, Lenny, Mr. PotatoHead, Rex, Sergeant, Slinky Dog, Woody
+	Bo Peep: Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6, Woody
+	Buzz Lightyear: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6, Woody
+	Hamm: Mr. PotatoHead
+	Hannah: Janey, Mrs Nesbitt, Sally
+	Janey: 
+	Lenny: 
+	Mr. PotatoHead: Hamm
+	Mrs Nesbitt: 
+	Rex: 
+	Sally: 
+	Scud: 
+	Sergeant: Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	Sid: Scud
+	Sid's Mom: Hannah, Sid
+	Slinky Dog: 
+	Soldier1: 
+	Soldier2: 
+	Soldier3: 
+	Soldier4: 
+	Soldier5: 
+	Soldier6: 
+	The Claw: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Woody: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+
+Users by Popularity:
+	1.
+	User: Buzz Lightyear
+	Followers: 22
+	Following: 0
+	Number of Posts: 7
+	2.
+	User: Bo Peep
+	Followers: 11
+	Following: 3
+	Number of Posts: 1
+	3.
+	User: Woody
+	Followers: 11
+	Following: 3
+	Number of Posts: 7
+	4.
+	User: The Claw
+	Followers: 10
+	Following: 0
+	Number of Posts: 0
+	5.
+	User: Alien1
+	Followers: 9
+	Following: 5
+	Number of Posts: 2
+	6.
+	User: Alien3
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	7.
+	User: Alien6
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	8.
+	User: Alien8
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	9.
+	User: Andy
+	Followers: 8
+	Following: 0
+	Number of Posts: 0
+	10.
+	User: Sergeant
+	Followers: 6
+	Following: 4
+	Number of Posts: 0
+	11.
+	User: Hannah
+	Followers: 3
+	Following: 1
+	Number of Posts: 1
+	12.
+	User: Sid's Mom
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	13.
+	User: Hamm
+	Followers: 1
+	Following: 2
+	Number of Posts: 0
+	14.
+	User: Mr. PotatoHead
+	Followers: 1
+	Following: 2
+	Number of Posts: 1
+	15.
+	User: Sid
+	Followers: 1
+	Following: 1
+	Number of Posts: 2
+	16.
+	User: Alien10
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	17.
+	User: Alien2
+	Followers: 0
+	Following: 6
+	Number of Posts: 2
+	18.
+	User: Alien4
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	19.
+	User: Alien5
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	20.
+	User: Alien7
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	21.
+	User: Alien9
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	22.
+	User: Janey
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	23.
+	User: Lenny
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	24.
+	User: Mrs Nesbitt
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	25.
+	User: Rex
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	26.
+	User: Sally
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	27.
+	User: Scud
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	28.
+	User: Slinky Dog
+	Followers: 0
+	Following: 4
+	Number of Posts: 1
+	29.
+	User: Soldier1
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	30.
+	User: Soldier2
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	31.
+	User: Soldier3
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	32.
+	User: Soldier4
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	33.
+	User: Soldier5
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	34.
+	User: Soldier6
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Buzz Lightyear
+	Content: This is an intergalactic emergency. I need to commandeer your vessel to Sector 12. Who's in charge here?.
+	Number of Likes: 22
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody, Alien10, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	2.
+	Original Poster: Buzz Lightyear
+	Content: You see the hat? I am Mrs. Nes-bitt!
+	Number of Likes: 22
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody, Alien10, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	3.
+	Original Poster: Buzz Lightyear
+	Content: I don't believe that man's ever been to medical school!
+	Number of Likes: 22
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody, Alien10, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	4.
+	Original Poster: Buzz Lightyear
+	Content: How dare you open a spaceman's helmet on an uncharted planet! My eyeballs could've been sucked from their sockets!
+	Number of Likes: 12
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	5.
+	Original Poster: Buzz Lightyear
+	Content: You are a sad, strange little man, and you have my pity.
+	Number of Likes: 12
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	6.
+	Original Poster: Bo Peep
+	Content: I've got my moving buddy
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Woody, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	7.
+	Original Poster: Woody
+	Content: And another thing, *stop* with this *spaceman* thing! It's getting on my nerves.
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	8.
+	Original Poster: Woody
+	Content: BUZZ, LOOK, AN ALIEN!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	9.
+	Original Poster: Woody
+	Content: Oh, yeah? Well, good riddance, ya loony!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	10.
+	Original Poster: Woody
+	Content: Reach for the sky!
+	Number of Likes: 11
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	11.
+	Original Poster: Woody
+	Content: This town ain't big enough for the two of us!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	12.
+	Original Poster: Woody
+	Content: Hey, Buzz! You're flying!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	13.
+	Original Poster: Woody
+	Content: To infinity and beyond!
+	Number of Likes: 11
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	14.
+	Original Poster: Alien1
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Alien10
+	15.
+	Original Poster: Alien3
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	16.
+	Original Poster: Alien6
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	17.
+	Original Poster: Alien8
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	18.
+	Original Poster: Alien1
+	Content: The claw is our master.
+	Number of Likes: 9
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Alien10
+	19.
+	Original Poster: Buzz Lightyear
+	Content: Greetings, I am Buzz Lightyear. I come in peace.
+	Number of Likes: 6
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant
+	20.
+	Original Poster: Buzz Lightyear
+	Content: To infininty and beyond!
+	Number of Likes: 6
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:falseUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant
+	21.
+	Original Poster: Hannah
+	Content: Mom! Mom, have you seen my Sally doll? ... Never mind.
+	Number of Likes: 3
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Janey, Mrs Nesbitt, Sally
+	22.
+	Original Poster: Mr. PotatoHead
+	Content: Ages three and up! It's on my box! Ages three and up! I'm not supposed to be babysitting Princess Drool!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Hamm
+	23.
+	Original Poster: Sid
+	Content: I'll have to perform one of my... operations!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	24.
+	Original Poster: Sid
+	Content: The Toys! The Toys are alive!
+	Number of Likes: 1
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	25.
+	Original Poster: Slinky Dog
+	Content: It's too short. We need more monkeys!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	26.
+	Original Poster: Alien2
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	27.
+	Original Poster: Alien4
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	28.
+	Original Poster: Alien5
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	29.
+	Original Poster: Alien7
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	30.
+	Original Poster: Alien9
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	31.
+	Original Poster: Alien10
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	32.
+	Original Poster: Alien2
+	Content: The claw chooses who will go and who will stay.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+
+TIMESTEP 4:
+Network Diagram:
+	Alien1: Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien10: 
+	Alien2: 
+	Alien3: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Alien4: 
+	Alien5: 
+	Alien6: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	Alien7: 
+	Alien8: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	Alien9: 
+	Andy: Bo Peep, Hamm, Lenny, Mr. PotatoHead, Rex, Sergeant, Slinky Dog, Woody
+	Bo Peep: Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6, Woody
+	Buzz Lightyear: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6, Woody
+	Hamm: Mr. PotatoHead
+	Hannah: Janey, Mrs Nesbitt, Sally
+	Janey: 
+	Lenny: 
+	Mr. PotatoHead: Hamm
+	Mrs Nesbitt: 
+	Rex: 
+	Sally: 
+	Scud: 
+	Sergeant: Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	Sid: Scud
+	Sid's Mom: Hannah, Sid
+	Slinky Dog: 
+	Soldier1: 
+	Soldier2: 
+	Soldier3: 
+	Soldier4: 
+	Soldier5: 
+	Soldier6: 
+	The Claw: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	Woody: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+
+Users by Popularity:
+	1.
+	User: Buzz Lightyear
+	Followers: 22
+	Following: 0
+	Number of Posts: 7
+	2.
+	User: Bo Peep
+	Followers: 11
+	Following: 3
+	Number of Posts: 1
+	3.
+	User: Woody
+	Followers: 11
+	Following: 3
+	Number of Posts: 7
+	4.
+	User: The Claw
+	Followers: 10
+	Following: 0
+	Number of Posts: 0
+	5.
+	User: Alien1
+	Followers: 9
+	Following: 5
+	Number of Posts: 2
+	6.
+	User: Alien3
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	7.
+	User: Alien6
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	8.
+	User: Alien8
+	Followers: 9
+	Following: 5
+	Number of Posts: 1
+	9.
+	User: Andy
+	Followers: 8
+	Following: 0
+	Number of Posts: 0
+	10.
+	User: Sergeant
+	Followers: 6
+	Following: 4
+	Number of Posts: 0
+	11.
+	User: Hannah
+	Followers: 3
+	Following: 1
+	Number of Posts: 1
+	12.
+	User: Sid's Mom
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	13.
+	User: Hamm
+	Followers: 1
+	Following: 2
+	Number of Posts: 0
+	14.
+	User: Mr. PotatoHead
+	Followers: 1
+	Following: 2
+	Number of Posts: 1
+	15.
+	User: Sid
+	Followers: 1
+	Following: 1
+	Number of Posts: 2
+	16.
+	User: Alien10
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	17.
+	User: Alien2
+	Followers: 0
+	Following: 6
+	Number of Posts: 2
+	18.
+	User: Alien4
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	19.
+	User: Alien5
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	20.
+	User: Alien7
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	21.
+	User: Alien9
+	Followers: 0
+	Following: 6
+	Number of Posts: 1
+	22.
+	User: Janey
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	23.
+	User: Lenny
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	24.
+	User: Mrs Nesbitt
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	25.
+	User: Rex
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	26.
+	User: Sally
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	27.
+	User: Scud
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	28.
+	User: Slinky Dog
+	Followers: 0
+	Following: 4
+	Number of Posts: 1
+	29.
+	User: Soldier1
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	30.
+	User: Soldier2
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	31.
+	User: Soldier3
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	32.
+	User: Soldier4
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	33.
+	User: Soldier5
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+	34.
+	User: Soldier6
+	Followers: 0
+	Following: 4
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Buzz Lightyear
+	Content: This is an intergalactic emergency. I need to commandeer your vessel to Sector 12. Who's in charge here?.
+	Number of Likes: 22
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody, Alien10, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	2.
+	Original Poster: Buzz Lightyear
+	Content: You see the hat? I am Mrs. Nes-bitt!
+	Number of Likes: 22
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody, Alien10, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	3.
+	Original Poster: Buzz Lightyear
+	Content: I don't believe that man's ever been to medical school!
+	Number of Likes: 22
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Bo Peep, Lenny, Rex, Slinky Dog, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Woody, Alien10, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	4.
+	Original Poster: Buzz Lightyear
+	Content: Greetings, I am Buzz Lightyear. I come in peace.
+	Number of Likes: 12
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	5.
+	Original Poster: Buzz Lightyear
+	Content: To infininty and beyond!
+	Number of Likes: 12
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	6.
+	Original Poster: Buzz Lightyear
+	Content: How dare you open a spaceman's helmet on an uncharted planet! My eyeballs could've been sucked from their sockets!
+	Number of Likes: 12
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	7.
+	Original Poster: Buzz Lightyear
+	Content: You are a sad, strange little man, and you have my pity.
+	Number of Likes: 12
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Slinky Dog, Woody, Sergeant, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	8.
+	Original Poster: Bo Peep
+	Content: I've got my moving buddy
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Woody, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	9.
+	Original Poster: Woody
+	Content: And another thing, *stop* with this *spaceman* thing! It's getting on my nerves.
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	10.
+	Original Poster: Woody
+	Content: BUZZ, LOOK, AN ALIEN!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	11.
+	Original Poster: Woody
+	Content: Oh, yeah? Well, good riddance, ya loony!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	12.
+	Original Poster: Woody
+	Content: Reach for the sky!
+	Number of Likes: 11
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	13.
+	Original Poster: Woody
+	Content: This town ain't big enough for the two of us!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	14.
+	Original Poster: Woody
+	Content: Hey, Buzz! You're flying!
+	Number of Likes: 11
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	15.
+	Original Poster: Woody
+	Content: To infinity and beyond!
+	Number of Likes: 11
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Bo Peep, Lenny, Rex, Sergeant, Slinky Dog, Soldier1, Soldier2, Soldier3, Soldier4, Soldier5, Soldier6
+	16.
+	Original Poster: Alien1
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Alien10
+	17.
+	Original Poster: Alien3
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9
+	18.
+	Original Poster: Alien6
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien7, Alien8, Alien9
+	19.
+	Original Poster: Alien8
+	Content: The Claw!
+	Number of Likes: 9
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien1, Alien10, Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien9
+	20.
+	Original Poster: Alien1
+	Content: The claw is our master.
+	Number of Likes: 9
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Alien2, Alien3, Alien4, Alien5, Alien6, Alien7, Alien8, Alien9, Alien10
+	21.
+	Original Poster: Hannah
+	Content: Mom! Mom, have you seen my Sally doll? ... Never mind.
+	Number of Likes: 3
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Janey, Mrs Nesbitt, Sally
+	22.
+	Original Poster: Mr. PotatoHead
+	Content: Ages three and up! It's on my box! Ages three and up! I'm not supposed to be babysitting Princess Drool!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Hamm
+	23.
+	Original Poster: Sid
+	Content: I'll have to perform one of my... operations!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	24.
+	Original Poster: Sid
+	Content: The Toys! The Toys are alive!
+	Number of Likes: 1
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:trueUsers Who Liked This: Scud
+	25.
+	Original Poster: Slinky Dog
+	Content: It's too short. We need more monkeys!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	26.
+	Original Poster: Alien2
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	27.
+	Original Poster: Alien4
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	28.
+	Original Poster: Alien5
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	29.
+	Original Poster: Alien7
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	30.
+	Original Poster: Alien9
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	31.
+	Original Poster: Alien10
+	Content: The Claw!
+	Number of Likes: 0
+	Clickbait Factor: 3.0
+	Created Time: 0
+	Stale:true
+	32.
+	Original Poster: Alien2
+	Content: The claw chooses who will go and who will stay.
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+
