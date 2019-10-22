@@ -194,7 +194,7 @@ public class Network extends DSAGraph
     public DSALinkedList getUserList()
     {
         DSALinkedList userList = new DSALinkedList();
-        Iterator vertexListIter = super.vertexList.iterator();
+        Iterator vertexListIter = super.vertices.iterator();
         while (vertexListIter.hasNext())
         {
             /*Getting label of current vertex (user) & adding it to list to
@@ -213,14 +213,14 @@ public class Network extends DSAGraph
         DSALinkedList followerList = new DSALinkedList();
         if (super.hasVertex(inName))
         {
-            DSALinkedList userAdjacencyList =
-                    super.getVertex(inName).adjacencyList;
+            DSABinarySearchTree userAdjacencyList =
+                    super.getVertex(inName).adjacent;
 
-            Iterator adjListIter = userAdjacencyList.iterator();
-            while (adjListIter.hasNext())
+            Iterator adjIter = userAdjacencyList.iterator();
+            while (adjIter.hasNext())
             {
                 followerList.insertLast(
-                        ((DSAGraphVertex)adjListIter.next()).label);
+                        ((DSAGraphVertex)adjIter.next()).label);
             }
         }
         else
@@ -293,7 +293,7 @@ public class Network extends DSAGraph
 
         /*Getting all userInfo objects in network into new array for sorting by
             likes*/
-        Iterator userListIter = super.vertexList.iterator();
+        Iterator userListIter = super.vertices.iterator();
         while (userListIter.hasNext())
         {
             curUserVertex = (DSAGraphVertex)userListIter.next();
@@ -323,7 +323,7 @@ public class Network extends DSAGraph
      */
     public int getUserCount()
     {
-        return super.vertexList.getCount();
+        return super.vertices.getCount();
     }
 
     /* Removes a user from the network via their name, throws exception if user
@@ -521,7 +521,7 @@ public class Network extends DSAGraph
 
         if (super.hasVertex(inUser))
         {
-            followerIter = super.getVertex(inUser).adjacencyList.iterator();
+            followerIter = super.getVertex(inUser).adjacent.iterator();
 
             while (followerIter.hasNext())
             {

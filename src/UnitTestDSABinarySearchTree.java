@@ -4,7 +4,7 @@
 import java.util.Iterator;
 
 import static java.lang.System.out;
-public class UnitTestBinarySearchTree
+public class UnitTestDSABinarySearchTree
 {
     public static void main(String[] args)
     {

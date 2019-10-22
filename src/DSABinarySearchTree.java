@@ -3,6 +3,7 @@
  *  & editing contained data
  * Created DAte: 19/08/2019
  */
+
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -10,6 +11,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
 {
     //CLASS FIELDS
     private DSATreeNode root; //Root node of this binary tree
+    private int count; //Tracks number of nodes in tree
 
     //INNER CLASSES
     /* Class for defining properties of node in binary search tree, contain
@@ -51,8 +53,11 @@ public class DSABinarySearchTree implements Serializable, Iterable
             //Getting post-list traversal of tree
             iterQueue = new DSAQueue();
 
-            //Recursively filling queue with tree's nodes
-            getInListRec(iterQueue, inTree.root);
+            if (root != null)
+            {
+                //Recursively filling queue with tree's nodes
+                getInListRec(iterQueue, inTree.root);
+            }
         }
 
         /* Returns whether next node for iterator exists
@@ -113,6 +118,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
     public DSABinarySearchTree()
     {
         root = null;
+        count = 0;
     }
 
     //MUTATORS
@@ -123,14 +129,15 @@ public class DSABinarySearchTree implements Serializable, Iterable
     {
         //Starting recursive insert at root node
         root = insertRec(newKey, newValue, root);
+        count++;
     }
 
     /* Recursive method for inserting new node into tree, inserts node once
-     *  reaches end of tree in sequence corresponding to new node's key, 
+     *  reaches end of tree in sequence corresponding to new node's key,
      *  otherwise checks child nodes based on key comparison
      */
-    private DSATreeNode insertRec(String newKey, Object newValue, DSATreeNode 
-        currentNode)
+    private DSATreeNode insertRec(String newKey, Object newValue, DSATreeNode
+            currentNode)
     {
         DSATreeNode updateNode = currentNode; /*Value that this node will be 
             updated to (as referenced by its parent node), same as current node
@@ -142,8 +149,8 @@ public class DSABinarySearchTree implements Serializable, Iterable
         }
         else if (newKey.equals(currentNode.key)) //If new key already in tree
         {
-            throw new IllegalArgumentException("Key '" + newKey + 
-                "' already in tree");
+            throw new IllegalArgumentException("Key '" + newKey +
+                    "' already in tree");
         }
         else if (newKey.compareTo(currentNode.key) < 0) /*If new key smaller
             than current node's key*/
@@ -163,17 +170,18 @@ public class DSABinarySearchTree implements Serializable, Iterable
     }
 
     /* Deletes node with imported key from tree if found (& moves connections
-     *  of remaining nodes to retain tree integrity), throws exception if 
+     *  of remaining nodes to retain tree integrity), throws exception if
      *  not found
      */
     public void delete(String deleteKey)
     {
         root = deleteRec(deleteKey, root);
+        count--;
     }
 
     /* Recursively searches for node with given key & calls method to delete it
      * if found, throws exception if not found
-     */ 
+     */
     private DSATreeNode deleteRec(String deleteKey, DSATreeNode currentNode)
     {
         DSATreeNode updateNode = currentNode; /*Value the node from which this 
@@ -182,8 +190,8 @@ public class DSABinarySearchTree implements Serializable, Iterable
 
         if (currentNode == null) //If node with imported key not found
         {
-            throw new IllegalArgumentException("Key '" + deleteKey + 
-                "'not found");
+            throw new IllegalArgumentException("Key '" + deleteKey +
+                    "'not found");
         }
         else if (currentNode.key.equals(deleteKey)) /*If current node is to be 
             deleted*/
@@ -201,11 +209,11 @@ public class DSABinarySearchTree implements Serializable, Iterable
         {
             currentNode.right = deleteRec(deleteKey, currentNode.right);
         }
-       
+
         return updateNode;
     }
 
-    /* Deletes specified node from tree, rearranging other node connections 
+    /* Deletes specified node from tree, rearranging other node connections
      *  to ensure no nodes lost & key rules maintained
      */
     private DSATreeNode deleteNode(String deleteKey, DSATreeNode delNode)
@@ -237,7 +245,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
         {
             /*Getting successor node that will maintain proper relationships
                 from right sub-tree*/
-            updateNode = promoteSuccessor(delNode.right); 
+            updateNode = promoteSuccessor(delNode.right);
             if (updateNode != delNode.right) /*If successor ended up not being
                 node to right of node to be deleted*/
             {
@@ -276,26 +284,6 @@ public class DSABinarySearchTree implements Serializable, Iterable
     }
 
     //ACCESSORS
-    /* Returns true if tree has node with imported key, throws exception
-     *  otherwise
-     */
-    public boolean has(String inKey) //FIXME is this dodgy?
-    {
-        boolean found;
-        try
-        {
-            //Attempting to find key in tree (throws exception if not found)
-            find(inKey);
-            found = true;
-        }
-        catch (IllegalArgumentException i) //If key was not found
-        {
-            found = false;
-        }
-
-        return found;
-    }
-
     /* Returns value held by node with imported key (throws exception if node
      *  does not exist)
      */
@@ -304,19 +292,19 @@ public class DSABinarySearchTree implements Serializable, Iterable
         //Starting recursive search on root node
         return findRec(searchKey, root);
     }
-    
+
     /* Recursive method for searching binary tree by key, checks imported node
      *  & searches one of child nodes based on key comparison
      */
     private Object findRec(String searchKey, DSATreeNode currentNode)
     {
         Object foundValue; //Value stored by node being searched for once found
-        
+
         if (currentNode == null) /*If end of tree reached without finding node
             with the given key*/
         {
-            throw new IllegalArgumentException("Key '" + searchKey + 
-                "' not found");
+            throw new IllegalArgumentException("Key '" + searchKey +
+                    "' not found");
         }
         else if (searchKey.equals(currentNode.key)) /*If current node is the 
             node being searched for*/
@@ -327,7 +315,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
             smaller than current node's key*/
         {
             //Continuing search on left child
-            foundValue = findRec(searchKey, currentNode.left); 
+            foundValue = findRec(searchKey, currentNode.left);
         }
         else //If search key larger than current node's key 
         {
@@ -338,6 +326,61 @@ public class DSABinarySearchTree implements Serializable, Iterable
         return foundValue;
     }
 
+    /* Returns true if tree has node with imported key, throws exception
+     *  otherwise
+     */
+    public boolean has(String inKey) //FIXME is this dodgy?
+    {
+        return hasRec(inKey, root);
+    }
+
+    /* Recursive method for determining whether tree has node with imported key
+     *  checks current node & then its children & returns boolean of whether
+     *  found
+     */
+    private boolean hasRec(String searchKey, DSATreeNode currentNode)
+    {
+        boolean found; //Whether or not node found in tree
+
+        if (currentNode == null) /*If end of tree reached without finding node
+            with the given key*/
+        {
+            found = false;
+        }
+        else if (searchKey.equals(currentNode.key)) /*If current node is the
+            node being searched for*/
+        {
+            found = true;
+        }
+        else if (searchKey.compareTo(currentNode.key) < 0) /*If search key
+            smaller than current node's key*/
+        {
+            //Continuing search on left child
+            found = hasRec(searchKey, currentNode.left);
+        }
+        else //If search key larger than current node's key
+        {
+            //Continuing search on right child
+            found = hasRec(searchKey, currentNode.right);
+        }
+
+        return found;
+    }
+
+    /* Returns whether tree currently empty or not
+     */
+    public boolean isEmpty()
+    {
+        return root == null;
+    }
+
+    /* Returns number of nodes currently in tree
+     */
+    public int getCount()
+    {
+        return count;
+    }
+
     public Iterator iterator()
     {
         //Creating & returning new iterator for this tree
@@ -346,29 +389,29 @@ public class DSABinarySearchTree implements Serializable, Iterable
 
     /* Returns all nodes in the list as a queue of strings using in-list
      * traversal
-    */
+     */
     public DSAQueue traverseInList()
     {
         DSAQueue treeQueue = new DSAQueue(); /*Queue storing all accessed 
             nodes in order (pass by reference)*/
-        
+
         //Starting recursive accessing of tree nodes
         inListRec(treeQueue, root);
 
         return treeQueue;
     }
 
-    /* Recursive algorithm for in-list traversal. Recursively accesses 
+    /* Recursive algorithm for in-list traversal. Recursively accesses
      *  left-child tree, then current, then right-child tree
-    */
+     */
     private void inListRec(DSAQueue treeQueue, DSATreeNode currentNode)
     {
         //Applying algorithm to left-child tree (if exists)
-        if (currentNode.left != null) 
+        if (currentNode.left != null)
         {
             inListRec(treeQueue, currentNode.left);
         }
-        
+
         //Reading current node as a string (key, value)
         treeQueue.enqueue(currentNode.key + "," + currentNode.value);
 
@@ -378,35 +421,35 @@ public class DSABinarySearchTree implements Serializable, Iterable
             inListRec(treeQueue, currentNode.right);
         }
     }
-    
-    /* Returns all nodes in list as queue of strings using pre-order 
+
+    /* Returns all nodes in list as queue of strings using pre-order
      * (children-first) traversal
      */
     public DSAQueue traversePreList()
     {
         DSAQueue treeQueue = new DSAQueue(); /*Queue storing all accessed 
             nodes in order (pass by reference)*/
-        
+
         //Starting recursive accessing of tree nodes
         preListRec(treeQueue, root);
 
         return treeQueue;
     }
 
-    /* Recursive algorithm for pre-list traversal. Recursively accesses 
+    /* Recursive algorithm for pre-list traversal. Recursively accesses
      *  current, then left-child tree, then right-child tree
-    */
+     */
     private void preListRec(DSAQueue treeQueue, DSATreeNode currentNode)
     {
         //Reading current node as a string (key, value)
         treeQueue.enqueue(currentNode.key + "," + currentNode.value);
-        
+
         //Applying algorithm to left-child tree (if exists)
-        if (currentNode.left != null) 
+        if (currentNode.left != null)
         {
             preListRec(treeQueue, currentNode.left);
         }
-        
+
         //Applying algorithm to left-child tree (if exists)
         if (currentNode.right != null)
         {
@@ -414,37 +457,37 @@ public class DSABinarySearchTree implements Serializable, Iterable
         }
     }
 
-    /* Returns all nodes in list as queue of strings using post-order 
+    /* Returns all nodes in list as queue of strings using post-order
      * (parents-first) traversal
      */
     public DSAQueue traversePostList()
     {
         DSAQueue treeQueue = new DSAQueue(); /*Queue storing all accessed 
             nodes in order (pass by reference)*/
-        
+
         //Starting recursive accessing of tree nodes
         postListRec(treeQueue, root);
 
         return treeQueue;
     }
 
-    /* Recursive algorithm for post-list traversal. Recursively accesses 
+    /* Recursive algorithm for post-list traversal. Recursively accesses
      *  left-child tree, right-child tree, then current
-    */
+     */
     private void postListRec(DSAQueue treeQueue, DSATreeNode currentNode)
     {
         //Applying algorithm to left-child tree (if exists)
-        if (currentNode.left != null) 
+        if (currentNode.left != null)
         {
             postListRec(treeQueue, currentNode.left);
         }
-        
+
         //Applying algorithm to left-child tree (if exists)
         if (currentNode.right != null)
         {
             postListRec(treeQueue, currentNode.right);
         }
-        
+
         //Reading current node as a string (key, value)
         treeQueue.enqueue(currentNode.key + "," + currentNode.value);
     }
@@ -457,17 +500,17 @@ public class DSABinarySearchTree implements Serializable, Iterable
         {
             throw new IllegalArgumentException("Tree is empty");
         }
-        
+
         //Getting list of nodes in in-list order
         DSAQueue treeQueue = traverseInList();
-        
+
         //Printing out key & toString of value held by each node 
         while (!treeQueue.isEmpty())
         {
             System.out.println(treeQueue.dequeue());
         }
     }
-    
+
     /* Returns value of smallest key in tree
      */
     public String min()
@@ -499,7 +542,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
 
         return minKey;
     }
-    
+
     /* Returns value of largest key in tree
      */
     public String max()
@@ -605,9 +648,9 @@ public class DSABinarySearchTree implements Serializable, Iterable
             countSoFar++;
         }
 
-        return countSoFar; 
+        return countSoFar;
     }
-    
+
     /*Returns percentage score for how balanced the tree is (i.e. percentage
      * ratio between left & right branches of root)
      */
@@ -617,7 +660,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
         {
             throw new IllegalArgumentException("Tree is empty");
         }
-       
+
         int leftCount, rightCount; /*Store number of nodes in left/right 
             sub-branches of root*/
 
@@ -625,7 +668,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
         rightCount = countRec(0, root.right);
 
         double balancePercent; //Balance level of tree as percentage ratio
-        
+
         //Calculating balance ratio (smaller side/larger side)
         if (leftCount == 0 && rightCount == 0) /*If both sides 0 (technically
             balanced since no imbalance exists*/
@@ -634,11 +677,11 @@ public class DSABinarySearchTree implements Serializable, Iterable
         }
         else if (leftCount > rightCount) //If left count bigger
         {
-            balancePercent = ((double)rightCount / (double)leftCount) * 100.0;
+            balancePercent = ((double) rightCount / (double) leftCount) * 100.0;
         }
         else //If right count bigger or if equal
         {
-            balancePercent = ((double)leftCount / (double)rightCount) * 100.0;
+            balancePercent = ((double) leftCount / (double) rightCount) * 100.0;
         }
 
         return balancePercent;

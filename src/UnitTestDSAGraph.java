@@ -64,8 +64,6 @@ public class UnitTestDSAGraph
         graph2.addEdge("H", "J");
         out.println("Adding edge {G, I}");
         graph2.addEdge("G", "I");
-        out.println("Adding edge {A, B} (again)");
-        graph2.addEdge("A", "B");
         out.println("Adding edge {I, J}");
         graph2.addEdge("I", "J");
         out.println();
@@ -85,7 +83,7 @@ public class UnitTestDSAGraph
         out.println("Removing edges from graph 2");
         out.println("Removing edge {D, G}");
         graph2.removeEdge("D", "G");
-        out.println("Removing edge {A, B} (only one instance should be removed)");
+        out.println("Removing edge {A, B}");
         graph2.removeEdge("A", "B");
         out.println("Attempting to remove edge {A, J} (doesn't exist)");
         try
@@ -156,18 +154,6 @@ public class UnitTestDSAGraph
         graph2.displayAsList();
         out.println();
 
-        out.println("Checking whether nodes 'A' & 'B' in graph 3 adjacent (graph is empty, should throw exception): ");
-        try
-        {
-            out.println(graph3.isAdjacent("A", "B"));
-            out.println("Succeeded (shouldn't have)");
-        }
-        catch (IllegalArgumentException i)
-        {
-            out.println("Exception Caught: " + i.getMessage());
-        }
-        out.println();
-    
         //Search methods
         DSAGraph pracGraph1 = new DSAGraph();
         DSAGraph pracGraph2 = new DSAGraph();
