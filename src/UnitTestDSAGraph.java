@@ -5,6 +5,8 @@
 
 import static java.lang.System.out;
 import java.util.*;
+import java.io.*;
+
 public class UnitTestDSAGraph
 {
     public static void main (String[] args)
@@ -154,22 +156,7 @@ public class UnitTestDSAGraph
         graph2.displayAsList();
         out.println();
 
-        //isAdjacent (removed for directional graph as not required for network)
-//        out.println("Checking whether nodes 'A' & 'B' in graph 1 adjacent (shoulnd't be): " + graph1.isAdjacent("A", "B"));
-//        out.println("Checking whether nodes 'A' & 'B' in graph 2 adjacent (should be): " + graph2.isAdjacent("A", "B"));
-//        out.println("Checking whether nodes 'A' & 'J' in graph 2 adjacent (shoulnd't be): " + graph2.isAdjacent("A", "J"));
-//        out.println("Checking whether nodes 'A' & 'X' in graph 2 adjacent ('X' not in graph, should throw exception): ");
-//        try
-//        {
-//            out.println(graph2.isAdjacent("A", "X"));
-//            out.println("Succeeded (shouldn't have)");
-//        }
-//        catch (IllegalArgumentException i)
-//        {
-//            out.println("Exception Caught: " + i.getMessage());
-//        }
-//        out.println();
-        out.println("Checking whether nodes 'A' & 'B' in graph 3 adjacent (graph is empty, should throw exception): "); 
+        out.println("Checking whether nodes 'A' & 'B' in graph 3 adjacent (graph is empty, should throw exception): ");
         try
         {
             out.println(graph3.isAdjacent("A", "B"));
@@ -187,8 +174,8 @@ public class UnitTestDSAGraph
         Iterator traversalIterator;
 
         out.println("Creating graphs from DSA practical 5...");
-        pracGraph1 = FileIO.readGraph("prac5graph1.al");
-        pracGraph2 = FileIO.readGraph("prac5graph2.al");
+        pracGraph1 = readGraph("prac5graph1.al");
+        pracGraph2 = readGraph("prac5graph2.al");
         out.println();
 
         out.println("Graph 1:");
@@ -228,14 +215,63 @@ public class UnitTestDSAGraph
         }
         out.println();
     }
-}
-/*
+
+    public static DSAGraph readGraph(String filename)
+    {
+        //Creating graph to return
+        DSAGraph graph = new DSAGraph();
+
+        FileInputStream fileStrm = null;
+        InputStreamReader rdr;
+        BufferedReader buffRdr;
+        String line;
+        String[] lineArray;
+
         try
         {
-            out.println("Succeeded (shouldn't have)");
+            fileStrm = new FileInputStream(filename);
+            rdr = new InputStreamReader(fileStrm);
+            buffRdr = new BufferedReader(rdr);
+
+            line = buffRdr.readLine();
+            while (line != null)
+            {
+                lineArray = line.split(" ");
+
+                if (lineArray.length != 2)
+                {
+                    throw new IllegalArgumentException("Invalid file format");
+                }
+
+                //Adding vertices to graph if do not already exist
+                if (!graph.hasVertex(lineArray[0]))
+                {
+                    graph.addVertex(lineArray[0], "value " + lineArray[0]);
+                }
+                if (!graph.hasVertex(lineArray[1]))
+                {
+                    graph.addVertex(lineArray[1], "value " + lineArray[1]);
+                }
+
+                /*Adding edge between line's 2 vertices (since the 2 vertices
+                    on this line must now exist in the graph*/
+                graph.addEdge(lineArray[0], lineArray[1]);
+
+                line = buffRdr.readLine();
+            }
+
+            fileStrm.close();
         }
-        catch (IllegalArgumentException i)
+        catch (IOException io)
         {
-            out.println("Exception Caught: " + i.getMessage());
+            if (fileStrm != null)
+            {
+                try { fileStrm.close(); } catch (IOException io2) { }
+
+                System.out.println("Failed to read file");
+            }
         }
-*/
+
+        return graph;
+    }
+}

@@ -1,6 +1,8 @@
 /* Test harness for DSABinarySearchTree by Moritz Bergemann
  */
 
+import java.util.Iterator;
+
 import static java.lang.System.out;
 public class UnitTestBinarySearchTree
 {
@@ -69,6 +71,13 @@ public class UnitTestBinarySearchTree
         {
             out.println("Exception Caught: " + i.getMessage());
         }
+        out.println();
+
+        //Has
+        out.println("Checking if tree 0 has key '044' (should be true): " + trees[0].has("044"));
+        out.println("Checking if tree 0 has key '111' (should be false): " + trees[0].has("111"));
+        out.println("Checking if empty tree 1 has key '050' (should be false): " + trees[1].has("050"));
+
         out.println();
 
         //Delete
@@ -150,6 +159,15 @@ public class UnitTestBinarySearchTree
         }
         out.println();
 
+
+        //Iterator
+        out.println("Creating iterator for filled binary search tree");
+        out.println("Iterating through & displaying values of iterator (should be same values as in-list traversal):");
+        Iterator treeIter = trees[0].iterator();
+        while (treeIter.hasNext())
+        {
+            System.out.println((String) treeIter.next());
+        }
     }
 }
 /*

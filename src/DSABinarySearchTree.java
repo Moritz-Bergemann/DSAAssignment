@@ -4,8 +4,9 @@
  * Created DAte: 19/08/2019
  */
 import java.io.Serializable;
+import java.util.Iterator;
 
-public class DSABinarySearchTree implements Serializable
+public class DSABinarySearchTree implements Serializable, Iterable
 {
     //CLASS FIELDS
     private DSATreeNode root; //Root node of this binary tree
@@ -30,6 +31,80 @@ public class DSABinarySearchTree implements Serializable
             value = inValue;
             left = null;
             right = null;
+        }
+    }
+
+    /* Iterator class for binary search tree (performs in-list iteration of
+     *  tree). Iterator does NOT update with changes made to tree.
+     */
+    private class DSABinarySearchTreeIterator implements Iterator
+    {
+        //CLASS FIELDS
+        private DSAQueue iterQueue; /*Stores queue of all elements in tree in
+            post-order*/
+
+        //CONSTRUCTORS
+        /* Alternate Constructor
+         */
+        public DSABinarySearchTreeIterator(DSABinarySearchTree inTree)
+        {
+            //Getting post-list traversal of tree
+            iterQueue = new DSAQueue();
+
+            //Recursively filling queue with tree's nodes
+            getInListRec(iterQueue, inTree.root);
+        }
+
+        /* Returns whether next node for iterator exists
+         */
+        public boolean hasNext()
+        {
+            return (!iterQueue.isEmpty());
+        }
+
+        /* Moves iterator to next node (the one currently stored by iterNext) if
+         *  it exists and returns its value
+         */
+        public Object next()
+        {
+            Object nextVal = null;
+
+            if (!iterQueue.isEmpty()) /*If tree traversal has not completed*/
+            {
+                //Getting value object of next node in queue
+                nextVal = ((DSATreeNode) iterQueue.dequeue()).value;
+            }
+
+            return nextVal;
+        }
+
+        /* Would be method for removing node currently at cursor though not
+         *  implemented here
+         */
+        public void remove()
+        {
+            throw new UnsupportedOperationException("Not Supported");
+        }
+
+        /* Recursively traverses tree using in-list traversal and returns result
+         *  as queue of tree nodes for use in iterator.
+         */
+        private void getInListRec(DSAQueue treeQueue, DSATreeNode currentNode)
+        {
+            //Applying algorithm to left-child tree (if exists)
+            if (currentNode.left != null)
+            {
+                getInListRec(treeQueue, currentNode.left);
+            }
+
+            //Adding current node to output queue
+            treeQueue.enqueue(currentNode);
+
+            //Applying algorithm to right-child tree (if exists)
+            if (currentNode.right != null)
+            {
+                getInListRec(treeQueue, currentNode.right);
+            }
         }
     }
 
@@ -201,6 +276,26 @@ public class DSABinarySearchTree implements Serializable
     }
 
     //ACCESSORS
+    /* Returns true if tree has node with imported key, throws exception
+     *  otherwise
+     */
+    public boolean has(String inKey) //FIXME is this dodgy?
+    {
+        boolean found;
+        try
+        {
+            //Attempting to find key in tree (throws exception if not found)
+            find(inKey);
+            found = true;
+        }
+        catch (IllegalArgumentException i) //If key was not found
+        {
+            found = false;
+        }
+
+        return found;
+    }
+
     /* Returns value held by node with imported key (throws exception if node
      *  does not exist)
      */
@@ -243,7 +338,13 @@ public class DSABinarySearchTree implements Serializable
         return foundValue;
     }
 
-    /* Returns all nodes in the list as a queue of strings using in-list 
+    public Iterator iterator()
+    {
+        //Creating & returning new iterator for this tree
+        return new DSABinarySearchTreeIterator(this);
+    }
+
+    /* Returns all nodes in the list as a queue of strings using in-list
      * traversal
     */
     public DSAQueue traverseInList()
