@@ -165,7 +165,12 @@ public class DSALinkedList implements Iterable, Serializable
     public void append(DSALinkedList inList)
     {
         DSAListNode curNode = inList.head;
-        while (curNode != null) /*For each node in imported list*/
+
+        /*Making count of imported list constant (in case attempting to append
+            list to itself)*/
+        int countInit = inList.count;
+        for (int ii = 0; ii < countInit; ii++) /*For each element in imported
+            list*/
         {
             //Adding value of current node in imported list to this list
             insertLast(curNode.value);
@@ -298,49 +303,114 @@ public class DSALinkedList implements Iterable, Serializable
     //TODO change sorts to quicksort
 
     /* Sorts nodes in link list in ascending order based on comparable
-     *  comparison of node values, algorithm used is effectively bubble sort
+     *  comparison of node values, algorithm used is effectively quicksort
      */
     public void sortAsc()
     {
-        DSAListNode currentNode;
-        Object temp;
-        boolean sorted = false;
+        head = mergeSortRecAsc(head);
 
-        while (sorted == false)
+        if (head != null)
         {
-            sorted = true; /*Setting sorted to true until disproven if 2
-                elements are out of order*/
-
-            //Iterating through list
-            currentNode = head;
-            while (currentNode != null)
+            /*Setting tail to end of link chain of new head exported by sort (since
+                sorting does not modify the tail)*/
+            DSAListNode curNode = head;
+            while (curNode.next != null)
             {
-                if (!(currentNode.value instanceof Comparable)) /*If the current
-                    node's value doesn't implement the comparable interface*/
-                {
-                    throw new IllegalStateException("Node does not " +
-                            "implement sortable");
-                }
-                if (currentNode.next != null) //If current node isn't last node
-                {
-                    /*If current node's value greater than next node's value
-                        (using the comparable interface's compareTo function*/
-                    if (((Comparable)currentNode.value).compareTo(
-                            (Comparable)currentNode.next.value) > 0)
-                    {
-                        sorted = false;
+                curNode = curNode.next;
+            }
+            tail = curNode;
+        }
+        else
+        {
+            tail = null;
+        }
+    }
 
-                        //Swapping values of current & next node
-                        temp = currentNode.value;
-                        currentNode.value = currentNode.next.value;
-                        currentNode.next.value = temp;
-                    }
-                }
+    private DSAListNode mergeSortRecAsc(DSAListNode firstNode)
+    {
+        if (firstNode != null && firstNode.next != null) /*If list can still
+            be split further*/
+        {
+            //Getting middle of list section for splitting
+            DSAListNode midNode = getMid(firstNode);
+            DSAListNode section2FirstNode = midNode.next;
 
-                //Moving to next node
-                currentNode = currentNode.next;
+            /*Splitting list (by setting next of first segment's last node to
+                null*/
+            midNode.next = null;
+
+            //Recursively applying mergesort to created list segments
+            firstNode = mergeSortRecAsc(firstNode);
+            section2FirstNode = mergeSortRecAsc(section2FirstNode);
+
+            /*Merging 2 segments (now sorted) together to form fully sorted
+                segment*/
+            firstNode = mergeAsc(firstNode, section2FirstNode);
+        }
+
+        return firstNode;
+    }
+
+    private DSAListNode mergeAsc(DSAListNode firstNodeLeft,
+                                 DSAListNode firstNodeRight)
+    {
+        DSALinkedList temp = new DSALinkedList();
+        DSAListNode curLeft = firstNodeLeft;
+        DSAListNode curRight = firstNodeRight;
+
+        while (curLeft != null && curRight != null)
+        {
+            if (((Comparable) curLeft.value).compareTo(
+                    (Comparable) curRight.value) < 0) /*If current node of left
+                    section has smaller value than current node of right
+                    section*/
+            {
+                temp.insertLast(curLeft.value);
+                curLeft = curLeft.next;
+            }
+            else //If current right is smaller
+            {
+                temp.insertLast(curRight.value);
+                curRight = curRight.next;
             }
         }
+
+        //Flushing rest of nodes into sorted segments
+        while (curLeft != null)
+        {
+            temp.insertLast(curLeft.value);
+            curLeft = curLeft.next;
+        }
+        while (curRight != null)
+        {
+            temp.insertLast(curRight.value);
+            curRight = curRight.next;
+        }
+
+        return temp.head;
+    }
+
+    /* Returns node at middle of list (i.e. between imported list & end node
+     *  which has null as its next)
+     */
+    private DSAListNode getMid(DSAListNode startNode)
+    {
+        DSAListNode singleStep = startNode;
+        DSAListNode doubleStep = startNode;
+
+        /*Stepping through linked list at single & double rate (singe rate
+            will always be halfway as far through list as double step)*/
+        while (doubleStep.next != null && doubleStep.next.next != null)
+        {
+            singleStep = singleStep.next;
+            doubleStep = doubleStep.next.next;
+        }
+
+        /*Getting middle node as single step (since if double step reached end
+            of list, single step should be halfway through list*/
+        DSAListNode midNode = singleStep;
+
+        return midNode;
     }
 
     /* Sorts nodes in link list in descending order based on comparable
@@ -348,45 +418,88 @@ public class DSALinkedList implements Iterable, Serializable
      */
     public void sortDesc()
     {
-        DSAListNode currentNode;
-        Object temp;
-        boolean sorted = false;
+        head = mergeSortRecDesc(head);
 
-        while (sorted == false)
+        if (head != null)
         {
-            sorted = true; /*Setting sorted to true until disproven if 2
-                elements are out of order*/
-
-            //Iterating through list
-            currentNode = head;
-            while (currentNode != null)
+            /*Setting tail to end of link chain of new head exported by sort (since
+                sorting does not modify the tail)*/
+            DSAListNode curNode = head;
+            while (curNode.next != null)
             {
-                if (!(currentNode.value instanceof Comparable)) /*If the current
-                    node's value doesn't implement the comparable interface*/
-                {
-                    throw new IllegalStateException("Node does not " +
-                            "implement sortable");
-                }
-                if (currentNode.next != null) //If current node isn't last node
-                {
-                    /*If current node's value greater than next node's value
-                        (using the comparable interface's compareTo function*/
-                    if (((Comparable)currentNode.value).compareTo(
-                            (Comparable)currentNode.next.value) < 0)
-                    {
-                        sorted = false;
+                curNode = curNode.next;
+            }
+            tail = curNode;
+        }
+        else
+        {
+            tail = null;
+        }
+    }
 
-                        //Swapping values of current & next node
-                        temp = currentNode.value;
-                        currentNode.value = currentNode.next.value;
-                        currentNode.next.value = temp;
-                    }
-                }
+    private DSAListNode mergeSortRecDesc(DSAListNode firstNode)
+    {
+        if (firstNode != null && firstNode.next != null) /*If list can still
+            be split further*/
+        {
+            //Getting middle of list section for splitting
+            DSAListNode midNode = getMid(firstNode);
+            DSAListNode section2FirstNode = midNode.next;
 
-                //Moving to next node
-                currentNode = currentNode.next;
+            /*Splitting list (by setting next of first segment's last node to
+                null*/
+            midNode.next = null;
+
+            //Recursively applying mergesort to created list segments
+            firstNode = mergeSortRecDesc(firstNode);
+            section2FirstNode = mergeSortRecDesc(section2FirstNode);
+
+            /*Merging 2 segments (now sorted) together to form fully sorted
+                segment*/
+            firstNode = mergeDesc(firstNode, section2FirstNode);
+        }
+
+        return firstNode;
+    }
+
+    private DSAListNode mergeDesc(DSAListNode firstNodeLeft,
+                                  DSAListNode firstNodeRight)
+    {
+        DSALinkedList temp = new DSALinkedList();
+        DSAListNode curLeft = firstNodeLeft;
+        DSAListNode curRight = firstNodeRight;
+
+        while (curLeft != null && curRight != null)
+        {
+            if (((Comparable) curLeft.value).compareTo(
+                    (Comparable) curRight.value) >= 0) /*If current node of left
+                    section has larger value than current node of right
+                    section (Equal to to maintain reverse sort as stable as
+                    left list's elements are then still added first)*/
+            {
+                temp.insertLast(curLeft.value);
+                curLeft = curLeft.next;
+            }
+            else //If current right is larger
+            {
+                temp.insertLast(curRight.value);
+                curRight = curRight.next;
             }
         }
+
+        //Flushing rest of nodes into sorted segments
+        while (curLeft != null)
+        {
+            temp.insertLast(curLeft.value);
+            curLeft = curLeft.next;
+        }
+        while (curRight != null)
+        {
+            temp.insertLast(curRight.value);
+            curRight = curRight.next;
+        }
+
+        return temp.head;
     }
 
     //ACCESSORS

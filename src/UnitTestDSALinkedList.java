@@ -150,7 +150,7 @@ public class UnitTestDSALinkedList
         out.println();
 
         iterators[0] = lists[0].iterator();
-        out.println("Cycling through all entries in loaded list with its original appended to back:");
+        out.println("Cycling through all entries in loaded list with itself appended to back:");
         while (iterators[0].hasNext())
         {
             out.println(iterators[0].next());
