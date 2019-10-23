@@ -1,4 +1,5 @@
 /* Test harness for DSABinarySearchTree by Moritz Bergemann
+ * REFERENCE: This class was adapted from my submission for DSA Prac 4
  */
 
 import java.util.Iterator;

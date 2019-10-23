@@ -1,5 +1,6 @@
 /* DSAQueueList test harness by Moritz Bergemann
  * Created date: 16/8/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 3
  */
 
 import java.util.*;
@@ -9,15 +10,13 @@ public class UnitTestDSAQueue
     public static void main(String[] args)
     {
         //Declaring array of queues 
-        DSAQueue[] queues = new DSAQueue[5];
+        DSAQueue[] queues = new DSAQueue[3];
         
-        out.println("Creating 5 list queues");
+        out.println("Creating 3 queues");
         queues[0] = new DSAQueue();
         queues[1] = new DSAQueue();
         queues[2] = new DSAQueue();
-        queues[3] = new DSAQueue();
-        queues[4] = new DSAQueue();
-    
+
         //Enqueue
         out.println("Adding strings to queue (size 10) until (also adding 10 strings to queue of size 100)");
         for (int ii = 1; ii <= 10; ii++)

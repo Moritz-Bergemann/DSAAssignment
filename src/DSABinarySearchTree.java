@@ -2,6 +2,7 @@
  * Model class for binary search trees containing functionality for viewing
  *  & editing contained data
  * Created DAte: 19/08/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 4
  */
 
 import java.io.Serializable;

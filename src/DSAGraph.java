@@ -3,6 +3,7 @@
  *  together by (directional) edges
  * Created Date: 3/09/2019
  * Updated Date: 3/10/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 5
  */
 import java.util.*;
 
@@ -294,7 +295,7 @@ public class DSAGraph
      */
     public DSALinkedList depthFirstSearch()
     {
-        DSAStackList vertexStack = new DSAStackList(); /*Stack for storing 
+        DSAStack vertexStack = new DSAStack(); /*Stack for storing 
             vertices during search*/
         DSALinkedList traversalList = new DSALinkedList(); /*List containing 
             labels for all vertices in order of traversal*/

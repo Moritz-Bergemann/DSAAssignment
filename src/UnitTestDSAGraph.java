@@ -1,6 +1,7 @@
 /* DSA Graph Test Harness by Moritz Bergemann
  * Test Harness for DSAGraph model class
- * Created DateL 4/09/2019
+ * Created Date: 4/09/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 5
  */
 
 import static java.lang.System.out;

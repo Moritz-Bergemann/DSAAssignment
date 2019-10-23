@@ -1,6 +1,7 @@
 /* DSAStackList by Moritz Bergemann
  * Purpose: Model class for stack data structure using a linked list
  * Created Date: 16/08/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 3
  */
 import java.util.*;
 

@@ -1,6 +1,7 @@
 /* DSA Linked List by Moritz Bergemann
  * Model class for doubly-linked double-ended linked list
  * Created Date: 12/08/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 3
  */
 import java.util.*;
 import java.io.Serializable;
@@ -302,6 +303,9 @@ public class DSALinkedList implements Iterable, Serializable
 
     /* Sorts nodes in link list in ascending order based on comparable
      *  comparison of node values, algorithm used is effectively quicksort
+     *  REFERENCE: Algorithm, recursive components and getMid are based on
+     *      https://www.geeksforgeeks.org/merge-sort-for-linked-list/ (Retrieved
+     *      2019)
      */
     public void sortAsc()
     {
@@ -324,6 +328,9 @@ public class DSALinkedList implements Iterable, Serializable
         }
     }
 
+    /*Recursive method for descending merge sort. Splits input section by
+     *  setting 'next' of imported node to null.
+     */
     private DSAListNode mergeSortRecAsc(DSAListNode firstNode)
     {
         if (firstNode != null && firstNode.next != null) /*If list can still
@@ -349,6 +356,9 @@ public class DSALinkedList implements Iterable, Serializable
         return firstNode;
     }
 
+    /* Merges 2 imported ListNode chains together in ascending order, returns
+     *  first node of completed chain.
+     */
     private DSAListNode mergeAsc(DSAListNode firstNodeLeft,
                                  DSAListNode firstNodeRight)
     {
@@ -413,6 +423,9 @@ public class DSALinkedList implements Iterable, Serializable
 
     /* Sorts nodes in link list in descending order based on comparable
      *  comparison of node values, algorithm used is effectively bubble sort
+     *  REFERENCE: Algorithm, recursive components and getMid are based on
+     *      https://www.geeksforgeeks.org/merge-sort-for-linked-list/ (Retrieved
+     *      2019)
      */
     public void sortDesc()
     {
@@ -435,6 +448,9 @@ public class DSALinkedList implements Iterable, Serializable
         }
     }
 
+    /*Recursive method for descending merge sort. Splits input section by
+     *  setting 'next' of imported node to null.
+     */
     private DSAListNode mergeSortRecDesc(DSAListNode firstNode)
     {
         if (firstNode != null && firstNode.next != null) /*If list can still
@@ -460,6 +476,9 @@ public class DSALinkedList implements Iterable, Serializable
         return firstNode;
     }
 
+    /* Merges 2 imported ListNode chains together in ascending order, returns
+     *  first node of completed chain.
+     */
     private DSAListNode mergeDesc(DSAListNode firstNodeLeft,
                                   DSAListNode firstNodeRight)
     {

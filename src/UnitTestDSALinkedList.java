@@ -1,5 +1,6 @@
 /*DSA Linked List Test Harness by Moritz Bergemann
- * CDate: 12/08/2019
+ * Created Date: 12/08/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 3
  */
 import java.util.*;
 

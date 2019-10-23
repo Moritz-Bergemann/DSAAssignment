@@ -2,6 +2,7 @@
  * Purpose: Model class for implementing queue data 
  *  structure using a linked list instead of an array
  * Created Date: 16/08/2019
+ * REFERENCE: This class was adapted from my submission for DSA Prac 3
  */
 import java.util.*;
 
