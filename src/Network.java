@@ -149,7 +149,7 @@ public class Network extends DSAGraph
                 (if any have liked post)*/
             if (!usersLiked.isEmpty()) //If list of users liked not empty
             {
-                string += "Users Who Liked This: ";
+                string += "\nUsers Who Liked This: ";
                 Iterator usersLikedIter = usersLiked.iterator();
                 while (usersLikedIter.hasNext())
                 {
@@ -238,24 +238,25 @@ public class Network extends DSAGraph
     {
         UserInfo newUserInfo;
 
-        if (!super.hasVertex(inName)) //If user not already in network
+        if (inName.indexOf(':') < 0) /*If input username does not contain
+            any semicolons*/
         {
-            if (inName.indexOf(':') < 0) /*If input username does not contain
-                any semicolons*/
+            newUserInfo = new UserInfo(inName, curTime);
+            try
             {
-                newUserInfo = new UserInfo(inName, curTime);
                 super.addVertex(inName, newUserInfo);
             }
-            else
+            catch (IllegalArgumentException i) /*If user with input name
+                already in network*/
             {
-                throw new IllegalArgumentException("User name cannot contain" +
-                        "semicolons (':')");
+                throw new IllegalArgumentException("User with name already in " +
+                        "network");
             }
         }
         else
         {
-            throw new IllegalArgumentException("User with name already in " +
-                    "network");
+            throw new IllegalArgumentException("User name cannot contain" +
+                    "semicolons (':')");
         }
     }
 
@@ -267,18 +268,19 @@ public class Network extends DSAGraph
         UserInfo inUserInfo;
         String infoString;
 
-        if (super.hasVertex(inName))
+        try
         {
             //Getting user info from graph
-            inUserInfo = (UserInfo)super.getVertex(inName).value;
-
-            infoString = inUserInfo.toString();
+            inUserInfo = (UserInfo) super.getVertex(inName).value;
         }
-        else
+        catch (IllegalArgumentException i) /*If user does not exist in
+            network*/
         {
             throw new IllegalArgumentException("User does not exist in " +
                     "network");
         }
+
+        infoString = inUserInfo.toString();
 
         return infoString;
     }
@@ -331,11 +333,11 @@ public class Network extends DSAGraph
      */
     public void removeUser(String inName)
     {
-        if (super.hasVertex(inName))
+        try
         {
             super.removeVertex(inName);
         }
-        else
+        catch (IllegalArgumentException i) //If user does not exist
         {
             throw new IllegalArgumentException("User does not exist in " +
                     "network");
@@ -400,6 +402,11 @@ public class Network extends DSAGraph
                 throw new IllegalArgumentException("User" + inUser2 + "not in" +
                         " network");
             }
+        }
+        else
+        {
+            throw new IllegalArgumentException("User" + inUser1 + "not in" +
+                    " network");
         }
 
         return followerPresent;

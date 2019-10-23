@@ -1,55 +1,92 @@
 TIMESTEP 3:
 Network Diagram:
-	user1: user2, user5
-	user2: user1
-	user4: user1, user2, user5
-	user5: user2
+	Aughra: Jen
+	Bat-Crystal: 
+	Chamberlain: 
+	Emperor: Bat-Crystal, Chamberlain, Garthim, skekUng
+	Fizzgig: 
+	Garthim: 
+	Healer: Jen
+	Jen: 
+	Kira: Fizzgig, Landstrider, Nebrie
+	Landstrider: 
+	Master: Healer, Jen
+	Nebrie: 
+	skekUng: Bat-Crystal, Garthim
 
 Users by Popularity:
 	1.
-	User: user4
-	Followers: 3
+	User: Emperor
+	Followers: 4
 	Following: 0
 	Number of Posts: 1
 	2.
-	User: user1
-	Followers: 2
-	Following: 3
-	Number of Posts: 2
+	User: Kira
+	Followers: 3
+	Following: 0
+	Number of Posts: 0
 	3.
-	User: user2
+	User: Master
 	Followers: 2
-	Following: 3
+	Following: 0
 	Number of Posts: 0
 	4.
-	User: user5
+	User: skekUng
+	Followers: 2
+	Following: 1
+	Number of Posts: 0
+	5.
+	User: Aughra
 	Followers: 1
+	Following: 0
+	Number of Posts: 0
+	6.
+	User: Healer
+	Followers: 1
+	Following: 1
+	Number of Posts: 0
+	7.
+	User: Bat-Crystal
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	8.
+	User: Chamberlain
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	9.
+	User: Fizzgig
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	10.
+	User: Garthim
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	11.
+	User: Jen
+	Followers: 0
 	Following: 3
+	Number of Posts: 0
+	12.
+	User: Landstrider
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	13.
+	User: Nebrie
+	Followers: 0
+	Following: 1
 	Number of Posts: 0
 
 Posts by Popularity:
 	1.
-	Original Poster: user4
-	Content: this is post2
-	Number of Likes: 3
-	Clickbait Factor: 2.0
-	Created Time: 0
-	Stale:true
-	Users Who Liked This: user1, user5, user2
-	2.
-	Original Poster: user1
-	Content: this is post1
-	Number of Likes: 2
+	Original Poster: Emperor
+	Content: TEST
+	Number of Likes: 4
 	Clickbait Factor: 1.0
 	Created Time: 0
-	Stale:true
-	Users Who Liked This: user5, user2
-	3.
-	Original Poster: user1
-	Content: this is post3
-	Number of Likes: 2
-	Clickbait Factor: 1.0
-	Created Time: 0
-	Stale:true
-	Users Who Liked This: user5, user2
+	Stale:trueUsers Who Liked This: Chamberlain, skekUng, Bat-Crystal, Garthim
 

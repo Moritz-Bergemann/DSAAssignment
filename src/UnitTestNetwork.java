@@ -278,40 +278,5 @@ public class UnitTestNetwork
         out.println();
         out.println();
 
-        //NetworkManager Tests
-        out.println("Reading in network from 'netfile1.txt'");
-        DSALinkedList networkFile1 = FileManager.readFile("netfile1.txt");
-        Network fileNetwork1 = NetworkManager.loadNetwork(networkFile1);
-        out.println("Displaying network from file");
-        fileNetwork1.displayAsList();
-        out.println();
-
-        out.println("Reading in network from 'netfile2.txt'");
-        DSALinkedList networkFile2 = FileManager.readFile("netfile2.txt");
-        Network fileNetwork2 = NetworkManager.loadNetwork(networkFile2);
-        out.println("Applying events file 'eventsfile2-2.txt' to read network");
-        DSALinkedList eventsFile2_2 = FileManager.readFile("eventsfile2-2.txt");
-        NetworkManager.applyEvents(fileNetwork2, eventsFile2_2);
-
-        out.println("Displaying network from file");
-        fileNetwork2.displayAsList();
-        out.println();
-
-        out.println("Displaying network 1 before saving");
-        network1.displayAsList();
-
-        out.println("Saving network 1 to NetworkTestOut.txt");
-        DSALinkedList saveList = NetworkManager.saveNetwork(network1);
-        FileManager.writeFile("NetworkTestOut.txt", saveList, false);
-        out.println();
-
-        out.println("Saving log of network 1's current timestep to NetworkTestLog.txt");
-        DSALinkedList logList = NetworkManager.logTimeStep(network1);
-        FileManager.writeFile("NetworkTestLog.txt", logList, false);
-
-        out.println("Reloading & displaying saved network:");
-        DSALinkedList reloadedFile = FileManager.readFile("NetworkTestOut.txt");
-        Network reloadedNetwork = NetworkManager.loadNetwork(reloadedFile);
-        reloadedNetwork.displayAsList();
     }
 }
