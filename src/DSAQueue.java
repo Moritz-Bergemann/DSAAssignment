@@ -11,7 +11,7 @@ public class DSAQueue implements Iterable /*Does not extend DSAQueue as
 {
     //CLASS FIELDS
     private DSALinkedList queue; //Linked list for storing queue elements
-    int count; //Stores number of elements currently in queue
+    private int count; //Stores number of elements currently in queue
 
     //CONSTRUCTORS
     //Default Constructor

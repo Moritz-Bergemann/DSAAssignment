@@ -88,5 +88,6 @@ Posts by Popularity:
 	Number of Likes: 4
 	Clickbait Factor: 1.0
 	Created Time: 0
-	Stale:trueUsers Who Liked This: Chamberlain, skekUng, Bat-Crystal, Garthim
+	Stale:true
+	Users Who Liked This: Chamberlain, skekUng, Bat-Crystal, Garthim
 
