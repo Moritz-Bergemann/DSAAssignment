@@ -6,12 +6,18 @@
  *  timesteps the program should be run?
  */
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 import java.util.*;
 
 public class SocialSim
 {
     public static void main(String[] args)
     {
+
+        MemoryMXBean memory = ManagementFactory.getMemoryMXBean();
+
         try
         {
             readCommandLine(args);
@@ -33,8 +39,7 @@ public class SocialSim
         else if (args[0].equals("-s")) /*If Simulation Mode flag given*/
         {
             if (args.length == 5) /*If correct number of other parameters
-                provided for simulation mode NOTE: Should this even be 8? Don't
-                you need more information (i.e. timesteps)*/
+                provided for simulation mode*/
             {
                 try
                 {
@@ -67,6 +72,24 @@ public class SocialSim
                 System.out.println("Invalid number of command line arguments" +
                         "given for interactive mode! Run without command line" +
                         "parameters for usage information.");
+            }
+        }
+        else if (args[0].equals("-t")) //If testing mode flag given
+        {
+            if (args.length == 5) /*If correct number of other parameters
+                provided for testing mode*/
+            {
+                try
+                {
+                    testing(args[1], args[2], Double.parseDouble(args[3]),
+                            Double.parseDouble(args[4]));
+                }
+                catch (NumberFormatException n)
+                {
+                    System.out.println("Failed to initiate testing mode: " +
+                            "3rd & 4th parameters (like & follow " +
+                            "probabilities) must be numbers");
+                }
             }
         }
         else
@@ -103,6 +126,10 @@ public class SocialSim
         System.out.println("\"-i\": Interactive Mode (allows the user to " +
                 "manually load/save networks and configure parts of the " +
                 "network live. Requires no further command line arguments.");
+        System.out.println("\"-t\": Testing Mode (identical to simulation mode" +
+                "except that files are not saved (for performance reasons) " +
+                "and network statistics sucha as execution time and memory " +
+                "usage are provided");
     }
 
 
@@ -150,10 +177,9 @@ public class SocialSim
 
             /*Running simulation (Any unhandled exceptions thrown will abort
                 simulation, should never happen if inputs were valid*/
+            System.out.println("Starting simulation.");
             try
             {
-                System.out.println("Starting simulation.");
-
                 while (!network.allPostsStale()) /*While all posts in network
                     can still be shared further (i.e. Further timesteps will
                     continue to perform actions*/
@@ -171,6 +197,82 @@ public class SocialSim
             {
                 System.out.println("Simulation Aborted: " + i.getMessage());
             }
+        }
+        catch (IllegalArgumentException i)
+        {
+            System.out.println("Failed to run simulation mode: " +
+                    i.getMessage());
+        }
+    }
+
+    public static void testing(String networkFilename, String eventFilename,
+                               double likeProb, double followProb)
+    {
+        Network network;
+
+        /*Performing setup for simulation & aborting if invalid command
+            line parameters given (based on exceptions thrown by setup
+            methods)*/
+        try
+        {
+            //Loading network from network file
+            DSALinkedList netInfo = FileManager.readFile(networkFilename);
+            network = NetworkManager.loadNetwork(netInfo);
+            System.out.println("Settings file read successfully.");
+
+            //Setting network like/follow probabilities
+            network.setLikeChance(likeProb);
+            network.setFollowChance(followProb);
+
+            /*Applying events from event file (will not abort program even if
+                entire file invalid, invalid lines are simply skipped & error
+                message printed*/
+            System.out.println("Reading events file:");
+            DSALinkedList eventInfo = FileManager.readFile(eventFilename);
+            NetworkManager.applyEvents(network, eventInfo);
+
+            System.out.println();
+
+            /*Running simulation (Any unhandled exceptions thrown will abort
+                simulation, should never happen if inputs were valid*/
+            System.out.println("Starting simulation.");
+
+            long totalTime = 0;
+            long timeBefore, timeAfter, timeTaken;
+            try
+            {
+                while (!network.allPostsStale()) /*While all posts in network
+                    can still be shared further (i.e. Further timesteps will
+                    continue to perform actions*/
+                {
+                    //Getting time before timestep
+                    timeBefore = System.nanoTime();
+
+                    //Running timeStep
+                    network.timeStep();
+
+                    //Getting time after timestep
+                    timeAfter = System.nanoTime();
+
+                    timeTaken = timeAfter - timeBefore;
+                    totalTime += timeTaken;
+
+                    System.out.println("Time for timestep " +
+                            network.getCurTime() + ": " + timeTaken + "ns");
+                }
+                System.out.println("Simulation completed successfully.");
+            }
+            catch (IllegalArgumentException i)
+            {
+                System.out.println("Simulation Aborted: " + i.getMessage());
+            }
+            MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+            long memoryUsed = heapMemoryUsage.getUsed();
+
+            System.out.println("Total Simulation Time: " + (totalTime) +
+                    "ns");
+            System.out.println("Total Heap Memory Used: " + memoryUsed +
+                    " bytes (" + ((double)memoryUsed / 1000000.0) + "MB)");
 
         }
         catch (IllegalArgumentException i)
@@ -178,6 +280,7 @@ public class SocialSim
             System.out.println("Failed to run simulation mode: " +
                     i.getMessage());
         }
+
     }
 
     /*Runs (and repeats) the menu for the program's interactive mode, and calls

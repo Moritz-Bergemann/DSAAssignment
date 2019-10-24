@@ -1,0 +1,322 @@
+TIMESTEP 0:
+Network Diagram:
+	Aughra: Jen
+	Bat-Crystal: 
+	Chamberlain: 
+	Emperor: Chamberlain, skekUng
+	Fizzgig: 
+	Garthim: 
+	Healer: Jen
+	Jen: Kira
+	Kira: Fizzgig, Jen, Landstrider, Nebrie
+	Landstrider: 
+	Master: Healer, Jen
+	Nebrie: 
+	skekUng: Bat-Crystal, Garthim
+
+Users by Popularity:
+	1.
+	User: Kira
+	Followers: 4
+	Following: 1
+	Number of Posts: 1
+	2.
+	User: Emperor
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	3.
+	User: Master
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	4.
+	User: skekUng
+	Followers: 2
+	Following: 1
+	Number of Posts: 0
+	5.
+	User: Aughra
+	Followers: 1
+	Following: 0
+	Number of Posts: 0
+	6.
+	User: Healer
+	Followers: 1
+	Following: 1
+	Number of Posts: 0
+	7.
+	User: Jen
+	Followers: 1
+	Following: 4
+	Number of Posts: 1
+	8.
+	User: Bat-Crystal
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	9.
+	User: Chamberlain
+	Followers: 0
+	Following: 1
+	Number of Posts: 1
+	10.
+	User: Fizzgig
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	11.
+	User: Garthim
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	12.
+	User: Landstrider
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	13.
+	User: Nebrie
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Kira
+	Content: The Garthim attacked my village
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	2.
+	Original Poster: Chamberlain
+	Content: Trial by stone!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	3.
+	Original Poster: Jen
+	Content: Wings? I don't have wings!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+
+TIMESTEP 1:
+Network Diagram:
+	Aughra: Jen
+	Bat-Crystal: 
+	Chamberlain: 
+	Emperor: Chamberlain, skekUng
+	Fizzgig: 
+	Garthim: 
+	Healer: Jen
+	Jen: Kira
+	Kira: Fizzgig, Jen, Landstrider, Nebrie
+	Landstrider: 
+	Master: Healer, Jen
+	Nebrie: 
+	skekUng: Bat-Crystal, Garthim
+
+Users by Popularity:
+	1.
+	User: Kira
+	Followers: 4
+	Following: 1
+	Number of Posts: 1
+	2.
+	User: Emperor
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	3.
+	User: Master
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	4.
+	User: skekUng
+	Followers: 2
+	Following: 1
+	Number of Posts: 0
+	5.
+	User: Aughra
+	Followers: 1
+	Following: 0
+	Number of Posts: 0
+	6.
+	User: Healer
+	Followers: 1
+	Following: 1
+	Number of Posts: 0
+	7.
+	User: Jen
+	Followers: 1
+	Following: 4
+	Number of Posts: 1
+	8.
+	User: Bat-Crystal
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	9.
+	User: Chamberlain
+	Followers: 0
+	Following: 1
+	Number of Posts: 1
+	10.
+	User: Fizzgig
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	11.
+	User: Garthim
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	12.
+	User: Landstrider
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	13.
+	User: Nebrie
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Kira
+	Content: The Garthim attacked my village
+	Number of Likes: 4
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	Users Who Liked This: Fizzgig, Jen, Landstrider, Nebrie
+	2.
+	Original Poster: Jen
+	Content: Wings? I don't have wings!
+	Number of Likes: 1
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	Users Who Liked This: Kira
+	3.
+	Original Poster: Chamberlain
+	Content: Trial by stone!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+
+TIMESTEP 2:
+Network Diagram:
+	Aughra: Jen
+	Bat-Crystal: 
+	Chamberlain: 
+	Emperor: Chamberlain, skekUng
+	Fizzgig: 
+	Garthim: 
+	Healer: Jen
+	Jen: Fizzgig, Kira, Landstrider, Nebrie
+	Kira: Fizzgig, Jen, Landstrider, Nebrie
+	Landstrider: 
+	Master: Healer, Jen
+	Nebrie: 
+	skekUng: Bat-Crystal, Garthim
+
+Users by Popularity:
+	1.
+	User: Jen
+	Followers: 4
+	Following: 4
+	Number of Posts: 1
+	2.
+	User: Kira
+	Followers: 4
+	Following: 1
+	Number of Posts: 1
+	3.
+	User: Emperor
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	4.
+	User: Master
+	Followers: 2
+	Following: 0
+	Number of Posts: 0
+	5.
+	User: skekUng
+	Followers: 2
+	Following: 1
+	Number of Posts: 0
+	6.
+	User: Aughra
+	Followers: 1
+	Following: 0
+	Number of Posts: 0
+	7.
+	User: Healer
+	Followers: 1
+	Following: 1
+	Number of Posts: 0
+	8.
+	User: Bat-Crystal
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	9.
+	User: Chamberlain
+	Followers: 0
+	Following: 1
+	Number of Posts: 1
+	10.
+	User: Fizzgig
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	11.
+	User: Garthim
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	12.
+	User: Landstrider
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+	13.
+	User: Nebrie
+	Followers: 0
+	Following: 2
+	Number of Posts: 0
+
+Posts by Popularity:
+	1.
+	Original Poster: Kira
+	Content: The Garthim attacked my village
+	Number of Likes: 4
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	Users Who Liked This: Fizzgig, Jen, Landstrider, Nebrie
+	2.
+	Original Poster: Jen
+	Content: Wings? I don't have wings!
+	Number of Likes: 4
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+	Users Who Liked This: Kira, Fizzgig, Landstrider, Nebrie
+	3.
+	Original Poster: Chamberlain
+	Content: Trial by stone!
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:true
+
