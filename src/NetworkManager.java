@@ -264,6 +264,51 @@ public class NetworkManager
                                     "must contain 3 or 4 sections");
                         }
                         break;
+                    case 'R': //Remove user
+                        splitLine = curLine.split(":");
+                        if (splitLine.length == 2)
+                        {
+                            try
+                            {
+                                network.removeUser(splitLine[1].trim());
+                            }
+                            catch (IllegalArgumentException i)
+                            {
+                                throw new IllegalArgumentException("Logical " +
+                                        "Error (line " + lineNum + "): " +
+                                        i.getMessage());
+                            }
+                        }
+                        else
+                        {
+                            throw new IllegalArgumentException("Invalid Format " +
+                                    "(line " + lineNum + "): Remove-User line " +
+                                    "must contain 2 sections");
+                        }
+                        break;
+                    case 'U': //Remove follower
+                        splitLine = curLine.split(":");
+                        if (splitLine.length == 3)
+                        {
+                            try
+                            {
+                                network.removeFollower(splitLine[2].trim(),
+                                        splitLine[1].trim());
+                            }
+                            catch (IllegalArgumentException i)
+                            {
+                                throw new IllegalArgumentException("Logical " +
+                                        "Error (line " + lineNum + "): " +
+                                        i.getMessage());
+                            }
+                        }
+                        else
+                        {
+                            throw new IllegalArgumentException("Invalid Format " +
+                                    "(line " + lineNum + "): Remove-Follower line " +
+                                    "must contain 3 sections");
+                        }
+                        break;
                     default:
                         throw new IllegalArgumentException("Invalid Format (line "
                                 + lineNum + "): Event descriptor must be " +

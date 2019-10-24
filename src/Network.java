@@ -569,8 +569,15 @@ public class Network extends DSAGraph
         }
         else
         {
-            throw new IllegalArgumentException("Input user does not exist");
+            throw new IllegalArgumentException("User to like post does not" +
+                    "exist");
         }
+        //TODO
+        /* If user does not exist (indicating user with the current label has
+            been removed from the network after they have been added to the
+            latest list of users to like) do nothing, as list of users to like
+            will automatically be removed
+         */
     }
 
     /* Runs a single timestep in the network, running the probabilities
@@ -603,30 +610,34 @@ public class Network extends DSAGraph
                 justSharedUsers = new DSALinkedList();
 
                 while (toLikeIter.hasNext()) /*For each person who has a chance
-                    to like this post this timestep*/
+                    to like this post this timestep (do nothing if they have)*/
                 {
                     curUser = (String)toLikeIter.next();
 
-                    if (chance(likeChance * curPost.clickbait)) /*If
+                    if (hasVertex(curUser)) /*If user has not been removed from
+                        network since last timestep*/
+                    {
+                        if (chance(likeChance * curPost.clickbait)) /*If
                         the chance to like the post is met (dependant on overall
                         like chance and the post's clickbait factor)*/
-                    {
-                        //Make the current user like the post
-                        likePost(curPost, curUser);
+                        {
+                            //Make the current user like the post
+                            likePost(curPost, curUser);
 
                         /*Make the current user share the post (& add all users
                             who received it to list of just shared users)*/
-                        sharePost(curPost, curUser, justSharedUsers);
+                            sharePost(curPost, curUser, justSharedUsers);
 
-                        if (chance(followChance)) /*If chance of following OP
+                            if (chance(followChance)) /*If chance of following OP
                             also met (only occurs if post was also liked)*/
-                        {
-                            if (!hasFollower(curUser, curPost.op)) /*If user
-                                is not already following OP*/
                             {
+                                if (!hasFollower(curUser, curPost.op)) /*If user
+                                is not already following OP*/
+                                {
                                 /*Making current user follow post's original
                                     poster*/
-                                addFollower(curUser, curPost.op);
+                                    addFollower(curUser, curPost.op);
+                                }
                             }
                         }
                     }
