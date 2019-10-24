@@ -330,7 +330,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
     /* Returns true if tree has node with imported key, throws exception
      *  otherwise
      */
-    public boolean has(String inKey) //FIXME is this dodgy?
+    public boolean has(String inKey)
     {
         return hasRec(inKey, root);
     }

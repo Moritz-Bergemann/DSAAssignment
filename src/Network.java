@@ -572,12 +572,6 @@ public class Network extends DSAGraph
             throw new IllegalArgumentException("User to like post does not" +
                     "exist");
         }
-        //TODO
-        /* If user does not exist (indicating user with the current label has
-            been removed from the network after they have been added to the
-            latest list of users to like) do nothing, as list of users to like
-            will automatically be removed
-         */
     }
 
     /* Runs a single timestep in the network, running the probabilities
