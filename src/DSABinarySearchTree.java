@@ -591,7 +591,7 @@ public class DSABinarySearchTree implements Serializable, Iterable
 
         if (currentNode == null) //If no more nodes along this path 
         {
-            heightSoFar = -1; //NOTE: Why -1 & not 0?
+            heightSoFar = -1;
         }
         else
         {

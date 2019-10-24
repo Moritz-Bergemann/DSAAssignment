@@ -2,13 +2,12 @@
  * Contains the user interface & calls functions from other classes to run
  *  the social simulation program. The manner in which the program is run is
  *  dependant on the given command line parameters.
- * NOTE: How does the '-s' version of the program running determine for how many
- *  timesteps the program should be run?
  */
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
+import java.lang.management.ThreadMXBean;
 import java.util.*;
 
 public class SocialSim
@@ -135,7 +134,6 @@ public class SocialSim
 
     /*Creates a network based on the imported simulation files and simulates
      *  the network using the imported like and follow probabilities.
-     *  NOTE: How many timesteps???
      */
     public static void simulation(String networkFilename, String eventFilename,
                                   double likeProb, double followProb)
@@ -258,7 +256,8 @@ public class SocialSim
                     totalTime += timeTaken;
 
                     System.out.println("Time for timestep " +
-                            network.getCurTime() + ": " + timeTaken + "ns");
+                            network.getCurTime() + ": " + timeTaken +
+                            "ns (" + ((double)totalTime / 1000000.0) + "ms)");
                 }
                 System.out.println("Simulation completed successfully.");
             }
@@ -270,10 +269,9 @@ public class SocialSim
             long memoryUsed = heapMemoryUsage.getUsed();
 
             System.out.println("Total Simulation Time: " + (totalTime) +
-                    "ns");
+                    "ns (" + ((double)totalTime / 1000000.0) + "ms)");
             System.out.println("Total Heap Memory Used: " + memoryUsed +
                     " bytes (" + ((double)memoryUsed / 1000000.0) + "MB)");
-
         }
         catch (IllegalArgumentException i)
         {
@@ -315,8 +313,7 @@ public class SocialSim
             System.out.println(optionText);
             menuChoice = inputInt("Choice", 1, 11);
 
-            switch (menuChoice) /*NOTE: Maybe move a lot of this into
-                NetworkManager if you can extensively modify the graph*/
+            switch (menuChoice)
             {
                 case 1: //Load network
                     System.out.print("Input name of network file to read: ");
