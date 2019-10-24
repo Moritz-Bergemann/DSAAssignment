@@ -12,6 +12,18 @@ public class SocialSim
 {
     public static void main(String[] args)
     {
+        try
+        {
+            readCommandLine(args);
+        }
+        catch (Exception e) //Catching base exception in case of critical errors
+        {
+            System.out.println("Critical Error: " + e.getMessage());
+        }
+    }
+
+    public static void readCommandLine(String[] args)
+    {
         //Taking actions based on command line parameters
         if (args.length == 0) /*If no arguments given (means should just
             display usage information)*/
@@ -175,16 +187,17 @@ public class SocialSim
     {
         Scanner sc = new Scanner(System.in);
         String optionText = "\t1. Load network" + "\n" +
-                "\t2. Set probabilities" + "\n" +
-                "\t3. User operations (find/insert/delete users)" + "\n" +
-                "\t4. Relationship operations (find/insert/remove follower/" +
+                "\t2. Read Events File" + "\n" +
+                "\t3. Set probabilities" + "\n" +
+                "\t4. User operations (find/insert/delete users)" + "\n" +
+                "\t5. Relationship operations (find/insert/remove follower/" +
                 "followed relationships)" + "\n" +
-                "\t5. Create post" + "\n" +
-                "\t6. Display network" + "\n" +
-                "\t7. Statistics" + "\n" +
-                "\t8. Next Timestep" + "\n" +
-                "\t9. Save network" + "\n" +
-                "\t10. Exit Program";
+                "\t6. Create post" + "\n" +
+                "\t7. Display network" + "\n" +
+                "\t8. Statistics" + "\n" +
+                "\t9. Next Timestep" + "\n" +
+                "\t10. Save network" + "\n" +
+                "\t11. Exit Program";
 
         //Creating network for use in simulation
         Network network = new Network();
@@ -197,7 +210,7 @@ public class SocialSim
             System.out.println("MAIN MENU:");
             System.out.println("Please choose one of the following options:");
             System.out.println(optionText);
-            menuChoice = inputInt("Choice", 1, 10);
+            menuChoice = inputInt("Choice", 1, 11);
 
             switch (menuChoice) /*NOTE: Maybe move a lot of this into
                 NetworkManager if you can extensively modify the graph*/
@@ -225,7 +238,27 @@ public class SocialSim
                                 "been changed.");
                     }
                     break;
-                case 2: //Set probabilities
+                case 2:
+                    System.out.print("Input name of events file to read: ");
+                    String eventsFileName = sc.nextLine();
+                    try
+                    {
+                        DSALinkedList eventList =
+                                FileManager.readFile(eventsFileName);
+
+                        /*Attempting to apply events from read file to existing
+                            network (any invalid lines will be avoided
+                            individually & output error message*/
+                        NetworkManager.applyEvents(network, eventList);
+                        System.out.println("Events file reading completed.");
+                    }
+                    catch (IllegalArgumentException i)
+                    {
+                        System.out.println("Failed to read events file: " +
+                                i.getMessage());
+                    }
+                    break;
+                case 3: //Set probabilities
                     network.setLikeChance(inputDouble("Input " +
                             "probability of liking/sharing a post " +
                             "(current is " + network.getLikeChance() +
@@ -235,13 +268,13 @@ public class SocialSim
                             "poster (current is " +
                             network.getFollowChance() + ")", 0.0, 1.0));
                     break;
-                case 3: //User operations
+                case 4: //User operations
                     userMenu(network);
                     break;
-                case 4: //Relationship operations
+                case 5: //Relationship operations
                     relationshipMenu(network);
                     break;
-                case 5: //Create post
+                case 6: //Create post
                     System.out.print("Input name of user to make post: ");
                     String postUser = sc.nextLine();
                     System.out.print("Input content of post: ");
@@ -260,19 +293,19 @@ public class SocialSim
                     }
 
                     break;
-                case 6: //Display Network
-                    //Displaying network as graph adjacency list (NOTE: Is this good enough?)
+                case 7: //Display Network
+                    //Displaying network as graph adjacency list
                     network.displayAsList();
                     break;
-                case 7: //Statistics menu
+                case 8: //Statistics menu
                     statisticsMenu(network);
                     break;
-                case 8: //Next timestep
+                case 9: //Next timestep
                         network.timeStep();
                         System.out.println("Timestep run. New Time: " +
                                 network.getCurTime());
                     break;
-                case 9: //Save network
+                case 10: //Save network
                     if (network.getUserCount() > 0)
                     {
                         System.out.print("Input filename to save to: ");
@@ -297,7 +330,7 @@ public class SocialSim
                                 "empty");
                     }
                     break;
-                case 10: //Exit
+                case 11: //Exit
                     System.out.println("Exiting...");
                     end = true;
                     break;
