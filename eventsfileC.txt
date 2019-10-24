@@ -1,0 +1,12 @@
+A:Cabbage Guy
+F:Cabbage Guy:Katara
+P:Oh no my cabbages
+P:Aang:I am the avatar?
+R:Aang
+P:Toph:lih gfeOU vdOU YvdL DVOV cOV CYGS
+P:Sokka:BOOMERANG:4
+F:Aang:Toph
+F:Sokka:Sokka
+F:Prince Zuko: Princess Azula
+P:Princess Azula:Suck my dick Zuko:2
+U:Prince Zuko:Princess Azula

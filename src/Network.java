@@ -603,6 +603,9 @@ public class Network extends DSAGraph
                     with them on this timestep*/
                 justSharedUsers = new DSALinkedList();
 
+                //Determining if post still exists in network
+                boolean opExists = hasVertex(curPost.op);
+
                 while (toLikeIter.hasNext()) /*For each person who has a chance
                     to like this post this timestep (do nothing if they have)*/
                 {
@@ -622,8 +625,10 @@ public class Network extends DSAGraph
                             who received it to list of just shared users)*/
                             sharePost(curPost, curUser, justSharedUsers);
 
-                            if (chance(followChance)) /*If chance of following OP
-                            also met (only occurs if post was also liked)*/
+                            if (chance(followChance) && opExists)
+                                /*If chance of following OP also met AND OP
+                                still exists (only occurs if post was also
+                                liked)*/
                             {
                                 if (!hasFollower(curUser, curPost.op)) /*If user
                                 is not already following OP*/

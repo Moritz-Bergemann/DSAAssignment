@@ -291,7 +291,6 @@ public class SocialSim
                         System.out.println("Failed to create post: " +
                                 i.getMessage());
                     }
-
                     break;
                 case 7: //Display Network
                     //Displaying network as graph adjacency list

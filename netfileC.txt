@@ -1,0 +1,19 @@
+Aang
+Katara
+Sokka
+Prince Zuko
+Uncle Iroh
+Mei from Overwatch
+Tai Lei
+Princess Azula
+Toph
+Aang:Katara
+Aang:Sokka
+Aang:Prince Zuko
+Katara:Aang
+Tai Lei:Mei from Overwatch
+Sokka:Toph
+Princess Azula:Prince Zuko
+Sokka:Katara
+Prince Zuko:Uncle Iroh
+Uncle Iroh:Princess Azula

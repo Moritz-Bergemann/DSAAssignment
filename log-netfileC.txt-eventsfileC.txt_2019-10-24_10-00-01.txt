@@ -1,0 +1,89 @@
+TIMESTEP 0:
+Network Diagram:
+	Cabbage Guy: Katara
+	Katara: 
+	Mei from Overwatch: 
+	Prince Zuko: Uncle Iroh
+	Princess Azula: Prince Zuko
+	Sokka: Katara, Toph
+	Tai Lei: Mei from Overwatch
+	Toph: 
+	Uncle Iroh: Princess Azula
+
+Users by Popularity:
+	1.
+	User: Sokka
+	Followers: 2
+	Following: 1
+	Number of Posts: 1
+	2.
+	User: Cabbage Guy
+	Followers: 1
+	Following: 0
+	Number of Posts: 0
+	3.
+	User: Katara
+	Followers: 1
+	Following: 3
+	Number of Posts: 0
+	4.
+	User: Prince Zuko
+	Followers: 1
+	Following: 2
+	Number of Posts: 0
+	5.
+	User: Princess Azula
+	Followers: 1
+	Following: 1
+	Number of Posts: 1
+	6.
+	User: Tai Lei
+	Followers: 1
+	Following: 0
+	Number of Posts: 0
+	7.
+	User: Uncle Iroh
+	Followers: 1
+	Following: 1
+	Number of Posts: 0
+	8.
+	User: Mei from Overwatch
+	Followers: 0
+	Following: 1
+	Number of Posts: 0
+	9.
+	User: Toph
+	Followers: 0
+	Following: 1
+	Number of Posts: 1
+
+Posts by Popularity:
+	1.
+	Original Poster: Aang
+	Content: I am the avatar?
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	2.
+	Original Poster: Toph
+	Content: lih gfeOU vdOU YvdL DVOV cOV CYGS
+	Number of Likes: 0
+	Clickbait Factor: 1.0
+	Created Time: 0
+	Stale:false
+	3.
+	Original Poster: Sokka
+	Content: BOOMERANG
+	Number of Likes: 0
+	Clickbait Factor: 4.0
+	Created Time: 0
+	Stale:false
+	4.
+	Original Poster: Princess Azula
+	Content: Suck my dick Zuko
+	Number of Likes: 0
+	Clickbait Factor: 2.0
+	Created Time: 0
+	Stale:false
+
