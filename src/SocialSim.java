@@ -3,15 +3,14 @@
  *  the social simulation program. The manner in which the program is run is
  *  dependant on the given command line parameters.
  */
-
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-import java.lang.management.MemoryUsage;
-import java.lang.management.ThreadMXBean;
+import java.lang.management.*;
 import java.util.*;
 
 public class SocialSim
 {
+    //CONTSTANTS
+    public static final int MB = 1024 * 1024; //For conversion of bytes & MB
+
     public static void main(String[] args)
     {
 
@@ -211,6 +210,10 @@ public class SocialSim
         /*Performing setup for simulation & aborting if invalid command
             line parameters given (based on exceptions thrown by setup
             methods)*/
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Hit ENTER to start: ");
+        sc.nextLine();
+
         try
         {
             //Loading network from network file
@@ -235,6 +238,8 @@ public class SocialSim
                 simulation, should never happen if inputs were valid*/
             System.out.println("Starting simulation.");
 
+            MemoryUsage heapMemoryUsage;
+            MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
             long totalTime = 0;
             long timeBefore, timeAfter, timeTaken;
             try
@@ -251,9 +256,11 @@ public class SocialSim
 
                     //Getting time after timestep
                     timeAfter = System.nanoTime();
-
                     timeTaken = timeAfter - timeBefore;
                     totalTime += timeTaken;
+
+                    heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
+                    System.out.println("Heap Memory Used: " + heapMemoryUsage.getUsed());
 
                     System.out.println("Time for timestep " +
                             network.getCurTime() + ": " + timeTaken +
@@ -265,13 +272,21 @@ public class SocialSim
             {
                 System.out.println("Simulation Aborted: " + i.getMessage());
             }
-            MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+
+            heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
             long memoryUsed = heapMemoryUsage.getUsed();
+            Runtime runtime = Runtime.getRuntime();
 
             System.out.println("Total Simulation Time: " + (totalTime) +
-                    "ns (" + ((double)totalTime / 1000000.0) + "ms)");
+                    "ns (" + ((double)totalTime / 1000000) + "ms)");
             System.out.println("Total Heap Memory Used: " + memoryUsed +
-                    " bytes (" + ((double)memoryUsed / 1000000.0) + "MB)");
+                    " bytes (" + ((double)memoryUsed / MB) + "MB)");
+            System.out.println("Memory Used (Runtime): " + (runtime.totalMemory() - runtime.freeMemory()));
+
+            System.out.print("Hit ENTER to exit: ");
+            sc.nextLine();
+
+
         }
         catch (IllegalArgumentException i)
         {
