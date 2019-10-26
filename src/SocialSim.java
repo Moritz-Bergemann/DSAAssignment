@@ -26,9 +26,8 @@ public class SocialSim
         }
     }
 
-    /**
-     *
-     * @param args
+    /* Reads command line arguments given to program at execution and runs
+     *  corresponding tasks. Prints error message if parameters were invalid.
      */
     public static void readCommandLine(String[] args)
     {
@@ -78,13 +77,14 @@ public class SocialSim
         }
         else if (args[0].equals("-t")) //If testing mode flag given
         {
-            if (args.length == 5) /*If correct number of other parameters
+            if (args.length == 6) /*If correct number of other parameters
                 provided for testing mode*/
             {
                 try
                 {
                     testing(args[1], args[2], Double.parseDouble(args[3]),
-                            Double.parseDouble(args[4]));
+                            Double.parseDouble(args[4]),
+                            Integer.parseInt(args[5]));
                 }
                 catch (NumberFormatException n)
                 {
@@ -207,17 +207,21 @@ public class SocialSim
     }
 
     public static void testing(String networkFilename, String eventFilename,
-                               double likeProb, double followProb)
+                               double likeProb, double followProb,
+                               int timeSteps)
     {
         Network network;
+        Scanner sc = new Scanner(System.in);
 
-        /*Performing setup for simulation & aborting if invalid command
+        if (timeSteps < 1) //If timestep input is less than 1 (invalid)
+        {
+            throw new IllegalArgumentException("Number of timesteps must " +
+                    "be greater than 0");
+        }
+
+        /*Performing setup for simulation mode & aborting if invalid command
             line parameters given (based on exceptions thrown by setup
             methods)*/
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Press ENTER to start: ");
-        sc.nextLine();
-
         try
         {
             //Loading network from network file
@@ -236,41 +240,67 @@ public class SocialSim
             DSALinkedList eventInfo = FileManager.readFile(eventFilename);
             NetworkManager.applyEvents(network, eventInfo);
 
+            /*Creating log file with auto-generated name & saving initial state
+                of network to it*/
+            String logFileName = FileManager.createLogFileName(networkFilename,
+                    eventFilename);
+            System.out.println("Saving logs to " + logFileName);
+
+            DSALinkedList timeStepLog = NetworkManager.logTimeStep(network);
+            FileManager.writeFile(logFileName, timeStepLog, false); /*
+                append is false as must initially create log file*/
+
             System.out.println();
+
+            /*Delaying start until input given (to allow for profiler
+                connection)*/
+            System.out.print("Ready to start. Give any input to begin: ");
+            sc.nextLine();
 
             /*Running simulation (Any unhandled exceptions thrown will abort
                 simulation, should never happen if inputs were valid*/
             System.out.println("Starting simulation.");
-
-            MemoryUsage heapMemoryUsage;
-            MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
-            long totalTime = 0;
-            long timeBefore, timeAfter, timeTaken;
             try
             {
-                while (!network.allPostsStale()) /*While all posts in network
-                    can still be shared further (i.e. Further timesteps will
-                    continue to perform actions*/
+                while (!network.allPostsStale()) /*While all posts in
+                        network can still be shared further*/
                 {
                     //Running timeStep
                     network.timeStep();
+
+                    //Appending log of current timestep to log file
+                    timeStepLog = NetworkManager.logTimeStep(network);
+                    FileManager.writeFile(logFileName, timeStepLog, true);
+
+                    if (network.getCurTime() <= timeSteps) /*If number of
+                        timesteps run less than or equal to number of timesteps
+                        to stop at*/
+                    {
+                        System.out.print("Timestep " + network.getCurTime() +
+                                " complete. Give any input to continue: ");
+                        sc.nextLine();
+                    }
+                    else
+                    {
+                        System.out.println("Completed timestep " +
+                                network.getCurTime());
+                    }
                 }
-                System.out.println("Simulation completed successfully.");
+
+                System.out.print("Simulation completed successfully. Give" +
+                        " any input to exit: ");
+                sc.nextLine();
             }
             catch (IllegalArgumentException i)
             {
                 System.out.println("Simulation Aborted: " + i.getMessage());
             }
-
-            System.out.print("Press ENTER to exit: ");
-            sc.nextLine();
         }
         catch (IllegalArgumentException i)
         {
             System.out.println("Failed to run simulation mode: " +
                     i.getMessage());
         }
-
     }
 
     /*Runs (and repeats) the menu for the program's interactive mode, and calls
