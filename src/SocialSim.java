@@ -26,6 +26,10 @@ public class SocialSim
         }
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void readCommandLine(String[] args)
     {
         //Taking actions based on command line parameters
@@ -126,7 +130,7 @@ public class SocialSim
                 "network live. Requires no further command line arguments.");
         System.out.println("\"-t\": Testing Mode (identical to simulation mode" +
                 "except that files are not saved (for performance reasons) " +
-                "and network statistics sucha as execution time and memory " +
+                "and network statistics such as execution time and memory " +
                 "usage are provided");
     }
 
@@ -211,7 +215,7 @@ public class SocialSim
             line parameters given (based on exceptions thrown by setup
             methods)*/
         Scanner sc = new Scanner(System.in);
-        System.out.print("Hit ENTER to start: ");
+        System.out.print("Press ENTER to start: ");
         sc.nextLine();
 
         try
@@ -248,23 +252,8 @@ public class SocialSim
                     can still be shared further (i.e. Further timesteps will
                     continue to perform actions*/
                 {
-                    //Getting time before timestep
-                    timeBefore = System.nanoTime();
-
                     //Running timeStep
                     network.timeStep();
-
-                    //Getting time after timestep
-                    timeAfter = System.nanoTime();
-                    timeTaken = timeAfter - timeBefore;
-                    totalTime += timeTaken;
-
-                    heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
-                    System.out.println("Heap Memory Used: " + heapMemoryUsage.getUsed());
-
-                    System.out.println("Time for timestep " +
-                            network.getCurTime() + ": " + timeTaken +
-                            "ns (" + ((double)totalTime / 1000000.0) + "ms)");
                 }
                 System.out.println("Simulation completed successfully.");
             }
@@ -273,20 +262,8 @@ public class SocialSim
                 System.out.println("Simulation Aborted: " + i.getMessage());
             }
 
-            heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
-            long memoryUsed = heapMemoryUsage.getUsed();
-            Runtime runtime = Runtime.getRuntime();
-
-            System.out.println("Total Simulation Time: " + (totalTime) +
-                    "ns (" + ((double)totalTime / 1000000) + "ms)");
-            System.out.println("Total Heap Memory Used: " + memoryUsed +
-                    " bytes (" + ((double)memoryUsed / MB) + "MB)");
-            System.out.println("Memory Used (Runtime): " + (runtime.totalMemory() - runtime.freeMemory()));
-
-            System.out.print("Hit ENTER to exit: ");
+            System.out.print("Press ENTER to exit: ");
             sc.nextLine();
-
-
         }
         catch (IllegalArgumentException i)
         {

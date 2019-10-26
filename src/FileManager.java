@@ -126,6 +126,10 @@ public class FileManager
 
             //Adding file extension to log file name
             logFileName += ".txt";
+
+            /*Replacing all instances of file divider with '|' (to prevent
+                divider in file name being read as invalid file path)*/
+            logFileName = logFileName.replaceAll("\\/", "\\$");
         }
         else
         {
