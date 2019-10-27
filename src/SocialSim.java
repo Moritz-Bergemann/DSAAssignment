@@ -224,6 +224,11 @@ public class SocialSim
             methods)*/
         try
         {
+            /*Delaying loading of network until input given (to allow for
+                profiler connection for memory storage)*/
+            System.out.print("Ready to load. Give any input to begin: ");
+            sc.nextLine();
+
             //Loading network from network file
             DSALinkedList netInfo = FileManager.readFile(networkFilename);
             network = NetworkManager.loadNetwork(netInfo);
